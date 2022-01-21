@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" th:src="@{/js/clanTeretane.js}" defer></script>
+    <link rel="stylesheet" th:href="@{/css/treninzi.css}">
+    <title>Treninzi</title>
+</head>
+<body onload="result()">
+<img class="pozadina" th:src="@{/img/background.jpg}">
+<div class="topnav">
+    <a href="#" style="padding-right: 30px;">
+        <img th:src="@{/img/korpa.jpg}">
+    </a>
+    <a href="#">Treninzi</a>
+    <a href="#">Loyalty kartica</a>
+    <a href="#">Komentari</a>
+    <a class="naslov">MOJA TERETANA</a>
+</div>
+<center>
+    <section>
+        <form>
+            <div >
+                <h1>Treninzi</h1>
+
+                <input style="margin-bottom: 15px; transform: scale(1.5)" type="text" id="myInput" onkeyup="myFunction()" placeholder="Pretraga po nazivu ..." title="Type in a name">
+            </div>
+            <div class="container" id="container">
+                <div class="kutija" th:each="Trening, status: ${treninzi}">
+                    <img class= "kocka" th:src="${Trening.slika}" width="200" height="100">
+                    <br>
+                    <div style="text-align: center;">Naziv: <a th:href="${'trening/'+Trening.id}" th:text="${Trening.naziv}"></a></div>
+                    <br>
+                    <div style="text-align: center;">Cena: <a th:text="${Trening.cena}"></a></div>
+                    <br>
+                    <div style="text-align: center;">Prosecna ocena: <a th:text="${Trening.prosecnaOcena}"></a></div>
+                    <p hidden th:text="${Trening.id}" th:name="${Trening.id}"></p>
+                </div>
+            </div>
+        </form>
+    </section>
+</center>
+<script>
+    function myFunction() {
+        var input, filter, parent, child, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        parent = document.getElementById("container");
+        child = parent.getElementsByClassName("kutija");
+        for (i = 0; i < child.length; i++) {
+            a = child[i].getElementsByTagName("div")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                child[i].style.display = "";
+            } else {
+                child[i].style.display = "none";
+            }
+        }
+    }
+</script>
+</body>
+</html>

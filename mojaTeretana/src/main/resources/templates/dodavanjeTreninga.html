@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="" defer></script>
+    <link rel="stylesheet" href="/css/registracija.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <title>Dodavanje treninga</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<img src="/img/background.jpg">
+<div class="center">
+    <form action="/dodavanjeTreninga-novitrening" method="post">
+        <label><b class="a">Naziv treninga: </b></label>
+        <input type="text" placeholder="Unesite naziv" name="naziv" required>
+
+        <label><b class="a">Trener treninga:</b></label>
+        <input type="text" placeholder="Unesite trenera" name="trener" required>
+
+        <label><b class="a">Unesite kratak opis treninga:</b></label>
+        <input type="text" placeholder="Unesite kratak opis" name="kratkiOpis" required>
+
+        <label><b class="a">Link slike treninga:</b></label>
+        <input type="text" placeholder="Unesite link slike" name="slika" required>
+        <br>
+        <label><b class="a">Cena treninga:</b></label>
+        <input type="number" placeholder="Unesite cenu" name="cena" required>
+        <br>
+        <br>
+        <label><b class="a">Tip treninga:</b></label>
+        <input type="text" placeholder="Unesite tip treninga" name="tipTreninga" required>
+
+        <label><b class="a">Vrsta treninga:</b></label>
+        <input type="text" placeholder="Unesite vrstu treninga" name="vrstaTreninga" required>
+
+        <label><b class="a">Nivo treninga:</b></label>
+        <input type="text" placeholder="Unesite nivo treninga" name="nivoTreninga" required>
+
+        <label><b class="a">Trajanje treninga:</b></label>
+        <input type="number" placeholder="Unesite trajanje treninga" name="trajanjeTreninga" required>
+
+        <button type="submit">Unesite trening</button>
+    </form>
+</div>
+</body>
+</html>

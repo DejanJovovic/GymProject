@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="" defer></script>
+    <link rel="stylesheet" href="/css/registracija.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <title>Registracija</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<img src="/img/background.jpg">
+<div class="center">
+    <form action="register-registracija" method="post">
+        <label><b class="a">Korisnicko ime: </b></label>
+        <input type="text" placeholder="Unesite korisnicko ime" name="korisnickoIme" required>
+
+        <label><b class="a">Lozinka:</b></label>
+        <input type="password" placeholder="Unesite lozinku" name="lozinka" required>
+
+        <label><b class="a">Email:</b></label>
+        <input type="email" placeholder="Unesite email" name="email" required>
+
+        <label><b class="a">Ime:</b></label>
+        <input type="text" placeholder="Unesite ime" name="ime" required>
+
+        <label><b class="a">Prezime:</b></label>
+        <input type="text" placeholder="Unesite prezime" name="prezime" required>
+        <br>
+        <label><b class="a">Datum rodjenja:</b></label>
+        <input type="date" placeholder="Unesite datum rodjenja" name="datumRodjenja" id="datumRodjenja" required>
+        <br>
+        <label><b class="a">Adresa:</b></label>
+        <input type="text" placeholder="Unesite adresu" name="adresa" required>
+
+        <label><b class="a">Broj telefona:</b></label>
+        <input type="text" placeholder="Unesite broj telefona" name="brojTelefona" required>
+
+        <button onclick="datumRodjenja()" type="submit">Registracija</button>
+    </form>
+</div>
+</body>
+</html>

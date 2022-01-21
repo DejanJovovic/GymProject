@@ -34,8 +34,13 @@ CREATE TABLE trening (
 ALTER TABLE trening
 ADD trener varchar(255);
 
-ALTER TABLE mojaTeretana.trening
-MODIFY COLUMN slika VARCHAR(255);
+
+CREATE TABLE tipTreninga (
+	idTipTreninga BIGINT AUTO_INCREMENT NOT NULL,
+	ime VARCHAR(20),
+	opis VARCHAR(100),
+	PRIMARY KEY(idTipTreninga)
+);
 
 CREATE TABLE clanskeKarte (
 	idClanskeKarte BIGINT AUTO_INCREMENT NOT NULL,
@@ -96,6 +101,11 @@ VALUES('Fitness sa Ivom','Iva','Trening fitness opis treninga','https://i.inside
 INSERT INTO trening (naziv, trener, kratakOpis, slika, tipTreninga, cena, vrstaTreninga, nivoTreninga, trajanjeTreninga, prosecnaOcena)
 VALUES('Fitness sa Milicom','Milica','Trening fitness opis treninga','https://i.imgur.com/iehRYNF.jpg','fitness',600,'pojedinacni','amaterski',30,4.1);
 
+INSERT INTO tipTreninga(ime, opis) VALUES('yoga', 'istezanje misica i opustanje');
+INSERT INTO tipTreninga(ime, opis) VALUES('cardio', 'dobijanje kondicije i mrsavnjenje');
+INSERT INTO tipTreninga(ime, opis) VALUES('snaga', 'dobijanje snage');
+INSERT INTO tipTreninga(ime, opis) VALUES('borilacke vestine', 'ucenje samoodbrane');
+
 INSERT INTO clanskeKarte(popust, brojPoena) VALUES(10,3);
 INSERT INTO clanskeKarte(popust, brojPoena) VALUES(15,1);
 INSERT INTO clanskeKarte(popust, brojPoena) VALUES(20,5);
@@ -117,4 +127,7 @@ INSERT INTO termin(sala, trening, datum) VALUES(4,1,'22.03.2022.');
 INSERT INTO komentar(tekst, ocena, datum, autor, trening, statusKomentara, anoniman) VALUES('Dobar trening svaka cast',5,'14.01.2022.',2,3,'odobren',false);
 
 select * from korisnik;
-delete table tipTreninga;
+select * from trening;
+
+SELECT naziv, slika, cena, prosecnaOcena FROM trening;
+SELECT * FROM trening;
