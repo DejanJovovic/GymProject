@@ -1,0 +1,14 @@
+package ftn.com.mojaTeretana.service;
+
+import ftn.com.mojaTeretana.model.Korisnik;
+
+import java.util.List;
+
+public interface korisnikService  {
+
+    Korisnik findOneById(Long id);
+    Korisnik findOneByUsername(String korisnickoIme);
+    Korisnik findOne(String korisnickoIme, String lozinka);
+    List<Korisnik> findAll();
+    Korisnik save(Korisnik korisnik);
+}

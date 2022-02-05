@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="" defer></script>
+    <link rel="stylesheet" href="/css/registracija.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <title>Registracija</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<img class="pozadina" src="/img/background.jpg">
+<div class="center">
+    <form action="register-registracija" method="post" th:each="Trening, status:${trening}">
+        <label><b class="a">Link slike: </b></label>
+        <input type="text" name="slika" required th:value="${Trening.slika}">
+
+        <label><b class="a">Naziv treninga: </b></label>
+        <input type="text" name="naziv" required th:value="${Trening.naziv}">
+
+        <label><b class="a">Trener:</b></label>
+        <input type="text" name="trener" required th:value="${Trening.trener}">
+
+        <label><b class="a">Kratak opis:</b></label>
+        <input type="email" name="kratakOpis" required th:value="${Trening.kratkiOpis}">
+
+        <label><b class="a">Tip treninga:</b></label>
+        <input type="text" name="tipTreninga" required th:value="${Trening.tipTreninga}">
+        <br>
+
+        <label><b class="a">Cena:</b></label>
+        <input type="number" name="cena" required th:value="${Trening.cena}">
+        <br>
+        <br>
+        <label><b class="a">Vrsta treninga:</b></label>
+        <input type="text" name="vrstaTreninga" required th:value="${Trening.vrstaTreninga}">
+        <br>
+        <br>
+        <label><b class="a">Nivo treninga:</b></label>
+        <input type="text" name="nivoTreninga" required th:value="${Trening.nivoTreninga}">
+
+        <br>
+        <label><b class="a">Trajanje treninga (minute):</b></label>
+        <input type="number" name="trajanjeTreninga" required th:value="${Trening.trajanjeTreninga}">
+
+        <button type="submit">Izmeni trening</button>
+    </form>
+</div>
+</body>
+</html>

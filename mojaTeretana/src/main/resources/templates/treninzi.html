@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/treninzi.css}">
     <title>Treninzi</title>
 </head>
-<body onload="result()">
+<body onload="result()" th:each="Korisnik, status: ${korisnik}">
 <img class="pozadina" th:src="@{/img/background.jpg}">
 <div class="topnav">
     <a href="#" style="padding-right: 30px;">
@@ -17,11 +17,11 @@
     <a href="#">Treninzi</a>
     <a href="#">Loyalty kartica</a>
     <a href="#">Komentari</a>
-    <a th:href="@{/dodavanjeTreninga}"><button class="btn prijava">Dodavanje treninga</button></a>
+    <a id="admin" th:href="${'Korisnicko_ime='+ Korisnik.korisnickoIme + '/dodavanjeTreninga'}">Dodavanje treninga</a>
     <a class="naslov">MOJA TERETANA</a>
 </div>
 <center>
-    <section>
+    <section onload="ProveraUloge()">
         <form>
             <div >
                 <h1>Treninzi</h1>
@@ -30,14 +30,15 @@
             </div>
             <div class="container" id="container">
                 <div class="kutija" th:each="Trening, status: ${treninzi}">
-                    <div th:each="Korisnik, status: ${korisnik}">
-                        <img class= "kocka" th:src="@{Trening.slika}" width="200" height="100">
+                    <div >
+                        <img class= "kocka" th:src="${Trening.slika}" width="200" height="100">
                         <br>
-                        <div style="text-align: center;">Naziv: <a th:href="@{'/trening/'+Trening.id}" th:text="${Trening.naziv}"></a></div>
+                        <div style="text-align: center;">Naziv: <a th:href="${'Korisnicko_ime='+ Korisnik.korisnickoIme +'/trening/'+ Trening.id}" th:text="${Trening.naziv}"></a></div>
                         <br>
                         <div style="text-align: center;">Cena: <a th:text="${Trening.cena}"></a></div>
                         <br>
                         <div style="text-align: center;">Prosecna ocena: <a th:text="${Trening.prosecnaOcena}"></a></div>
+                        <p hidden><a id="uloga" th:text="${Korisnik.uloga}"></a></p>
                     </div>
                 </div>
             </div>
@@ -59,6 +60,24 @@
             } else {
                 child[i].style.display = "none";
             }
+        }
+    }
+
+    function ProveraUloge() {
+        let uloga = document.getElementById("uloga").innerHTML;
+        let admin = document.getElementById("admin");
+        let admin1 = document.getElementById("admin1");
+        let clanTeretane = document.getElementById("clanTeretane");
+
+        if(uloga === "administrator") {
+            admin.style.display = 'block'
+            admin1.style.display = 'block'
+            clanTeretane.style.display = 'none'
+        }
+        else if (uloga === "clanTeretane") {
+            admin.style.display = 'none'
+            admin1.style.display = 'none'
+            clanTeretane.style.display = 'block'
         }
     }
 </script>

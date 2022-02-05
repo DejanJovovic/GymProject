@@ -12,9 +12,9 @@
 
     </style>
 </head>
-<body>
+<body onload="ProveraUloge()">
 <img src="/img/background.jpg">
-<div class="center">
+<div class="center" th:each="Korisnik, status: ${korisnik}">
     <form method="get" th:each="Trening, status: ${trening}">
         <label><b class="a">Slika: <img th:src="${trening.slika}" style="width: 150px; height: 150px"></b></label>
         <br>
@@ -45,7 +45,22 @@
         <br>
         <label><b class="a">Prosecna ocena treninga: <a th:text="${trening.prosecnaOcena}"></a></b></label>
         <br>
+        <button id="admin"><a style="text-decoration: none; color: white;" th:href="${'/admin/Korisnicko_ime='+ Korisnik.korisnickoIme + '/trening/'+ trening.id +'/izmenaTreninga'}">Izmeni</a></button>
+        <p hidden><a id="uloga" th:text="${Korisnik.uloga}"></a></p>
     </form>
 </div>
 </body>
+<script>
+    function ProveraUloge() {
+        let uloga = document.getElementById("uloga").innerHTML;
+        let admin = document.getElementById("admin");
+
+        if(uloga === "administrator") {
+            admin.style.display = 'block'
+        }
+        else if (uloga === "clanTeretane") {
+            admin.style.display = 'none'
+        }
+    }
+</script>
 </html>
