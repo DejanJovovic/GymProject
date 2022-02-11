@@ -15,7 +15,7 @@
 <body>
 <img class="pozadina" src="/img/background.jpg">
 <div class="center">
-    <form action="register-registracija" method="post" th:each="Trening, status:${trening}">
+    <form action="izmenaTreninga-akcija" method="post" th:each="Trening, status:${trening}">
         <label><b class="a">Link slike: </b></label>
         <input type="text" name="slika" required th:value="${Trening.slika}">
 
@@ -26,7 +26,7 @@
         <input type="text" name="trener" required th:value="${Trening.trener}">
 
         <label><b class="a">Kratak opis:</b></label>
-        <input type="email" name="kratakOpis" required th:value="${Trening.kratkiOpis}">
+        <input type="text" name="kratakOpis" required th:value="${Trening.kratkiOpis}">
 
         <label><b class="a">Tip treninga:</b></label>
         <input type="text" name="tipTreninga" required th:value="${Trening.tipTreninga}">
@@ -35,10 +35,8 @@
         <label><b class="a">Cena:</b></label>
         <input type="number" name="cena" required th:value="${Trening.cena}">
         <br>
-        <br>
         <label><b class="a">Vrsta treninga:</b></label>
         <input type="text" name="vrstaTreninga" required th:value="${Trening.vrstaTreninga}">
-        <br>
         <br>
         <label><b class="a">Nivo treninga:</b></label>
         <input type="text" name="nivoTreninga" required th:value="${Trening.nivoTreninga}">
@@ -46,6 +44,8 @@
         <br>
         <label><b class="a">Trajanje treninga (minute):</b></label>
         <input type="number" name="trajanjeTreninga" required th:value="${Trening.trajanjeTreninga}">
+
+        <p hidden><a>th:value="${Trening.id}"</a></p>
 
         <button type="submit">Izmeni trening</button>
     </form>

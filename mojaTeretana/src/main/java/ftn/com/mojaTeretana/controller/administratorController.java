@@ -95,5 +95,50 @@ public class administratorController implements ServletContextAware {
         return "izmenaTreninga";
     }
 
+    @PostMapping(value="/trening/{id}/izmenaTreninga-izmena")
+    public void IzmenaTreninga(@RequestParam Long Treningid, @RequestParam String slika, @RequestParam String naziv,
+                               @RequestParam String trener, @RequestParam String kratakOpis,
+                               @RequestParam String tipTreninga, @RequestParam int cena,
+                               @RequestParam String vrstaTreninga, @RequestParam String nivoTreninga,
+                               @RequestParam int trajanjeTreninga,@RequestParam int prosecnaOcena,  HttpServletResponse response) throws IOException {
+        Trening trening = treningService.findOneById(Treningid);
 
+        if(trener != null) {
+            if(Treningid != null && !Treningid.equals("")) {
+                trening.setId(Treningid);
+                if (slika != null && !slika.equals("")) {
+                    trening.setSlika(slika);
+                }
+                if (naziv != null && !naziv.equals("")) {
+                    trening.setNaziv(naziv);
+                }
+                if (trener != null && !trener.equals("")) {
+                    trening.setTrener(trener);
+                }
+                if (kratakOpis != null && !kratakOpis.equals("")) {
+                    trening.setKratkiOpis(kratakOpis);
+                }
+                if (tipTreninga != null && !tipTreninga.equals("")) {
+                    trening.setTipTreninga(tipTreninga);
+                }
+                if (cena > 0) {
+                    trening.setCena(cena);
+                }
+                if (vrstaTreninga != null && !vrstaTreninga.equals("")) {
+                    trening.setVrstaTreninga(vrstaTreninga);
+                }
+                if (nivoTreninga != null && !nivoTreninga.equals("")) {
+                    trening.setNivoTreninga(nivoTreninga);
+                }
+                if (trajanjeTreninga > 0) {
+                    trening.setTrajanjeTreninga(trajanjeTreninga);
+                }if (prosecnaOcena > 0) {
+                    trening.setProsecnaOcena(prosecnaOcena);
+                }
+
+                treningService.update(trening);
+                response.sendRedirect(bURL + "login");
+            }
+        }
+    }
 }

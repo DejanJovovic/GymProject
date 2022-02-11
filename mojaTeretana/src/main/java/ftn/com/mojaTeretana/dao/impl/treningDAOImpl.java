@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -74,6 +75,15 @@ public class treningDAOImpl implements TreningDAO {
         TreningRowCallBackHandler rowCallbackHandler = new TreningRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler, id);
         return rowCallbackHandler.getTreninzi().get(0);
+    }
+
+    @Transactional
+    @Override
+    public int update(Trening trening) {
+        String sql = "UPDATE mojaTeretana.trening SET naziv = ?, kratakOpis = ?, slika = ?, tipTreninga = ?, cena = ?, vrstaTreninga = ?, nivoTreninga = ?, trajanjeTreninga = ?, prosecnaOcena = ?, trener = ? WHERE id = ?";
+        boolean uspeh = jdbcTemplate.update(sql, trening.getNaziv(), trening.getKratkiOpis(), trening.getSlika(), trening.getCena(), trening.getVrstaTreninga(), trening.getNivoTreninga(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId()) == 1;
+
+        return uspeh?1:0;
     }
 
     @Override

@@ -9,6 +9,8 @@ public interface TreningDAO {
 
     Trening findOneById(Long id);
 
+    int update(Trening trening);
 
     int save(Trening trening);
+
 }

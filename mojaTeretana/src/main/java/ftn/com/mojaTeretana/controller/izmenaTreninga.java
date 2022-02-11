@@ -4,18 +4,20 @@ import ftn.com.mojaTeretana.model.Trening;
 import ftn.com.mojaTeretana.service.treningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("admin/Korisnicko_ime={korisnickoIme}/trening/{id}/izmenaTreninga")
 public class izmenaTreninga {
 
     @Autowired
-    private ftn.com.mojaTeretana.service.treningService treningService;
+    private treningService treningService;
 
     @GetMapping
     @ResponseBody

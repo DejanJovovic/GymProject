@@ -1,6 +1,7 @@
 package ftn.com.mojaTeretana.service.impl;
 
 import ftn.com.mojaTeretana.dao.TreningDAO;
+import ftn.com.mojaTeretana.model.Korisnik;
 import ftn.com.mojaTeretana.model.Trening;
 import ftn.com.mojaTeretana.service.treningService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,12 @@ public class DatabasesTreningServiceImpl implements treningService {
     @Override
     public Trening findOneById(Long id) {
         return treningDAO.findOneById(id);
+    }
+
+    @Override
+    public Trening update(Trening trening) {
+        treningDAO.update(trening);
+        return trening;
     }
 
     @Override
