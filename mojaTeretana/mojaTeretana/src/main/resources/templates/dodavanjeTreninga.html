@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="" defer></script>
+    <link rel="stylesheet" th:href="@{/css/registracija.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/treninzi.css}">
+    <title>Dodavanje treninga</title>
+</head>
+<body>
+<img class="pozadina" th:src="@{/img/background.jpg}">
+<div class="topnav">
+    <a href="#" style="padding-right: 30px;">
+        <img th:src="@{/img/korpa.jpg}">
+    </a>
+    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/logout'}">Odjava</a>
+    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme}}">Treninzi</a>
+    <a href="#">Loyalty kartica</a>
+    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/komentari'}">Komentari</a>
+    <a href="#">Dodavanje treninga</a>
+    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/korisnici'}">Korisnici</a>
+    <a class="naslov">MOJA TERETANA</a>
+</div>
+<div class="center">
+    <form action="dodavanjeTreninga-novitrening" method="get">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1 style="text-align: center">Novi trening</h1>
+        <label><b class="a">Naziv treninga: </b></label>
+        <input type="text" placeholder="Unesite naziv" name="naziv" required>
+
+        <label><b class="a">Trener treninga:</b></label>
+        <input type="text" placeholder="Unesite trenera" name="trener" required>
+        <br>
+        <label><b class="a">Unesite kratak opis treninga:</b></label>
+        <input type="text" placeholder="Unesite kratak opis" name="kratakOpis" required>
+        <br>
+        <label><b class="a">Link slike treninga:</b></label>
+        <input type="text" placeholder="Unesite link slike" name="slika" required>
+        <br>
+        <label><b class="a">Cena treninga:</b></label>
+        <input type="number" placeholder="Unesite cenu" name="cena" required>
+        <br>
+        <label><b class="a">Tip treninga:</b></label>
+        <input type="text" placeholder="Unesite tip treninga" name="tipTreninga" required>
+        <br>
+        <label><b class="a">Vrsta treninga:</b></label>
+        <input type="text" placeholder="Unesite vrstu treninga" name="vrstaTreninga" required>
+        <br>
+        <label><b class="a">Nivo treninga:</b></label>
+        <input type="text" placeholder="Unesite nivo treninga" name="nivoTreninga" required>
+        <br>
+        <label><b class="a">Trajanje treninga:</b></label>
+        <input type="number" placeholder="Unesite trajanje treninga" name="trajanjeTreninga" required>
+        <br>
+        <button type="submit">Unesite trening</button>
+        <br>
+        <br>
+    </form>
+</div>
+</body>
+</html>

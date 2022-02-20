@@ -1,0 +1,102 @@
+.container {
+    width:1320px;
+    height:270px;
+    background-color:lightgray;
+    opacity: 0.8;
+    padding-top:20px;
+    padding-left:15px;
+    padding-right:15px;
+}
+.kutija {
+    opacity: 1.0;
+    float:left;
+    width:300px;
+    height:350px;
+    background-color:white;
+    border:solid black;
+    margin-left:20px;
+    margin-bottom: 20px;
+}
+h1 {
+    color:White;
+}
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.btn {
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    color: black;
+}
+.btn:hover {
+    background: #e7e7e7;
+}
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*transform: translate(-50%, -200%);;*/
+}
+img.pozadina{
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+    position: fixed;
+    z-index: 0;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #bfbfbf;
+    position: fixed;
+    width: 100vw;
+    top: 0px;
+    z-index: 1;
+}
+
+.topnav a {
+    float: right;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: gray;
+    color: black;
+}
+
+.topnav a.naslov {
+    font-size: 19px;
+    float: left;
+    text-align: center;
+}
+.topnav a.naslov:hover {
+    background-color: #bfbfbf;
+    color: black;
+}
+
+section{
+    position: relative;
+    top: 100px;
+}
+
+img.kocka {
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
