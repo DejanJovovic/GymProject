@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" th:src="@{/js/clanTeretane.js}" defer></script>
+    <link rel="stylesheet" th:href="@{/css/registracija.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/treninzi.css}">
+    <title>Prikaz Treninga</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="topnav">
+    <a href="#" style="padding-right: 30px;">
+        <img class="pozadina" th:src="@{/img/korpa.jpg}">
+    </a>
+    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/logout'}">Odjava</a>
+    <a th:href="@{'/' + ${korisnik.uloga} + '/Korisnicko_ime=' + ${korisnik.korisnickoIme}}">Treninzi</a>
+    <a href="#">Loyalty kartica</a>
+    <a id="admin" href="#">Komentari</a>
+    <a id="admin1" th:href="@{'Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/dodavanjeTreninga'}">Dodavanje treninga</a>
+    <a id="admin3" th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/korisnici'}">Korisnici</a>
+    <a class="naslov">MOJA TERETANA</a>
+</div>
+<img class="pozadina" src="/img/background.jpg">
+<div class="center" th:each="Korisnik, status: ${korisnik}">
+    <form method="get" th:each="Trening, status: ${trening}" >
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <label><b class="a">Slika: <img th:src="${trening.slika}" style="width: 150px; height: 150px"></b></label>
+        <br>
+        <br>
+        <label><b class="a">Naziv: <a id="treningNaziv" th:text="${trening.naziv}"></a></b></label>
+        <br>
+        <br>
+        <label><b class="a">Trener: <a th:text="${trening.trener}"></a></b></label>
+        <br>
+        <br>
+        <label><b class="a">Kratak opis: <a th:text="${trening.kratakOpis}"></a></b></label>
+        <br>
+        <br>
+        <label><b class="a">Tip Treninga: <a th:text="${trening.tipTreninga}"></a></b></label>
+        <br>
+        <br>
+        <label><b class="a">Cena: <a th:text="${trening.cena}"></a> dinara</b></label>
+        <br>
+        <br>
+        <label><b class="a">Vrsta treninga: <a th:text="${trening.vrstaTreninga}"></a></b></label>
+        <br>
+        <br>
+        <label><b class="a">Nivo treninga: <a th:text="${trening.nivoTreninga}"></a></b></label>
+        <br>
+        <br>
+        <label><b class="a">Trajanje treninga: <a th:text="${trening.trajanjeTreninga}"></a> minuta</b></label>
+        <br>
+        <br>
+        <label><b class="a">Prosecna ocena treninga: <a th:text="${trening.prosecnaOcena}"></a></b></label>
+        <br>
+        <button id="admin2"><a th:href="${'/admin/Korisnicko_ime='+ korisnik.korisnickoIme + '/trening/'+ trening.id +'/izmenaTreninga'}">Izmeni</a></button>
+        <p hidden><a id="uloga" th:text="${korisnik.uloga}"></a></p>
+        <br>
+        <br>
+        <div id="clanTeretane">
+            <label class="a" id="clanTeretan2">Komentari:</label>
+            <br><br>
+            <div id="kutijaKomentar" class="kutija" style="width: 350px; height: 330px" th:each="komentari, status: ${komentari}">
+                <div>
+                    <br>
+                    <div style="text-align: center;">Trening: <a id="komentarTrening" th:text="${komentari.trening}"></a></div>
+                    <br>
+                    <div style="text-align: center;">Datum postavljanja komentara: <a th:text="${komentari.datumPostavljanja}"></a></div>
+                    <br>
+                    <div style="text-align: center;">Ocena: <a th:text="${komentari.ocena}"></a></div>
+                    <br>
+                    <div style="text-align: center;">Tekst komentara: <a th:text="${komentari.tekstKomentara}"></a></div>
+                    <br>
+                    <div style="text-align: center;">Status komentara: <a id="odobren" th:text="${komentari.status}"></a></div>
+                    <br>
+                    <div style="text-align: center;">Autor komentara: <a th:text="${komentari.autor}"></a></div>
+                    <br>
+                    <div style="text-align: center;">Anoniman: <a th:text="${komentari.anoniman}"></a></div>
+                </div>
+            </div>
+            <form id="clanTeretane3">
+                <br><br>
+                <label class="a">Komentar:</label>
+                <br>
+                <br>
+                <textarea style="font-family:sans-serif; font-size:1.2em; width: 300px"></textarea>
+                <br><br>
+                <label class="a">Ocena (1 - 5):</label>
+                <br><br>
+                <input type="number" min="1" max="5">
+                <br>
+                <button type="submit">Postavi komentar</button>
+            </form>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    let treningNaziv = document.getElementById("treningNaziv").innerHTML;
+    let komentarTrening = document.getElementById("komentarTrening").innerHTML;
+    let kutijaKomentar = document.getElementById("kutijaKomentar");
+    console.log(treningNaziv);
+    console.log(komentarTrening);
+    if(treningNaziv !== komentarTrening) {
+        kutijaKomentar.style.display='none';
+    }
+    else {
+        kutijaKomentar.style.display='block ';
+    }
+</script>
+<script>
+    function ProveraUloge() {
+        let uloga = document.getElementById("uloga").innerText;
+        let admin = document.getElementById("admin");
+        let admin1 = document.getElementById("admin1");
+        let admin2 = document.getElementById("admin2");
+        let admin3 = document.getElementById("admin3");
+        let clanTeretane = document.getElementById("clanTeretane");
+        let clanTeretane2 = document.getElementById("clanTeretane2");
+        let clanTeretane3 = document.getElementById("clanTeretane3");
+        if (uloga === "admin") {
+            admin.style.display = 'block';
+            admin1.style.display = 'block';
+            admin2.style.display = 'block';
+            admin3.style.display = 'block';
+            clanTeretane.style.display = 'none';
+            clanTeretane2.style.display = 'none';
+            clanTeretane3.style.display = 'none';
+            console.log("a");
+        } else if (uloga === "clanTeretane") {
+            admin.style.display = 'none';
+            admin1.style.display = 'none';
+            admin2.style.display = 'none';
+            admin3.style.display = 'none';
+            clanTeretane.style.display = 'block';
+            clanTeretane2.style.display = 'block';
+            clanTeretane3.style.display = 'block';
+        }
+    }
+    window.onload=ProveraUloge;
+</script>
+</html>
