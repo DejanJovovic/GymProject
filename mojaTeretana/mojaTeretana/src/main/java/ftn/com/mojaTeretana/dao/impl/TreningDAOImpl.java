@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class treningDAOImpl implements TreningDAO {
+public class TreningDAOImpl implements TreningDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

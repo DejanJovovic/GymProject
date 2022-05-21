@@ -5,7 +5,7 @@ import ftn.com.mojaTeretana.model.Korisnik;
 import ftn.com.mojaTeretana.model.Trening;
 import ftn.com.mojaTeretana.service.komentarService;
 import ftn.com.mojaTeretana.service.korisnikService;
-import ftn.com.mojaTeretana.service.treningService;
+import ftn.com.mojaTeretana.service.TreningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ public class clanTeretaneController implements ServletContextAware {
     private String bURL;
 
     @Autowired
-    public treningService treningService;
+    public TreningService treningService;
 
     @Autowired
     private korisnikService korisnikService;
@@ -78,7 +78,7 @@ public class clanTeretaneController implements ServletContextAware {
         Trening trening = treningService.findOneById(id);
         Korisnik korisnik = korisnikService.findOneByUsername(korisnickoIme);
         List<Komentar> komentari = komentarService.FindAll();
-
+        /*
         for (int i = 0; i < komentari.size(); i++) {
             if(komentari.get(i).getStatus().equals("Nije odobren")){
                 komentari.remove(i);
@@ -94,6 +94,7 @@ public class clanTeretaneController implements ServletContextAware {
                 komentari.remove(i);
             }
         }
+        */
 
         model.addAttribute("trening", trening);
         model.addAttribute("komentari", komentari);

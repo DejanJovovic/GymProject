@@ -1,10 +1,11 @@
 package ftn.com.mojaTeretana.controller;
 
+import ftn.com.mojaTeretana.model.EStatusKomentara;
 import ftn.com.mojaTeretana.model.Komentar;
 import ftn.com.mojaTeretana.model.Korisnik;
 import ftn.com.mojaTeretana.model.Trening;
 import ftn.com.mojaTeretana.service.korisnikService;
-import ftn.com.mojaTeretana.service.treningService;
+import ftn.com.mojaTeretana.service.TreningService;
 import ftn.com.mojaTeretana.service.komentarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -30,7 +31,7 @@ public class administratorController implements ServletContextAware {
     private String bURL;
 
     @Autowired
-    private treningService treningService;
+    private TreningService treningService;
 
     @Autowired
     private korisnikService korisnikService;
@@ -138,7 +139,7 @@ public class administratorController implements ServletContextAware {
         komentar.setAutor(komentar1.getAutor());
         komentar.setTrening(komentar1.getTrening());
         komentar.setDatumPostavljanja(komentar1.getDatumPostavljanja());
-        komentar.setStatus("Nije odobren");
+        komentar.setStatusKomentara(EStatusKomentara.ODBIJEN);
 
         komentarService.update(komentar);
 
@@ -158,7 +159,8 @@ public class administratorController implements ServletContextAware {
         komentar.setAutor(komentar1.getAutor());
         komentar.setTrening(komentar1.getTrening());
         komentar.setDatumPostavljanja(komentar1.getDatumPostavljanja());
-        komentar.setStatus("Odobren");
+        //komentar.setStatus("Odobren");
+        komentar.setStatusKomentara(EStatusKomentara.ODOBREN);
 
         komentarService.update(komentar);
 

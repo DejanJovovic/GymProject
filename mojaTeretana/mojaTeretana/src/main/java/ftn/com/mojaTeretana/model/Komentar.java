@@ -7,23 +7,27 @@ public class Komentar {
     private int ocena;
     private String datum;
     private String autor;
-    private String trening;
-    private String statusKomentara;
+    private Trening trening;
+    private EStatusKomentara statusKomentara;
     private boolean anoniman;
 
-    public Komentar(long id, String tekstKomentara, int ocena, String datumPostavljanja,
-                    String autor, String trening, String statusKomentara, boolean anoniman) {
-        this.id = id;
-        this.tekstKomentara = tekstKomentara;
-        this.ocena = ocena;
-        this.datum = datumPostavljanja;
-        this.autor = autor;
-        this.trening = trening;
-        this.statusKomentara = statusKomentara;
-        this.anoniman = anoniman;
-    }
+    
+    
+   
 
-    @Override
+    public Komentar(long id, String tekstKomentara, int ocena, String datum, String autor, Trening trening,
+			EStatusKomentara statusKomentara, boolean anoniman) {
+		super();
+		this.id = id;
+		this.tekstKomentara = tekstKomentara;
+		this.ocena = ocena;
+		this.datum = datum;
+		this.autor = autor;
+		this.trening = trening;
+		this.statusKomentara = statusKomentara;
+		this.anoniman = anoniman;
+	}
+	@Override
     public String toString() {
         return "Komentar{" +
                 "id=" + id +
@@ -66,22 +70,35 @@ public class Komentar {
     public void setAutor(String autor) {
         this.autor = autor;
     }
-    public String getTrening() {
-        return trening;
-    }
-    public void setTrening(String trening) {
-        this.trening = trening;
-    }
-    public String getStatus() {
-        return statusKomentara;
-    }
-    public void setStatus(String statusKomentara) {
-        this.statusKomentara = statusKomentara;
-    }
+    
     public boolean isAnoniman() {
         return anoniman;
     }
     public void setAnoniman(boolean anoniman) {
         anoniman = anoniman;
     }
+	public String getDatum() {
+		return datum;
+	}
+	public void setDatum(String datum) {
+		this.datum = datum;
+	}
+	public Trening getTrening() {
+		return trening;
+	}
+	public void setTrening(Trening trening) {
+		this.trening = trening;
+	}
+	public EStatusKomentara getStatusKomentara() {
+		return statusKomentara;
+	}
+	public void setStatusKomentara(EStatusKomentara statusKomentara) {
+		this.statusKomentara = statusKomentara;
+	}
+    
+    
+    
+    
+    
+    
 }

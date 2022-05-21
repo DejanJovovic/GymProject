@@ -4,7 +4,7 @@ import ftn.com.mojaTeretana.model.Trening;
 
 import java.util.List;
 
-public interface treningService {
+public interface TreningService {
 
     List<Trening> findAll();
 

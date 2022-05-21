@@ -1,7 +1,11 @@
 package ftn.com.mojaTeretana.dao.impl;
 
-import ftn.com.mojaTeretana.dao.komentarDAO;
+import ftn.com.mojaTeretana.dao.KomentarDAO;
+import ftn.com.mojaTeretana.dao.TreningDAO;
+import ftn.com.mojaTeretana.model.EStatusKomentara;
 import ftn.com.mojaTeretana.model.Komentar;
+import ftn.com.mojaTeretana.model.Trening;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
@@ -16,10 +20,13 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class komentarDAOImpl implements komentarDAO {
+public class KomentarDAOImpl implements KomentarDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    private TreningDAO treningDAO;
 
     private class KomentarRowCallBackHandler implements RowCallbackHandler {
 
@@ -33,8 +40,11 @@ public class komentarDAOImpl implements komentarDAO {
             int ocena = resultSet.getInt(index++);
             String datum = resultSet.getString(index++);
             String autor = resultSet.getString(index++);
-            String trening = resultSet.getString(index++);
-            String statusKomentara = resultSet.getString(index++);
+            long treningId = resultSet.getLong(index++);
+            Trening trening = treningDAO.findOneById(treningId);
+            
+            
+            EStatusKomentara statusKomentara = EStatusKomentara.valueOf(resultSet.getString(index++));
             boolean anoniman = resultSet.getBoolean(index++);
             Komentar komentar = komentari.get(id);
             if (komentar == null) {
@@ -52,7 +62,7 @@ public class komentarDAOImpl implements komentarDAO {
     public List<Komentar> FindAllById(Long id) {
         String sql = "SELECT * FROM mojateretana.komentar WHERE idKomentar = ? ";
 
-        komentarDAOImpl.KomentarRowCallBackHandler rowCallbackHandler = new komentarDAOImpl.KomentarRowCallBackHandler();
+        KomentarDAOImpl.KomentarRowCallBackHandler rowCallbackHandler = new KomentarDAOImpl.KomentarRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler, id);
         return rowCallbackHandler.getKomentari();
     }
@@ -60,7 +70,7 @@ public class komentarDAOImpl implements komentarDAO {
     @Override
     public List<Komentar> FindAll() {
         String sql = "SELECT * FROM mojateretana.komentar";
-        komentarDAOImpl.KomentarRowCallBackHandler rowCallbackHandler = new komentarDAOImpl.KomentarRowCallBackHandler();
+        KomentarDAOImpl.KomentarRowCallBackHandler rowCallbackHandler = new KomentarDAOImpl.KomentarRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler);
         return rowCallbackHandler.getKomentari();
     }
@@ -70,7 +80,7 @@ public class komentarDAOImpl implements komentarDAO {
     public void update(Komentar komentar) {
         String sql = "UPDATE mojaTeretana.komentar SET tekstKomentara = ?, ocena = ?, datum = ?, autor = ?, trening = ?, statusKomentara = ?, anoniman = ? WHERE idKomentar = ?";
         jdbcTemplate.update(sql,komentar.getTekstKomentara(), komentar.getOcena(), komentar.getDatumPostavljanja(),
-                komentar.getAutor(),komentar.getTrening(),komentar.getStatus(),komentar.isAnoniman(), komentar.getId());
+                komentar.getAutor(),komentar.getTrening().getId(),komentar.getStatusKomentara().toString(),komentar.isAnoniman(), komentar.getId());
 
         return;
     }
@@ -79,8 +89,14 @@ public class komentarDAOImpl implements komentarDAO {
     public Komentar FindOneById(Long id) {
         String sql = "SELECT * FROM mojateretana.komentar WHERE idKomentar = ? ";
 
-        komentarDAOImpl.KomentarRowCallBackHandler rowCallbackHandler = new komentarDAOImpl.KomentarRowCallBackHandler();
+        KomentarDAOImpl.KomentarRowCallBackHandler rowCallbackHandler = new KomentarDAOImpl.KomentarRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler, id);
         return rowCallbackHandler.getKomentari().get(0);
     }
+
+	@Override
+	public List<Komentar> findAllByTreningId(long treningId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

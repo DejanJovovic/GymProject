@@ -1,6 +1,6 @@
 package ftn.com.mojaTeretana.service.impl;
 
-import ftn.com.mojaTeretana.dao.komentarDAO;
+import ftn.com.mojaTeretana.dao.KomentarDAO;
 import ftn.com.mojaTeretana.model.Komentar;
 import ftn.com.mojaTeretana.service.komentarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabasesKomentarServiceImpl implements komentarService {
 
     @Autowired
-    private komentarDAO komentarDAO;
+    private KomentarDAO komentarDAO;
 
     @Override
     public List<Komentar> FindAllById(Long id) {

@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface komentarDAO {
+public interface KomentarDAO {
 
     List<Komentar> FindAllById(Long id);
 
@@ -14,4 +14,7 @@ public interface komentarDAO {
     void update(Komentar komentar);
 
     Komentar FindOneById(Long id);
+    
+    
+    List<Komentar> findAllByTreningId(long treningId);
 }
