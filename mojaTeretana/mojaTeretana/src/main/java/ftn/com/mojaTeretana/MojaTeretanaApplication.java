@@ -11,3 +11,11 @@ public class MojaTeretanaApplication extends SpringBootServletInitializer {
 		SpringApplication.run(MojaTeretanaApplication.class, args);
 	}
 }
+
+// implementiraj prijavadao
+
+
+// implementiraj clanskakartadao
+
+
+// napravi nove kontrolere treningkontroler i KomentarController

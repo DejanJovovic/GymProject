@@ -159,7 +159,7 @@ public class administratorController implements ServletContextAware {
         komentar.setAutor(komentar1.getAutor());
         komentar.setTrening(komentar1.getTrening());
         komentar.setDatumPostavljanja(komentar1.getDatumPostavljanja());
-        //komentar.setStatus("Odobren");
+        //komentar.setStatus("ODOBREN");
         komentar.setStatusKomentara(EStatusKomentara.ODOBREN);
 
         komentarService.update(komentar);
