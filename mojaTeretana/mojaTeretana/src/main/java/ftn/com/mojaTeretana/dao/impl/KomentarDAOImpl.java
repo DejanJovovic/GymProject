@@ -1,9 +1,11 @@
 package ftn.com.mojaTeretana.dao.impl;
 
 import ftn.com.mojaTeretana.dao.KomentarDAO;
+import ftn.com.mojaTeretana.dao.KorisnikDAO;
 import ftn.com.mojaTeretana.dao.TreningDAO;
 import ftn.com.mojaTeretana.model.EStatusKomentara;
 import ftn.com.mojaTeretana.model.Komentar;
+import ftn.com.mojaTeretana.model.Korisnik;
 import ftn.com.mojaTeretana.model.Trening;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,6 +27,9 @@ public class KomentarDAOImpl implements KomentarDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    private KorisnikDAO korisnikDAO;
     
     @Autowired
     private TreningDAO treningDAO;
@@ -37,14 +43,14 @@ public class KomentarDAOImpl implements KomentarDAO {
             int index = 1;
             Long id = resultSet.getLong(index++);
             String tekstKomentara = resultSet.getString(index++);
-            int ocena = resultSet.getInt(index++);
-            String datum = resultSet.getString(index++);
-            String autor = resultSet.getString(index++);
-            long treningId = resultSet.getLong(index++);
-            Trening trening = treningDAO.findOneById(treningId);
-            
-            
+            Integer ocena = resultSet.getInt(index++);
+            LocalDate datum = resultSet.getTimestamp(index++).toLocalDateTime().toLocalDate();
             EStatusKomentara statusKomentara = EStatusKomentara.valueOf(resultSet.getString(index++));
+            Long korisnikId = resultSet.getLong(index++);
+            Korisnik autor = korisnikDAO.findOneById(korisnikId);
+            Long treningId = resultSet.getLong(index++);
+            Trening trening = treningDAO.findOneById(treningId);
+
             boolean anoniman = resultSet.getBoolean(index++);
             Komentar komentar = komentari.get(id);
             if (komentar == null) {
@@ -60,17 +66,17 @@ public class KomentarDAOImpl implements KomentarDAO {
 
     @Override
     public List<Komentar> FindAllById(Long id) {
-        String sql = "SELECT * FROM mojateretana.komentar WHERE idKomentar = ? ";
+        String sql = "SELECT * from komentari WHERE trening = ? and statusKomentara = 'ODOBREN' ";
 
-        KomentarDAOImpl.KomentarRowCallBackHandler rowCallbackHandler = new KomentarDAOImpl.KomentarRowCallBackHandler();
+        KomentarRowCallBackHandler rowCallbackHandler = new KomentarRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler, id);
         return rowCallbackHandler.getKomentari();
     }
 
     @Override
     public List<Komentar> FindAll() {
-        String sql = "SELECT * FROM mojateretana.komentar";
-        KomentarDAOImpl.KomentarRowCallBackHandler rowCallbackHandler = new KomentarDAOImpl.KomentarRowCallBackHandler();
+        String sql = "SELECT * FROM komentari where statusKomentara = 'CEKANJE'";
+        KomentarRowCallBackHandler rowCallbackHandler = new KomentarRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler);
         return rowCallbackHandler.getKomentari();
     }
@@ -78,8 +84,8 @@ public class KomentarDAOImpl implements KomentarDAO {
     @Transactional
     @Override
     public void update(Komentar komentar) {
-        String sql = "UPDATE mojaTeretana.komentar SET tekstKomentara = ?, ocena = ?, datum = ?, autor = ?, trening = ?, statusKomentara = ?, anoniman = ? WHERE idKomentar = ?";
-        jdbcTemplate.update(sql,komentar.getTekstKomentara(), komentar.getOcena(), komentar.getDatumPostavljanja(),
+        String sql = "UPDATE komentari set tekstKomentara = ?, ocena = ?, datum = ?, autor = ?, trening = ?, statusKomentara = ?, anoniman = ? WHERE id = ?";
+        jdbcTemplate.update(sql,komentar.getTekstKomentara(), komentar.getOcena(), komentar.getDatum(),
                 komentar.getAutor(),komentar.getTrening().getId(),komentar.getStatusKomentara().toString(),komentar.isAnoniman(), komentar.getId());
 
         return;
@@ -87,16 +93,29 @@ public class KomentarDAOImpl implements KomentarDAO {
 
     @Override
     public Komentar FindOneById(Long id) {
-        String sql = "SELECT * FROM mojateretana.komentar WHERE idKomentar = ? ";
+        String sql = "SELECT * FROM komentari WHERE id = ? ";
 
-        KomentarDAOImpl.KomentarRowCallBackHandler rowCallbackHandler = new KomentarDAOImpl.KomentarRowCallBackHandler();
+        KomentarRowCallBackHandler rowCallbackHandler = new KomentarRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler, id);
         return rowCallbackHandler.getKomentari().get(0);
     }
 
 	@Override
-	public List<Komentar> findAllByTreningId(long treningId) {
+	public List<Komentar> findAllByTreningId(Long treningId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int delete(Long id) {
+			
+		String sql = "Update komentari set statusKomentara = 'ODBIJEN' where id = ?";
+		return jdbcTemplate.update(sql, id);
+	}
+
+	@Override
+	public int odobreno(Long id) {
+		String sql = "Update komentari set statusKomentara = 'ODOBREN' where id = ?";
+		return jdbcTemplate.update(sql, id);
 	}
 }

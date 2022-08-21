@@ -17,6 +17,10 @@ trener varchar(255) NOT NULL,
 PRIMARY KEY(id)
 );
 
+ALTER TABLE treninzi
+modify column vrstaTreninga enum('POJEDINACNI', 'GRUPNI'),
+MODIFY COLUMN nivoTreninga enum('AMATERSKI', 'SREDNJI', 'NAPREDNI')
+
 Create table tipTreninga (
 id BIGINT AUTO_INCREMENT NOT NULL,
 ime VARCHAR(255) NOT NULL,
@@ -42,6 +46,9 @@ uloga VARCHAR(20) NOT NULL,
 PRIMARY KEY(id)
 );
 
+ALTER TABLE korisnici
+ADD tipKorisnika enum('ADMINISTRATOR', 'POLAZNIK')
+
 CREATE TABLE clanskeKarte (
 id BIGINT AUTO_INCREMENT NOT NULL,
 popust INT(50) NOT NULL,
@@ -50,6 +57,9 @@ PRIMARY KEY(id),
 korisnikId bigint,
 FOREIGN KEY(korisnikId) REFERENCES korisnici(id)
 );
+
+ALTER TABLE clanskeKarte
+Add status enum('CEKANJE', 'ODOBREN', 'ODBIJEN')
 
 CREATE TABLE sale (
 id BIGINT AUTO_INCREMENT NOT NULL,
@@ -85,6 +95,9 @@ FOREIGN KEY(korisnikId) REFERENCES korisnici(id),
 FOREIGN KEY(treningId) REFERENCES treninzi(id)
 );
 
+ALTER TABLE komentari
+ADD statusKomentara enum('CEKANJE', 'ODOBREN', 'ODBIJEN')
+
 CREATE TABLE korpe(
 id BIGINT AUTO_INCREMENT NOT NULL,
 korisnikId bigint,
@@ -94,7 +107,7 @@ FOREIGN KEY(korisnikId) REFERENCES korisnici(id),
 FOREIGN KEY(terminId) REFERENCES terminTreninga(id)
 );
 
-
+	
 INSERT INTO korisnici (korisnickoIme, lozinka, email, ime, prezime, datumRodjenja, adresa, brojTelefona, datumIVremeRegistracije, uloga)
 VALUES ('admin', 'admin','admin@admin.rs','Marko','Markovic','27.05.2000.','neka tamo adresa','063857281','11.07.2022. 15:37','admin');
 INSERT INTO korisniCI (korisnickoIme, lozinka, email, ime, prezime, datumRodjenja, adresa, brojTelefona, datumIVremeRegistracije, uloga)

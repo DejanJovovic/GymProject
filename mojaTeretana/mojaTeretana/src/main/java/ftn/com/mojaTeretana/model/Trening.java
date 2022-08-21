@@ -9,16 +9,14 @@ public class Trening {
     private String slika;
     private TipTreninga tipTreninga;
     private int cena;
-    private String vrstaTreninga;
-    private String nivoTreninga;
+    private EVrstaTreninga vrstaTreninga;
+    private ENivoTreninga nivoTreninga;
     private int trajanjeTreninga;
     private int prosecnaOcena;
 
     
-    public Trening() {
-    }
-
-    public Trening(String naziv1, String kratakOpis1, String slika, int cena1,String vrstaTreninga,String nivoTreninga
+  
+    public Trening(String naziv1, String kratakOpis1, String slika, int cena1,EVrstaTreninga vrstaTreninga,ENivoTreninga nivoTreninga
     		,int trajanjeTreninga1, String trener,  int prosecnaOcena1) {
         this.naziv = naziv1;
         this.kratakOpis = kratakOpis1;
@@ -31,7 +29,7 @@ public class Trening {
         this.prosecnaOcena = prosecnaOcena1;
     }
     public Trening(Long id1, String naziv1, String kratakOpis1, String slika,TipTreninga tipTreninga1,
-                   int cena1, String vrstaTreninga1, String nivoTreninga1,
+                   int cena1, EVrstaTreninga vrstaTreninga1, ENivoTreninga nivoTreninga1,
                    int trajanjeTreninga1, int prosecnaOcena1, String trener) {
         this.id = id1;
         this.naziv = naziv1;
@@ -46,7 +44,7 @@ public class Trening {
         this.trener = trener;
     }
     public Trening(String naziv1, String kratakOpis1, String slika,TipTreninga tipTreninga1,
-                   int cena1, String vrstaTreninga1, String nivoTreninga1,
+                   int cena1, EVrstaTreninga vrstaTreninga1, ENivoTreninga nivoTreninga1,
                    int trajanjeTreninga1, int prosecnaOcena1, String trener) {
         this.naziv = naziv1;
         this.kratakOpis = kratakOpis1;
@@ -141,19 +139,19 @@ public class Trening {
 		this.cena = cena;
 	}
 
-	public String getVrstaTreninga() {
+	public EVrstaTreninga getVrstaTreninga() {
 		return vrstaTreninga;
 	}
 
-	public void setVrstaTreninga(String vrstaTreninga) {
+	public void setVrstaTreninga(EVrstaTreninga vrstaTreninga) {
 		this.vrstaTreninga = vrstaTreninga;
 	}
 
-	public String getNivoTreninga() {
+	public ENivoTreninga getNivoTreninga() {
 		return nivoTreninga;
 	}
 
-	public void setNivoTreninga(String nivoTreninga) {
+	public void setNivoTreninga(ENivoTreninga nivoTreninga) {
 		this.nivoTreninga = nivoTreninga;
 	}
 

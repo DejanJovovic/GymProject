@@ -4,7 +4,7 @@ import ftn.com.mojaTeretana.model.Korisnik;
 
 import java.util.List;
 
-public interface korisnikDAO{
+public interface KorisnikDAO{
 
     Korisnik findOneById(Long id);
 
@@ -15,4 +15,7 @@ public interface korisnikDAO{
     List<Korisnik> findAll();
 
     int save(Korisnik korisnik);
+    int delete(Long id);
+    int update(Korisnik korisnik);
+    int updateProfil(Korisnik korisnik);
 }

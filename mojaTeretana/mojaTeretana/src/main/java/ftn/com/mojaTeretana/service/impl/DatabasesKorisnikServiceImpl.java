@@ -1,6 +1,6 @@
 package ftn.com.mojaTeretana.service.impl;
 
-import ftn.com.mojaTeretana.dao.korisnikDAO;
+import ftn.com.mojaTeretana.dao.KorisnikDAO;
 import ftn.com.mojaTeretana.model.Korisnik;
 import ftn.com.mojaTeretana.service.korisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabasesKorisnikServiceImpl implements korisnikService {
 
     @Autowired
-    private korisnikDAO korisnikDAO;
+    private KorisnikDAO korisnikDAO;
 
     @Override
     public Korisnik findOneById(Long id) {

@@ -16,6 +16,12 @@ public class Korisnik {
     private String datumIVremeRegistracije;
     private ETipKorisnika tipKorisnika;
     private String uloga;
+    
+    
+    public Korisnik() {
+        
+    }
+    
 
     public Korisnik(String korisnickoIme1, String lozinka1, String email1, String ime1,
                     String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
@@ -67,9 +73,6 @@ public class Korisnik {
                 '}';
     }
     
-    public Korisnik() {
-    
-    }
     
     public long getId() {
         return id;

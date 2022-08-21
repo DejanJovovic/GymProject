@@ -12,5 +12,7 @@ public interface TreningDAO {
     void update(Trening trening);
 
     int save(Trening trening);
+    
+    Float sum(Long id);
 
 }

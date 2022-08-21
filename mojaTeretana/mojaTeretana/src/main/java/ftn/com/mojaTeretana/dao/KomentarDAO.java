@@ -12,9 +12,12 @@ public interface KomentarDAO {
     List<Komentar> FindAll();
 
     void update(Komentar komentar);
+    
+    int delete(Long id);
+    int odobreno(Long id);
 
     Komentar FindOneById(Long id);
     
     
-    List<Komentar> findAllByTreningId(long treningId);
+    List<Komentar> findAllByTreningId(Long treningId);
 }

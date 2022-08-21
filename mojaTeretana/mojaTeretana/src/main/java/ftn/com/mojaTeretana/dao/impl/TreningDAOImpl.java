@@ -1,6 +1,10 @@
 package ftn.com.mojaTeretana.dao.impl;
 
 import ftn.com.mojaTeretana.dao.TreningDAO;
+import ftn.com.mojaTeretana.model.ENivoTreninga;
+import ftn.com.mojaTeretana.model.ETipKorisnika;
+import ftn.com.mojaTeretana.model.EVrstaTreninga;
+import ftn.com.mojaTeretana.model.TipTreninga;
 import ftn.com.mojaTeretana.model.Trening;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +26,7 @@ public class TreningDAOImpl implements TreningDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    class TreningRowCallBackHandler implements RowCallbackHandler {
+    private class TreningRowCallBackHandler implements RowCallbackHandler {
 
         private Map<Long, Trening> treninzi = new LinkedHashMap<>();
 
@@ -31,22 +35,20 @@ public class TreningDAOImpl implements TreningDAO {
             int index = 1;
             Long id = resultSet.getLong(index++);
             String naziv = resultSet.getString(index++);
-
             String kratakOpis = resultSet.getString(index++);
             String slika = resultSet.getString(index++);
-            String tipTreninga = resultSet.getString(index++);
-
-            int cena = resultSet.getInt(index++);
-            String vrstaTreninga = resultSet.getString(index++);
-            String nivoTreninga = resultSet.getString(index++);
-            int trajanjeTreninga = resultSet.getInt(index++);
-            int prosecnaOcena = resultSet.getInt(index++);
+            Integer cena = resultSet.getInt(index++);
+            EVrstaTreninga vrstaTreninga = EVrstaTreninga.valueOf(resultSet.getString(index++));
+            ENivoTreninga nivoTreninga = ENivoTreninga.valueOf(resultSet.getString(index++));
+            Integer trajanjeTreninga = resultSet.getInt(index++);
+            Integer prosecnaOcena = resultSet.getInt(index++);
             String trener = resultSet.getString(index++);
 
             Trening trening = treninzi.get(id);
             if (trening == null) {
-                trening = new Trening(id, naziv, kratakOpis, slika, tipTreninga, cena, vrstaTreninga,
-                        nivoTreninga, trajanjeTreninga, prosecnaOcena, trener);
+                trening = new Trening(id, naziv, kratakOpis, slika,
+                        null, cena, vrstaTreninga, nivoTreninga,
+                        trajanjeTreninga, prosecnaOcena, trener);
                 treninzi.put(trening.getId(), trening); // dodavanje u kolekciju
             }
         }
@@ -58,8 +60,8 @@ public class TreningDAOImpl implements TreningDAO {
     @Override
     public List<Trening> findAll() {
         String sql =
-                "SELECT idTrening, naziv, kratakOpis, slika, tipTreninga, cena, vrstaTreninga, nivoTreninga," +
-                        "trajanjeTreninga, prosecnaOcena, trener FROM trening";
+                "SELECT id, naziv, kratakOpis, slika, tipTreninga, cena, vrstaTreninga, nivoTreninga," +
+                        "trajanjeTreninga, prosecnaOcena, trener FROM treninzi";
 
         TreningRowCallBackHandler rowCallbackHandler = new TreningRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler);
@@ -70,7 +72,7 @@ public class TreningDAOImpl implements TreningDAO {
     @Override
     public Trening findOneById(Long id) {
         String sql =
-                "SELECT * FROM mojaTeretana.trening WHERE idTrening = ? ";
+                "SELECT * FROM treninzi WHERE id = ? ";
 
         TreningRowCallBackHandler rowCallbackHandler = new TreningRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler, id);
@@ -81,7 +83,7 @@ public class TreningDAOImpl implements TreningDAO {
     @Override
     public void update(Trening trening) {
         String sql = "UPDATE mojaTeretana.trening SET naziv = ?, kratakOpis = ?, slika = ?, tipTreninga = ?, cena = ?, vrstaTreninga = ?, nivoTreninga = ?, trajanjeTreninga = ?, prosecnaOcena = ?, trener = ? WHERE idTrening = ?";
-        jdbcTemplate.update(sql, trening.getNaziv(), trening.getOpis(), trening.getSlika(), trening.getTipTreninga(), trening.getCena(), trening.getVrstaTreninga(), trening.getNivoTreninga(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
+        jdbcTemplate.update(sql, trening.getNaziv(), trening.getKratakOpis(), trening.getSlika(), trening.getTipTreninga(), trening.getCena(), trening.getVrstaTreninga(), trening.getNivoTreninga(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
 
         return;
     }
@@ -92,18 +94,17 @@ public class TreningDAOImpl implements TreningDAO {
 
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                String sql = "INSERT INTO trening (naziv, kratakOpis, slika, tipTreninga," +
+                String sql = "INSERT INTO treninzi (naziv, kratakOpis, slika, tipTreninga," +
                         "cena, vrstaTreninga, nivoTreninga, trajanjeTreninga, prosecnaOcena, trener)" +
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 int index = 1;
                 preparedStatement.setString(index++, trening.getNaziv());
-                preparedStatement.setString(index++, trening.getOpis());
+                preparedStatement.setString(index++, trening.getKratakOpis());
                 preparedStatement.setString(index++, trening.getSlika());
-                preparedStatement.setString(index++, trening.getTipTreninga());
                 preparedStatement.setInt(index++, trening.getCena());
-                preparedStatement.setString(index++, trening.getVrstaTreninga());
-                preparedStatement.setString(index++, trening.getNivoTreninga());
+                preparedStatement.setString(index++, trening.getVrstaTreninga().toString());
+                preparedStatement.setString(index++, trening.getNivoTreninga().toString());
                 preparedStatement.setInt(index++, trening.getTrajanjeTreninga());
                 preparedStatement.setInt(index++, trening.getProsecnaOcena());
                 preparedStatement.setString(index++, trening.getTrener());
@@ -115,4 +116,32 @@ public class TreningDAOImpl implements TreningDAO {
         boolean uspeh = jdbcTemplate.update(preparedStatementCreator, keyHolder) == 1;
         return uspeh?1:0;
     }
+    
+    private class CenaHandler implements RowCallbackHandler {
+    	private List<Float> list = new ArrayList<Float>();
+
+		@Override
+		public void processRow(ResultSet resultSet) throws SQLException {
+			int index = 1;
+			Float cena = resultSet.getFloat(index++);
+			
+			list.add(cena);
+			
+		}
+		
+		public List<Float> getCene() {
+			return new ArrayList<>(list);
+		}
+    	
+    }
+
+	@Override
+	public Float sum(Long id) {
+		String sql = "select sum(cena) from treninzi tr left join terminTreninga t on t.treningId = tr.id left join Korpa k on k.terminId = t.id where k.korisnikId = ?";
+		
+		CenaHandler rowCallbackHandler = new CenaHandler();
+			jdbcTemplate.query(sql, rowCallbackHandler, id);
+			
+			return rowCallbackHandler.getCene().get(0);
+	}
 }
