@@ -1,32 +1,49 @@
 package ftn.com.mojaTeretana.model;
 
+import java.time.LocalDate;
+
 public class Komentar {
 
-    private long id;
+    private Long id;
     private String tekstKomentara;
     private int ocena;
-    private String datum;
-    private String autor;
+    private LocalDate datum;
+    private Korisnik autor;
     private Trening trening;
     private EStatusKomentara statusKomentara;
     private boolean anoniman;
 
+    public Komentar() {
+    	
+    }
     
-    
-   
 
-    public Komentar(long id, String tekstKomentara, int ocena, String datum, String autor, Trening trening,
-			EStatusKomentara statusKomentara, boolean anoniman) {
+    public Komentar(Long id1, String tekstKomentara1, int ocena1, LocalDate datum1, Korisnik autor, Trening trening1,
+			EStatusKomentara statusKomentara1, boolean anoniman1) {
 		super();
-		this.id = id;
-		this.tekstKomentara = tekstKomentara;
-		this.ocena = ocena;
-		this.datum = datum;
+		this.id = id1;
+		this.tekstKomentara = tekstKomentara1;
+		this.ocena = ocena1;
+		this.datum = datum1;
 		this.autor = autor;
-		this.trening = trening;
-		this.statusKomentara = statusKomentara;
-		this.anoniman = anoniman;
+		this.trening = trening1;
+		this.statusKomentara = statusKomentara1;
+		this.anoniman = anoniman1;
 	}
+    
+    public Komentar(String tekstKomentara1, int ocena1, LocalDate datum1, Korisnik autor, Trening trening1,
+			EStatusKomentara statusKomentara1, boolean anoniman1) {
+		super();
+		this.tekstKomentara = tekstKomentara1;
+		this.ocena = ocena1;
+		this.datum = datum1;
+		this.autor = autor;
+		this.trening = trening1;
+		this.statusKomentara = statusKomentara1;
+		this.anoniman = anoniman1;
+	}
+    
+    
 	@Override
     public String toString() {
         return "Komentar{" +
@@ -40,65 +57,81 @@ public class Komentar {
                 ", anoniman=" + anoniman +
                 '}';
     }
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getTekstKomentara() {
-        return tekstKomentara;
-    }
-    public void setTekstKomentara(String tekstKomentara) {
-        this.tekstKomentara = tekstKomentara;
-    }
-    public int getOcena() {
-        return ocena;
-    }
-    public void setOcena(int ocena) {
-        this.ocena = ocena;
-    }
-    public String getDatumPostavljanja() {
-        return datum;
-    }
-    public void setDatumPostavljanja(String datumPostavljanja) {
-        this.datum = datumPostavljanja;
-    }
-    public String getAutor() {
-        return autor;
-    }
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-    
-    public boolean isAnoniman() {
-        return anoniman;
-    }
-    public void setAnoniman(boolean anoniman) {
-        anoniman = anoniman;
-    }
-	public String getDatum() {
+
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getTekstKomentara() {
+		return tekstKomentara;
+	}
+
+
+	public void setTekstKomentara(String tekstKomentara) {
+		this.tekstKomentara = tekstKomentara;
+	}
+
+
+	public int getOcena() {
+		return ocena;
+	}
+
+
+	public void setOcena(int ocena) {
+		this.ocena = ocena;
+	}
+
+
+	public LocalDate getDatum() {
 		return datum;
 	}
-	public void setDatum(String datum) {
+
+
+	public void setDatum(LocalDate datum) {
 		this.datum = datum;
 	}
+
+
+	public Korisnik getAutor() {
+		return autor;
+	}
+
+
+	public void setAutor(Korisnik autor) {
+		this.autor = autor;
+	}
+
+
 	public Trening getTrening() {
 		return trening;
 	}
+
 	public void setTrening(Trening trening) {
 		this.trening = trening;
 	}
+
+
 	public EStatusKomentara getStatusKomentara() {
 		return statusKomentara;
 	}
+
 	public void setStatusKomentara(EStatusKomentara statusKomentara) {
 		this.statusKomentara = statusKomentara;
 	}
-    
-    
-    
-    
-    
-    
+
+	public boolean isAnoniman() {
+		return anoniman;
+	}
+
+
+	public void setAnoniman(boolean anoniman) {
+		this.anoniman = anoniman;
+	}
+
 }

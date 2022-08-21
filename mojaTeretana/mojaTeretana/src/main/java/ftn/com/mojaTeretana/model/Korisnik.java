@@ -1,5 +1,7 @@
 package ftn.com.mojaTeretana.model;
 
+import java.time.LocalDate;
+
 public class Korisnik {
 
     private Long id;
@@ -12,36 +14,38 @@ public class Korisnik {
     private String adresa;
     private String brojTelefona;
     private String datumIVremeRegistracije;
+    private ETipKorisnika tipKorisnika;
     private String uloga;
 
-    public Korisnik(String korisnickoIme, String lozinka, String email, String ime,
-                    String prezime, String datumRodjenja, String adresa, String brojTelefona,
-                    String datumIVremeRegistracije, String uloga) {
-        this.korisnickoIme = korisnickoIme;
-        this.lozinka = lozinka;
-        this.email = email;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.datumRodjenja = datumRodjenja;
-        this.adresa = adresa;
-        this.brojTelefona = brojTelefona;
-        this.datumIVremeRegistracije = datumIVremeRegistracije;
+    public Korisnik(String korisnickoIme1, String lozinka1, String email1, String ime1,
+                    String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
+                    String datumIVremeRegistracije1, ETipKorisnika tipKorisnika, String uloga) {
+        this.korisnickoIme = korisnickoIme1;
+        this.lozinka = lozinka1;
+        this.email = email1;
+        this.ime = ime1;
+        this.prezime = prezime1;
+        this.datumRodjenja = datumRodjenja1;
+        this.adresa = adresa1;
+        this.brojTelefona = brojTelefona1;
+        this.datumIVremeRegistracije = datumIVremeRegistracije1;
         this.uloga = uloga;
     }
 
-    public Korisnik(long id, String korisnickoIme, String lozinka, String email, String ime,
-                    String prezime, String datumRodjenja, String adresa, String brojTelefona,
-                    String datumIVremeRegistracije, String uloga) {
-        this.id = id;
-        this.korisnickoIme = korisnickoIme;
-        this.lozinka = lozinka;
-        this.email = email;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.datumRodjenja = datumRodjenja;
-        this.adresa = adresa;
-        this.brojTelefona = brojTelefona;
-        this.datumIVremeRegistracije = datumIVremeRegistracije;
+    public Korisnik(Long id1, String korisnickoIme1, String lozinka1, String email1, String ime1,
+                    String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
+                    String datumIVremeRegistracije1 , ETipKorisnika tipKorisnika1,  String uloga) {
+        this.id = id1;
+        this.korisnickoIme = korisnickoIme1;
+        this.lozinka = lozinka1;
+        this.email = email1;
+        this.ime = ime1;
+        this.prezime = prezime1;
+        this.datumRodjenja = datumRodjenja1;
+        this.adresa = adresa1;
+        this.brojTelefona = brojTelefona1;
+        this.datumIVremeRegistracije = datumIVremeRegistracije1;
+        this.tipKorisnika = tipKorisnika1;
         this.uloga = uloga;
     }
 
@@ -58,9 +62,15 @@ public class Korisnik {
                 ", adresa='" + adresa + '\'' +
                 ", brojTelefona='" + brojTelefona + '\'' +
                 ", datumIVremeRegistracije='" + datumIVremeRegistracije + '\'' +
+                ", tipKorisnika=" + tipKorisnika +
                 ", uloga=" + uloga +
                 '}';
     }
+    
+    public Korisnik() {
+    
+    }
+    
     public long getId() {
         return id;
     }
@@ -115,16 +125,34 @@ public class Korisnik {
     public void setBrojTelefona(String brojTelefona) {
         this.brojTelefona = brojTelefona;
     }
+
     public String getDatumIVremeRegistracije() {
-        return datumIVremeRegistracije;
-    }
-    public void setDatumIVremeRegistracije(String datumIVremeRegistracije) {
-        this.datumIVremeRegistracije = datumIVremeRegistracije;
-    }
-    public String getUloga() {
-        return uloga;
-    }
-    public void setUloga(String uloga) {
-        this.uloga = uloga;
-    }
+		return datumIVremeRegistracije;
+	}
+
+	public void setDatumIVremeRegistracije(String datumIVremeRegistracije) {
+		this.datumIVremeRegistracije = datumIVremeRegistracije;
+	}
+
+	public ETipKorisnika getTipKorisnika() {
+		return tipKorisnika;
+	}
+
+	public void setTipKorisnika(ETipKorisnika tipKorisnika) {
+		this.tipKorisnika = tipKorisnika;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUloga() {
+		return uloga;
+	}
+
+	public void setUloga(String uloga) {
+		this.uloga = uloga;
+	}
+
+	
 }

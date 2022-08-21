@@ -3,20 +3,20 @@ package ftn.com.mojaTeretana.model;
 
 public class Korpa {
 	private Long id;
-	private Korisnik korisnik;
-	private Termin termin;
+	private Korisnik korisnikId;
+	private TerminTreninga terminId;
 	
 
 	
-	public Korpa(Long id, Korisnik korisnik, Termin termin) {
+	public Korpa(Long id, Korisnik korisnikId, TerminTreninga terminId) {
 		
 		this.id = id;
-		this.korisnik = korisnik;
-		this.termin = termin;
+		this.korisnikId = korisnikId;
+		this.terminId = terminId;
 	}
-	public Korpa(Korisnik ulogovani, Termin termin) {
-		this.korisnik = ulogovani;
-		this.termin = termin;
+	public Korpa(Korisnik ulogovani, TerminTreninga termin) {
+		this.korisnikId = ulogovani;
+		this.terminId = termin;
 	}
 	public Long getId() {
 		return id;
@@ -25,16 +25,16 @@ public class Korpa {
 		this.id = id;
 	}
 	public Korisnik getKorisnikId() {
-		return korisnik;
+		return korisnikId;
 	}
-	public void setKorisnikId(Korisnik korisnik) {
-		this.korisnik = korisnik;
+	public void setKorisnikId(Korisnik korisnikId) {
+		this.korisnikId = korisnikId;
 	}
-	public Termin getTerminId() {
-		return termin;
+	public TerminTreninga getTerminId() {
+		return terminId;
 	}
-	public void setTerminId(Termin termin) {
-		this.termin = termin;
+	public void setTerminId(TerminTreninga terminId) {
+		this.terminId = terminId;
 	}
 	
 

@@ -81,7 +81,7 @@ public class TreningDAOImpl implements TreningDAO {
     @Override
     public void update(Trening trening) {
         String sql = "UPDATE mojaTeretana.trening SET naziv = ?, kratakOpis = ?, slika = ?, tipTreninga = ?, cena = ?, vrstaTreninga = ?, nivoTreninga = ?, trajanjeTreninga = ?, prosecnaOcena = ?, trener = ? WHERE idTrening = ?";
-        jdbcTemplate.update(sql, trening.getNaziv(), trening.getKratakOpis(), trening.getSlika(), trening.getTipTreninga(), trening.getCena(), trening.getVrstaTreninga(), trening.getNivoTreninga(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
+        jdbcTemplate.update(sql, trening.getNaziv(), trening.getOpis(), trening.getSlika(), trening.getTipTreninga(), trening.getCena(), trening.getVrstaTreninga(), trening.getNivoTreninga(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
 
         return;
     }
@@ -98,7 +98,7 @@ public class TreningDAOImpl implements TreningDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 int index = 1;
                 preparedStatement.setString(index++, trening.getNaziv());
-                preparedStatement.setString(index++, trening.getKratakOpis());
+                preparedStatement.setString(index++, trening.getOpis());
                 preparedStatement.setString(index++, trening.getSlika());
                 preparedStatement.setString(index++, trening.getTipTreninga());
                 preparedStatement.setInt(index++, trening.getCena());

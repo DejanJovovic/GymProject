@@ -185,7 +185,7 @@ public class administratorController implements ServletContextAware {
             trening.setSlika(trening1.getSlika());
             trening.setNaziv(trening1.getNaziv());
             trening.setTrener(trening1.getTrener());
-            trening.setKratakOpis(trening1.getKratakOpis());
+            trening.setOpis(trening1.getOpis());
             trening.setTipTreninga(trening1.getTipTreninga());
             trening.setCena(trening1.getCena());
             trening.setVrstaTreninga(trening1.getVrstaTreninga());

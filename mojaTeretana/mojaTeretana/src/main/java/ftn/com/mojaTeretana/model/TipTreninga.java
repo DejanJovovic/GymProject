@@ -4,6 +4,7 @@ package ftn.com.mojaTeretana.model;
 public class TipTreninga {
 
     private Long id;
+    private Trening treningId;
     private String ime;
     private String opis;
 
@@ -18,8 +19,27 @@ public class TipTreninga {
 
     public TipTreninga() {
     }
+    
+    public TipTreninga(Long id, Trening treningId, String ime, String opis) {
+    	super();
+    	this.id = id;
+    	this.treningId = treningId;
+    	this.ime = ime;
+    	this.opis = opis;
+    	
+    	
+    }
+    
 
-    public Long getId() {
+    public Trening getTreningId() {
+		return treningId;
+	}
+
+	public void setTreningId(Trening treningId) {
+		this.treningId = treningId;
+	}
+
+	public Long getId() {
         return id;
     }
     public void setId(Long id) {

@@ -3,7 +3,7 @@ package ftn.com.mojaTeretana.model;
 public class Prijava {
 	
 	private long id;
-	private Termin termin;
+	private TerminTreninga termin;
 	private Korisnik korisnik;
 	public long getId() {
 		return id;
@@ -11,10 +11,10 @@ public class Prijava {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Termin getTermin() {
+	public TerminTreninga getTermin() {
 		return termin;
 	}
-	public void setTermin(Termin termin) {
+	public void setTermin(TerminTreninga termin) {
 		this.termin = termin;
 	}
 	public Korisnik getKorisnik() {
