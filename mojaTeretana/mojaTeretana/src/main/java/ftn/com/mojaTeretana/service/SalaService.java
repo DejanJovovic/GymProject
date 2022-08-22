@@ -7,7 +7,7 @@ import ftn.com.mojaTeretana.model.Sala;
 public interface SalaService {
 	
 	Sala save(Sala sala);
-	Sala delete(Sala sala);
+	Sala delete(Long id);
 	Sala update(Sala sala);
 	Sala findOneById(Long salaId);
 	

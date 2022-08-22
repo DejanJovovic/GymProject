@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ServletContextAware;
 
 import ftn.com.mojaTeretana.model.Korisnik;
-import ftn.com.mojaTeretana.service.korisnikService;
+import ftn.com.mojaTeretana.service.KorisnikService;
 
 public class AutentikacijaController implements ServletContextAware {
 	
@@ -28,7 +28,7 @@ public class AutentikacijaController implements ServletContextAware {
 	    private String bURL;
 	
 	 @Autowired
-	    private korisnikService korisnikService;
+	    private KorisnikService korisnikService;
 	 
 	 
 

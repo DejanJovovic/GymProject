@@ -118,4 +118,13 @@ public class KomentarDAOImpl implements KomentarDAO {
 		String sql = "Update komentari set statusKomentara = 'ODOBREN' where id = ?";
 		return jdbcTemplate.update(sql, id);
 	}
+
+	@Override
+	public int save(Komentar komentar) {
+		String sql = "Insert into komentari (tekstKomentara, ocena, datum, anoniman, statusKomentara, autor, trening) values(?, ?, ?, ?, ?, ?, ?)";
+		return jdbcTemplate.update(sql, komentar.getTekstKomentara(),
+				komentar.getOcena(), komentar.getDatum(), komentar.getStatusKomentara().toString(), 
+				komentar.getAutor().getId(), komentar.getTrening().getId(), komentar.isAnoniman());
+		
+	}
 }

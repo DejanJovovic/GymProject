@@ -5,10 +5,14 @@ import ftn.com.mojaTeretana.model.Trening;
 
 import java.util.List;
 
-public interface komentarService {
+public interface KomentarService {
 
     List<Komentar> FindAllById(Long id);
     List<Komentar> FindAll();
+    
+    Komentar save(Komentar komentar);
     Komentar update(Komentar komentar);
     Komentar FindOneById(Long id);
+    Komentar delete(Long id);
+    Komentar odobreno(Long id);
 }

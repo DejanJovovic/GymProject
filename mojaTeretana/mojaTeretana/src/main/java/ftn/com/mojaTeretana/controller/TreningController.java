@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ftn.com.mojaTeretana.model.Korisnik;
 import ftn.com.mojaTeretana.model.Trening;
 import ftn.com.mojaTeretana.service.TreningService;
-import ftn.com.mojaTeretana.service.korisnikService;
+import ftn.com.mojaTeretana.service.KorisnikService;
 
 @Controller
 @RequestMapping("/treninzi")
@@ -28,7 +28,7 @@ public class TreningController {
 	private TreningService treningService;
 	
 	  @Autowired
-	    private korisnikService korisnikService;
+	    private KorisnikService korisnikService;
 
 	
 	

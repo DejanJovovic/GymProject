@@ -6,11 +6,12 @@ import ftn.com.mojaTeretana.model.Trening;
 import ftn.com.mojaTeretana.service.TreningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository
-public class DatabasesTreningServiceImpl implements TreningService {
+@Service
+public class DatabaseTreningServiceImpl implements TreningService {
 
     @Autowired
     private  TreningDAO treningDAO;
@@ -36,4 +37,9 @@ public class DatabasesTreningServiceImpl implements TreningService {
         treningDAO.save(trening);
         return trening;
     }
+
+	@Override
+	public Float sum(Long id) {
+		return treningDAO.sum(id);
+	}
 }

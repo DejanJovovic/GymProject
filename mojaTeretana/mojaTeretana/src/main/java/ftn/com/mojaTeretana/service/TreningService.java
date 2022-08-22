@@ -13,4 +13,6 @@ public interface TreningService {
     Trening save(Trening trening);
 
     Trening update(Trening trening);
+    
+    Float sum(Long id);
 }

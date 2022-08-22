@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.stereotype.Repository;
 
 import ftn.com.mojaTeretana.dao.KorisnikDAO;
 import ftn.com.mojaTeretana.dao.KorpaDAO;
@@ -18,6 +19,7 @@ import ftn.com.mojaTeretana.model.Korisnik;
 import ftn.com.mojaTeretana.model.Korpa;
 import ftn.com.mojaTeretana.model.TerminTreninga;
 
+@Repository
 public class KorpaDAOImpl implements KorpaDAO {
 
 	@Autowired

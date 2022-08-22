@@ -23,7 +23,7 @@ public interface ClanskaKartaDAO {
 	ClanskaKarta findByKorisnikIdAndStatus(Long korisnikId, EStatusClanskeKarte status);
 	
 	
-	ClanskaKarta findById(Long id);
+	ClanskaKarta findOneById(Long id);
 
 	ClanskaKarta findOdobrena(Long id);
 }

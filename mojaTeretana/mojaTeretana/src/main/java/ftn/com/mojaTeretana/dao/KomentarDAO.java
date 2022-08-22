@@ -12,7 +12,7 @@ public interface KomentarDAO {
     List<Komentar> FindAll();
 
     void update(Komentar komentar);
-    
+    int save(Komentar komentar);
     int delete(Long id);
     int odobreno(Long id);
 

@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.stereotype.Repository;
 
 import ftn.com.mojaTeretana.dao.TerminTreningaDAO;
 import ftn.com.mojaTeretana.dao.TreningDAO;
@@ -19,6 +20,7 @@ import ftn.com.mojaTeretana.model.TerminTreninga;
 import ftn.com.mojaTeretana.model.Trening;
 import ftn.com.mojaTeretana.service.SalaService;
 
+@Repository
 public class TerminTreningaDAOImpl implements TerminTreningaDAO{
 
 	@Autowired

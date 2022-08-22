@@ -3,8 +3,8 @@ package ftn.com.mojaTeretana.controller;
 import ftn.com.mojaTeretana.model.Komentar;
 import ftn.com.mojaTeretana.model.Korisnik;
 import ftn.com.mojaTeretana.model.Trening;
-import ftn.com.mojaTeretana.service.komentarService;
-import ftn.com.mojaTeretana.service.korisnikService;
+import ftn.com.mojaTeretana.service.KomentarService;
+import ftn.com.mojaTeretana.service.KorisnikService;
 import ftn.com.mojaTeretana.service.TreningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,10 +32,10 @@ public class clanTeretaneController implements ServletContextAware {
     public TreningService treningService;
 
     @Autowired
-    private korisnikService korisnikService;
+    private KorisnikService korisnikService;
 
     @Autowired
-    private komentarService komentarService;
+    private KomentarService komentarService;
 
     @PostConstruct
     public void init() {

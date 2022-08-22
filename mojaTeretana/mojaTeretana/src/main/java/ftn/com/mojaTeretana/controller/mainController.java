@@ -1,7 +1,7 @@
 package ftn.com.mojaTeretana.controller;
 
 import ftn.com.mojaTeretana.model.Korisnik;
-import ftn.com.mojaTeretana.service.korisnikService;
+import ftn.com.mojaTeretana.service.KorisnikService;
 import ftn.com.mojaTeretana.service.TreningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class mainController implements ServletContextAware {
     private String bURL;
 
     @Autowired
-    private korisnikService korisnikService;
+    private KorisnikService korisnikService;
 
     @Autowired
     private TreningService treningService;

@@ -82,7 +82,7 @@ public class ClanskaKartaDAOImpl implements ClanskaKartaDAO{
 	}
 
 	@Override
-	public ClanskaKarta findById(Long id) {
+	public ClanskaKarta findOneById(Long id) {
 		String sql = "select * from clanskeKarte where id = ?";
 		
 		ClanskaKartaRowCallbackHandler rowBackHandler = new ClanskaKartaRowCallbackHandler();
