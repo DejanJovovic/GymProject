@@ -10,9 +10,10 @@ public class Sala {
     	
     }
     
-    public Sala(Long id, int kapacitet) {
+    public Sala(Long id, int kapacitet, String oznakaSale) {
     	this.id = id;
     	this.kapacitet = kapacitet;
+    	this.oznakaSale = oznakaSale;
     	
     }
     

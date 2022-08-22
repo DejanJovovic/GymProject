@@ -20,6 +20,8 @@ public class TipTreninga {
     public TipTreninga() {
     }
     
+   
+    
     public TipTreninga(Long id, Trening treningId, String ime, String opis) {
     	super();
     	this.id = id;
@@ -57,4 +59,5 @@ public class TipTreninga {
     public void setOpis(String opis) {
         this.opis = opis;
     }
+
 }
