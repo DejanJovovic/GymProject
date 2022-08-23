@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -41,13 +42,15 @@ public class KorisnikDAOImpl implements KorisnikDAO{
             String datumRodjenja = resultSet.getString(index++);
             String adresa = resultSet.getString(index++);
             String brojTelefona = resultSet.getString(index++);
-            String datumIVremeRegistracije = resultSet.getString(index++);
+            LocalDate datumIVremeRegistracije = resultSet.getTimestamp(index++).toLocalDateTime().toLocalDate();
             String uloga = resultSet.getString(index++);
             ETipKorisnika tipKorisnika = ETipKorisnika.valueOf(resultSet.getString(index++));
+            boolean aktivan = resultSet.getBoolean(index++);
+            
             Korisnik korisnik = korisnici.get(id);
             if (korisnik == null) {
                 korisnik = new Korisnik(id, korisnickoIme, lozinka, email, ime, prezime, datumRodjenja,
-                        adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika, uloga);
+                        adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika, uloga, aktivan);
                 korisnici.put(korisnik.getId(), korisnik); // dodavanje u kolekciju
             }
         }
@@ -125,7 +128,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
                 preparedStatement.setString(index++, korisnik.getDatumRodjenja());
                 preparedStatement.setString(index++, korisnik.getAdresa());
                 preparedStatement.setString(index++, korisnik.getBrojTelefona());
-                preparedStatement.setString(index++, korisnik.getDatumIVremeRegistracije());
+                preparedStatement.setTimestamp(index++, Timestamp.valueOf(korisnik.getDatumIVremeRegistracije().atStartOfDay()));
                 preparedStatement.setString(index++, korisnik.getTipKorisnika().toString());
                 preparedStatement.setString(index++, korisnik.getUloga());
                 return preparedStatement;
