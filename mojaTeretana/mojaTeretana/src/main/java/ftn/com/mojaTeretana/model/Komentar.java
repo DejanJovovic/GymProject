@@ -44,6 +44,18 @@ public class Komentar {
 	}
     
     
+	public Komentar(String tekstKomentara2, int ocena2, LocalDate datum2, EStatusKomentara statusKomentara2,
+			Korisnik ulogovan, Trening trening2, boolean anoniman2) {
+		this.tekstKomentara = tekstKomentara2;
+		this.ocena = ocena2;
+		this.datum = datum2;
+		this.statusKomentara = statusKomentara2;
+		this.trening = trening2;
+		this.anoniman = anoniman2;
+		
+	}
+
+
 	@Override
     public String toString() {
         return "Komentar{" +
