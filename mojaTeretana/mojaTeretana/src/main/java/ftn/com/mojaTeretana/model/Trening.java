@@ -66,7 +66,19 @@ public class Trening {
     	this.id = id1;
     }
     
-    @Override
+    public Trening(String naziv2, String trener2, String kratakOpis2, String slika2, int cena2,
+			EVrstaTreninga vrstaTreninga2, ENivoTreninga nivoTreninga2, int trajanjeTreninga2, int prosecnaOcena2) {
+		this.naziv = naziv2;
+		this.trener = trener2;
+		this.kratakOpis = kratakOpis2;
+		this.slika = slika2;
+		this.cena = cena2;
+		this.vrstaTreninga = vrstaTreninga2;
+		this.nivoTreninga = nivoTreninga2;
+		this.trajanjeTreninga = trajanjeTreninga2;
+		this.prosecnaOcena = prosecnaOcena2;
+	}
+	@Override
     public String toString() {
         return "Trening{" +
                 "id=" + id +

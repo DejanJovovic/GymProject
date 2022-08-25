@@ -111,18 +111,18 @@ public class PolaznikController implements ServletContextAware{
 	@RequestParam(name ="ponovljenaLozinka") String ponovljenaLozinka, HttpServletResponse response) throws IOException {
 		Korisnik korisnik = korisnikService.findOneById(profilEdit.getId());
 		if(korisnik != null) {
+			if(profilEdit.getKorisnickoIme() != null && !profilEdit.getKorisnickoIme().trim().equals(""))
+				korisnik.setKorisnickoIme(profilEdit.getKorisnickoIme());
+			if(profilEdit.getLozinka() != null && profilEdit.getLozinka().equals(ponovljenaLozinka))
+				korisnik.setLozinka(profilEdit.getLozinka());
+			if(profilEdit.getEmail() != null && !profilEdit.getEmail().trim().equals(""))
+				korisnik.setEmail(profilEdit.getEmail());
 			if(profilEdit.getIme() != null && !profilEdit.getIme().trim().equals(""))
 				korisnik.setIme(profilEdit.getIme());
 			if(profilEdit.getPrezime() != null && !profilEdit.getPrezime().trim().equals(""))
 				korisnik.setPrezime(profilEdit.getPrezime());
-			if(profilEdit.getKorisnickoIme() != null && !profilEdit.getPrezime().trim().equals(""))
-				korisnik.setKorisnickoIme(profilEdit.getKorisnickoIme());
-			if(profilEdit.getEmail() != null && !profilEdit.getEmail().trim().equals(""))
-				korisnik.setEmail(profilEdit.getEmail());
 			if(profilEdit.getTipKorisnika() != null)
 				korisnik.setTipKorisnika(profilEdit.getTipKorisnika());
-			if(profilEdit.getLozinka() != null && profilEdit.getLozinka().equals(ponovljenaLozinka))
-				korisnik.setLozinka(profilEdit.getLozinka());
 			else korisnik.setLozinka(profilEdit.getLozinka());
 		}
 		Korisnik sacuvaj = korisnikService.updateProfil(korisnik);
