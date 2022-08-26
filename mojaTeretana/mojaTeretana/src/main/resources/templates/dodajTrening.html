@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+	<meta charset="UTF-8" />
+
+	<link rel="stylesheet"  type="text/css"  href="css/registracija.css"/>     
+	<link rel="stylesheet" type="text/css" href="css/home.css"/>
+	<link rel="stylesheet" type="text/css" href="css/treninzi.css"/>
+	<base href="bURL">
+	<title>Dodaj trening</title>
+</head>
+<body>
+<img class="pozadina" th:src="@{/img/background.jpg}">
+ 	<form method="post" action="addTrening">  
+<!--  	 <a href="#" style="padding-right: 30px;"> -->
+<!--         <img th:src="@{/img/korpa.jpg}"> -->
+<!--     </a>   -->
+ 		<table>   
+	 		<h1 th:text="#{dodajTrening}"></h1></caption>     
+ 			<tr><th th:text="#{nazivTreninga}"></th><td><input type="text" value="" name="naziv"/></td></tr>    
+ 			<tr><th th:text="#{kratakOpisTreninga}"></th><td><input type="text" value="" name="opis"/></td></tr>   
+ 			<tr><th th:text="#{cenaTreninga}"></th><td><input type="text" value="" name="cena" /></td></tr>   
+ 			<tr><th th:text="#{trener}"></th><td><input type="text" value="" name="trener" /></td></tr>   
+ 			<tr><th th:text="#{vrstaTreninga}"></th>
+ 			<td>
+ 			<select name="vrstaTreninga">
+	 			<option  value="POJEDINACNI">POJEDINACNI</option>
+	 			<option  value="GRUPNI">GRUPNI</option>
+	 			
+ 			</select>
+ 			</td>
+ 			</tr>   
+ 			<tr><th th:text="#{nivoTreninga}"></th>
+ 			<td>
+ 			<select name="nivoTreninga">
+	 			<option value="AMATERSKI">AMATERSKI</option>
+	 			<option value="SREDNJI">SREDNJI</option>
+	 			<option value="NAPREDNI">NAPREDNI</option>
+	 			
+ 			</select>
+ 			</td>
+ 			</tr>  
+ 			<tr><th th:text="#{trajanjeTreninga}"></th><td><input type="number" min="1" name="trajanjeTreninga"/></td></tr>   
+ 			<tr><th th:text="#{prosecnaOcena}"></th><td><input type="number" min="1" name="prosecnaOcena"/></td></tr>   
+ 			<tr><th></th><td><input type="submit" th:value="#{dodajTrening}"/></td>    
+ 		</table>    
+ 	</form> 
+
+</body>
+</html>
+  	

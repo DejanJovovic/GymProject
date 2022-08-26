@@ -1,0 +1,38 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<base th:href="@{/}">
+		<title>Clanska Karta</title>
+		<link rel="stylesheet" type="text/css" href="css/Tabela.css"/>
+		<link rel="stylesheet" type="text/css" href="css/Meni.css"/>
+	</head>
+	<body>
+		<ul>
+	 <li><a href="korisnik/profil" th:text="#{profil}"></a></li>  
+	 <li><a href="korisnik/korpa" th:text="#{korpa}"></a></li>  
+
+			</ul>
+		
+ 				<td>
+					<form method="post" action="korisnik/posalji">
+						<input th:value="#{zahtevClanska}" type="submit">
+					</form>
+				</td> 
+ 			</tr> 
+ 			 <table>     
+	 			<h1 th:text="#{clanskaKarta}"></h1></caption>    
+	 			<tr>      
+	 			    <th  th:text="#{popust}"></th> 
+	 				<th  th:text="#{poeni}"></th>    	
+	 			</tr>
+	 			<tr  th:each="itClanska, status: ${clanska}">  
+	 			<td th:text="${itClanska.popust}+'%'" name="popust"></td>  
+	 			<td th:text="${itClanska.poeni}" name="poeni"></td> 
+	 		</table>
+	 		
+	 	<li><a href="korisnik/logout" th:text="#{logOut}"></a></li>   
+	 		
+		
+	</body>
+</html>

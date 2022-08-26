@@ -15,8 +15,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +44,7 @@ import ftn.com.mojaTeretana.service.SalaService;
 import ftn.com.mojaTeretana.service.TerminTreningaService;
 import ftn.com.mojaTeretana.service.TipTreningaService;
 import ftn.com.mojaTeretana.service.TreningService;
+
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -186,7 +189,7 @@ public class AdminController implements ServletContextAware{
 	}
 	
 	@SuppressWarnings("unused")
-	@PostMapping(value = "komentari/odobri")
+	@PostMapping(value = "komentari/odobriKomentar")
 	private void odobriKomentar(
 	@RequestParam Long id, HttpServletResponse response) throws IOException{
 		Komentar komentar = komentarService.odobreno(id);
@@ -234,6 +237,7 @@ public class AdminController implements ServletContextAware{
 		return "dodajTrening";
 	}
 	
+
 	@GetMapping(value = "/detaljiTreninga")
 	@ResponseBody
 	public ModelAndView detaljiTreninga(
@@ -330,7 +334,7 @@ public class AdminController implements ServletContextAware{
 	
 	
 	@SuppressWarnings("unused") 
-	@PostMapping(value = "/add")
+	@PostMapping(value = "/addTrening")
 	public void create(
 	@RequestParam String naziv,
 	@RequestParam String trener,
@@ -347,6 +351,8 @@ public class AdminController implements ServletContextAware{
 		response.sendRedirect(bURL + "admin");
 		
 	}
+
+	
 	
 	@SuppressWarnings("unused") 
 	@PostMapping(value = "/deleteKorisnik")

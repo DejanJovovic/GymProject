@@ -83,7 +83,7 @@ public class KorisnikController implements ServletContextAware{
 		Korisnik korisnik = new Korisnik(korisnickoIme, email, lozinka, ime, prezime, datumRodjenja, adresa, 
 				brojTelefona, tipKorisnika, datumIVremeRegistracije);
 		korisnikService.save(korisnik);
-		response.sendRedirect(bURL + "index.html");
+		response.sendRedirect(bURL + "registracija.html");
 		
 	}
 	
@@ -114,8 +114,9 @@ public class KorisnikController implements ServletContextAware{
 			
 			StringBuilder rtVal = new StringBuilder();
 			rtVal.append("<DOCTYPE html>\r\n" + "<html>\r\n" + "<head>\r\n" + "<meta charset =\"UTF-8\">\r\n"
-			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/Main.css\"/>\r\n"
-			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/Meni.css\"/>\r\n"
+			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/home.css\"/>\r\n"
+			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/prijava.css\"/>\r\n"
+			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/registracija.css\"/>\r\n"
 			+ "<base href = \"/MojaTeretana/\"> \r\n" 
 			+ "<title>Prijava korisnika</title>\r\n"
 			+ "</head>\r\n" + "<body>\r\n" + "<ul>\r\n");

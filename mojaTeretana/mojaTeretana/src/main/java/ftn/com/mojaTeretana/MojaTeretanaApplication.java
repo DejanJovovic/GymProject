@@ -9,6 +9,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class MojaTeretanaApplication extends SpringBootServletInitializer {
 	
 	
+	protected SpringApplicationBuilder configyre(SpringApplicationBuilder application) {
+		return application.sources(MojaTeretanaApplication.class);
+	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(MojaTeretanaApplication.class, args);
 	}

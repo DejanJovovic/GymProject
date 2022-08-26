@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="" defer></script>
+    <base href="bURL">
     <link rel="stylesheet" href="/css/registracija.css">
     <link rel="stylesheet" href="/css/home.css">
     <title>Registracija</title>
@@ -13,8 +14,17 @@
 </head>
 <body>
 <img src="/img/background.jpg">
+
+
+<br/>
+<ul>    
+ 	<li><a href="index.html">Povratak</a></li>    
+ 
+</ul>  
+
+
 <div class="center">
-    <form action="korisnici/registracija" method="post">
+    <form method="post" action="korisnici/registracija">
         <label><b class="a">Korisnicko ime: </b></label>
         <input type="text" placeholder="Unesite korisnicko ime" name="korisnickoIme" required>
 

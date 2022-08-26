@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Profil</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/Tabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/Meni.css"/>   
+	 </head>     
+	 <body>   
+  
+   	<ul>    
+	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li> 
+ 
+ 	</ul>   
+
+           <form method="post" action="admin/profil">
+           <input type="hidden" name="id" th:value="${korisnik.id}"/>
+ 			<table>   
+	 		<h1 th:text="#{profil}"></h1></caption>     
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{ime}"></th>
+ 			<td><input type="text" th:value="${itKorisnik.ime}"  name="ime"></td>
+ 			</tr>    
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{prezime}"></th>
+ 			<td><input type="text" th:value="${itKorisnik.prezime}" name="prezime" /></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{korisnickoIme}"></th>
+ 			<td><input type="text" th:value="${itKorisnik.korisnickoIme}" name="korisnickoIme"/></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{email}"></th>
+ 			<td><input type="text" th:value="${itKorisnik.email}" name="email"/></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{adresa}"></th>
+ 			<td><input type="text" th:value="${itKorisnik.adresa}" name="adresa"/></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{brojTelefona}"></th>
+ 			<td><input type="text" th:value="${itKorisnik.brojTelefona}" name="brojTelefona"/></td>
+ 			</tr>  
+ 			<tr th:each="itKorisnik, status: ${korisnik}">  
+ 			<th th:text="#{datumRodjenja}"></th>
+ 			<td><input type="text" th:value="${itKorisnik.datRodjenja}" name="datRodjenja"/></td>
+ 			</tr>
+ 			<tr th:each="itKorisnik, status: ${korisnik}">  
+ 			<th th:text="#{lozinka}"></th>
+ 			<td><input type="password" th:value="${itKorisnik.lozinka}" name="lozinka"/></td>
+ 			</tr>
+ 			 <th th:text="#{ponoviteLozinku}"></th>
+ 			<td><input type="text" name="lozinkaPonovljena"/></td>
+ 			</tr>
+ 			<tr><th></th><td><input type="submit" th:value="izmeni"></td></tr>
+ 			  
+ 		</table>   
+ 		</form>
+ 			 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreninga}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
+
+
+	 </body>   
+ </html>

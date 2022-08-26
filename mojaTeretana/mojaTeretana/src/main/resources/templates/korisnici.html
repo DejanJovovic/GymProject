@@ -1,57 +1,53 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" th:src="@{/js/clanTeretane.js}" defer></script>
-    <link rel="stylesheet" th:href="@{/css/treninzi.css}">
-    <title>Korisnici</title>
-</head>
-<body th:each="Korisnik, status: ${korisnik}">
-<img class="pozadina" th:src="@{/img/background.jpg}">
-<div class="topnav">
-    <a href="#" style="padding-right: 30px;">
-        <img th:src="@{/img/korpa.jpg}">
-    </a>
-    <a th:href="@{'Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/logout'}">Odjava</a>
-    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme}}">Treninzi</a>
-    <a href="#">Loyalty kartica</a>
-    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/komentari'}">Komentari</a>
-    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/dodavanjeTreninga'}">Dodavanje treninga</a>
-    <a href="#">Korisnici</a>
-    <a class="naslov">MOJA TERETANA</a>
-</div>
-<center>
-    <section>
-        <form onload="result()">
-            <div >
-                <h1>Korisnici</h1>
-                <p hidden><a id="uloga" th:text="${korisnik.uloga}"></a></p>
-                <input style="margin-bottom: 15px; transform: scale(1.5)" type="text" id="myInput" onkeyup="myFunction()" placeholder="Pretraga po nazivu ..." title="Type in a name">
-            </div>
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Korisnici</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/Tabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/Meni.css"/>   
+	 </head>     
+	 <body>   
+	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
+   
+   
+	 		<table>     
+	 			<h1 th:text="#{korisnici}"></h1></caption>     
+	 			<tr>      
+	 			    <th th:text="#{username}"></th> 
+	 				<th th:text="#{ime}"></th>     
+	 				<th th:text="#{prezime}"></th>     
+	 				<th th:text="#{email}"></th>   
+	 				<th th:text="#{lozinka}"></th> 
+	 				<th th:text="#{datumRodjenja}"></th> 
+	 				<th th:text="#{brojTelefona}"></th> 
+	 				<th th:text="#{datumiVreme}"></th> 
+	 				<th th:text="#{tipKorisnika}"></th> 
+	 				<th th:text="#{adresa}"></th> 
+	 				 
+	 			</tr>
+	 			<tr th:each="itKorisnik, status: ${korisnici}">  
+	 			    <td ><a th:href="|admin/details?id=${itKorisnik.id}|"  th:text="${itKorisnik.korisnickoIme}"></a></td>    
+	 				<td th:text="${itKorisnik.ime}"></td>    
+	 				<td th:text="${itKorisnik.prezime}"></td>    
+	 				<td th:text="${itKorisnik.email}"></td>   
+	 				<td th:text="${itKorisnik.lozinka}"></td>   
+	 				<td th:text="${itKorisnik.datRodjenja}"></td>   
+	 				<td th:text="${itKorisnik.brojTelefona}"></td>   
+	 				<td th:text="${itKorisnik.datumIVremeRegistracije}"></td>  
+	 				<td th:text="${itKorisnik.tipKorisnika}"></td>  
+	 				<td th:text="${itKorisnik.adresa}"></td>  
 
-        </form>
-    </section>
-</center>
-<script>
-    function myFunction() {
-        var input, filter, parent, child, a, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        parent = document.getElementById("container");
-        child = parent.getElementsByClassName("kutija");
-        for (i = 0; i < child.length; i++) {
-            a = child[i].getElementsByTagName("div")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                child[i].style.display = "";
-            } else {
-                child[i].style.display = "none";
-            }
-        }
+	 			</tr>
+	 		</table>
+	 	<ul>     
+	 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreninga}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
 
-    }
-</script>
-</body>
-</html>
+	 </body>   
+ </html>	

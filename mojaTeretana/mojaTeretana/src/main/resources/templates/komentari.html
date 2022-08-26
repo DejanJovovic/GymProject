@@ -1,82 +1,55 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" th:src="@{/js/clanTeretane.js}" defer></script>
-    <link rel="stylesheet" th:href="@{/css/treninzi.css}">
-    <link rel="stylesheet" th:href="@{/css/home.css}">
-    <link rel="stylesheet" th:href="@{/css/registracija.css}">
-    <title>Komentari</title>
-</head>
-<body onload="myFunction()">
-<img class="pozadina" th:src="@{/img/background.jpg}">
-<div class="topnav" th:object="${korisnik}">
-    <a href="#" style="padding-right: 30px;">
-        <img th:src="@{/img/korpa.jpg}">
-    </a>
-    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/logout'}">Odjava</a>
-    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme}}">Treninzi</a>
-    <a href="#">Loyalty kartica</a>
-    <a href="#">Komentari</a>
-    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/dodavanjeTreninga'}">Dodavanje treninga</a>
-    <a th:href="@{'/admin/Korisnicko_ime=' + ${korisnik.korisnickoIme} + '/korisnici'}">Korisnici</a>
-    <a class="naslov">MOJA TERETANA</a>
-</div>
-<center>
-    <section>
-        <form>
-            <div>
-                <h1>Komentari</h1>
-            </div>
-            <form>
-                <div class="container" id="container">
-                    <div class="kutija" style="width: 350px; height: 380px" th:each="Komentari, status: ${komentari}" >
-                        <div th:object="${komentar1}">
-                            <br>
-                            <div style="text-align: center;">Trening: <a th:text="${Komentari.trening}"></a></div>
-                            <br>
-                            <div style="text-align: center;">Datum postavljanja komentara: <a th:text="${Komentari.datumPostavljanja}"></a></div>
-                            <br>
-                            <div style="text-align: center;">Ocena: <a th:text="${Komentari.ocena}"></a></div>
-                            <br>
-                            <div style="text-align: center;">Tekst komentara: <a th:text="${Komentari.tekstKomentara}"></a></div>
-                            <br>
-                            <div style="text-align: center;">Status komentara: <a id="odobren" th:text="${Komentari.status}"></a></div>
-                            <br>
-                            <div style="text-align: center;">Autor komentara: <a th:text="${Komentari.autor}"></a></div>
-                            <br>
-                            <div style="text-align: center;">Anoniman: <a th:text="${Komentari.anoniman}"></a></div>
-                            <p hidden><a th:text="${Komentari.id}"></a></p>
-                            <button id="odobrenDugme" type="submit" th:action="@{'/komentari-odobri/' + Komentari.id}">Odobri</button>
-                            <button id="odobrenDugme1" type="submit" th:action="@{'/komentari-odbi/' + Komentari.id}">Odbi</button>y
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </form>
-    </section>
-</center>
-<script>
-    function myFunction() {
-        let odobren = document.getElementById("odobren").innerHTML;
-        let odobrenDugme = document.getElementById("odobrenDugme");
-        let odobrenDugme1 = document.getElementById("odobrenDugme1");
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Komentari</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/Tabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/Meni.css"/>   
+	 </head> 
+	 
+<body>
+	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
+	
+ 			 <table>     
+	 			<h1 th:text="#{komentari}"></h1>  
 
-        if(odobren === "Odobren") {
-            odobrenDugme.style.display = 'none';
-            odobrenDugme1.style.display = 'block';
-        }
-        else if(odobren === "Na cekanju") {
-            odobrenDugme.style.display = 'block';
-            odobrenDugme1.style.display = 'block';
-        }
-        else if(odobren === "Nije odobren") {
-            odobrenDugme.style.display = 'block';
-            odobrenDugme1.style.display = 'none';
-        }
-    }
-</script>
+	 			<tr>      
+	 			    <th th:text="#{autor}">Autor</th> 
+	 				<th th:text="#{datumiVreme}">Datum</th>     
+	 				<th th:text="#{tekstt}">Tekst</th>     
+	 				<th th:text="#{ocena}">Ocena</th>   
+	 				<th th:text="#{imeTreninga}">Naziv treninga</th>  
+	 				<th th:text="#{opcija}">Opcija</th>  
+	 			
+
+	 			</tr>
+	 			<tr  th:each="itKomentar, status: ${komentar}">  
+	 			<td th:text="${itKomentar.autor.korisnickoIme}" name="autor"></td>  
+	 			<td th:text="${itKomentar.datum}" name="datum"></td> 
+	 			<td th:text="${itKomentar.tekstKomentara}" name="Tekst"></td> 
+	 			<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
+	 			<td th:text="${itKomentar.trening.naziv}" name="naziv"></td> 
+	 			<td>    
+	 					<form method="post" action="admin/komentari/obrisiKomentar" >     
+	 						<input type="hidden"  name="id"  th:value="${itKomentar.id}">     
+	 						<input type="submit"  th:value="#{obrisiKomentar}">    
+	 					</form>  
+	 					<form method="post" action="admin/komentari/odobriKomentar" >     
+	 						<input type="hidden"  name="id"  th:value="${itKomentar.id}">     
+	 						<input type="submit"  th:value="#{odobriKomentar}">    
+	 					</form> 
+	 			</td> 
+	 		</table>
+	 			 			 	<ul>     
+	 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTerminTrening" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
+	
 </body>
 </html>

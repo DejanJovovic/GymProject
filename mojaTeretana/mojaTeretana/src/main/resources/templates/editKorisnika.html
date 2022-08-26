@@ -1,0 +1,83 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Profil</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/Tabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/Meni.css"/>   
+	 </head> 
+<body>
+	<form method="post" action="admin/edit">
+ 		<input type="hidden" name="id" th:value="${korisnik.id}"/>
+		<table class="forma">
+			<h1 th:text="#{editKorisnika}"></h1></caption>     
+
+			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{ime}"></th>
+ 			<td th:text="${itKorisnik.ime}"  name="ime"></td>
+ 			</tr>    
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{prezime}"></th>
+ 			<td th:text="${itKorisnik.prezime}" name="prezime" /></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{username}"></th>
+ 			<td th:text="${itKorisnik.korisnickoIme}" name="korisnickoIme"/></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th th:text="#{email}"></th>
+ 			<td th:text="${itKorisnik.email}" name="email"/></td>
+ 			</tr> 
+			<tr>
+			<th th:text="#{tipKorisnika}"></th>
+			<td>
+				<select th:each="itKorisnik, status: ${korisnik}" name="tipKorisnika">
+				      <option th:text="${itKorisnik.tipKorisnika}" ></option>
+					  <option th:if="${itKorisnik.tipKorisnika != 'POLAZNIK'}" >POLAZNIK</option>
+					  <option th:if="${itKorisnik.tipKorisnika != 'ADMINISTRATOR'}" >ADMINISTRATOR</option>
+				</select>
+			</td>
+		   </tr>
+		   <tr th:each="itKorisnik, status: ${korisnik}">
+		   <th th:text="#{aktivan}"></th>
+		   <td><input type = "checkbox" name="aktivan" th:checked="${itKorisnik.isAktivan}"/></td>
+		   </tr>
+			<tr><th></th><td><input type="submit" th:value="#{izmeniKorisnika}"></td></tr>
+		</table>
+	</form>
+	
+			<table>
+	 			<h1 th:text="#{zakazaniTreninziKorisnika}"></h1></caption>     
+			<tr>
+				<th th:text="#{nazivTreninga}"></th>
+				<th th:text="#{cenaTreninga}"></th>
+				<th th:text="#{datumIVreme}"></th>
+				<th></th>
+			</tr>
+			
+			<tr th:each="itKorpa, status: ${korpa}">  
+ 				<td th:text="${itKorpa.terminId.treningId.naziv}"></td>    
+ 				<td th:text="${itKorpa.terminId.treningId.cena}"></td>    
+ 				<td><a th:href="|admin/korpa?id=${itKorpa.id}|"  th:text="${itKorpa.terminId.datumTermina}"></td>  
+		</tr>
+		</table>
+				</table>
+				</table>
+				<table>
+	 			
+			<tr>
+				<th th:text="#{Ukupno}"></th>
+			</tr>
+			
+			
+ 				<td th:text="${sum}"></td>     
+		</tr>
+		</table>
+	 	<ul>     
+	 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreniga}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
+</body>
+</html>
