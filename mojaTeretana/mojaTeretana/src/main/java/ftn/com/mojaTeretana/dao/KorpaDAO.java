@@ -7,12 +7,12 @@ import ftn.com.mojaTeretana.model.Korpa;
 public interface KorpaDAO {
 	
 	
-	int save(Korpa korpa);
+	public int save(Korpa korpa);
 	int deleteZakazane(Long id);
 	
-	Korpa sum(Long id);
-	List <Korpa> findKorpa(Long id);
-	Korpa findOne(Long id);
+	public Korpa sum(Long id);
+	public List <Korpa> findKorpa(Long id);
+	public Korpa findOne(Long id);
 	
 
 }

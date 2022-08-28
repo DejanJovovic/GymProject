@@ -10,7 +10,7 @@ public interface KorpaService {
 	
 	Korpa save(Korpa korpa);
 	Korpa findOneById(Long id);
-	Korpa delete(Long id);
+	Korpa deleteZakazano(Long id);
 	Korpa sum(Long id);
 
 }

@@ -43,14 +43,13 @@ public class KorisnikDAOImpl implements KorisnikDAO{
             String adresa = resultSet.getString(index++);
             String brojTelefona = resultSet.getString(index++);
             LocalDate datumIVremeRegistracije = resultSet.getTimestamp(index++).toLocalDateTime().toLocalDate();
-            String uloga = resultSet.getString(index++);
             ETipKorisnika tipKorisnika = ETipKorisnika.valueOf(resultSet.getString(index++));
             boolean aktivan = resultSet.getBoolean(index++);
             
             Korisnik korisnik = korisnici.get(id);
             if (korisnik == null) {
                 korisnik = new Korisnik(id, korisnickoIme, lozinka, email, ime, prezime, datumRodjenja,
-                        adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika, uloga, aktivan);
+                        adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika, aktivan);
                 korisnici.put(korisnik.getId(), korisnik); // dodavanje u kolekciju
             }
         }
@@ -62,10 +61,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
     @Override
     public Korisnik findOneById(Long id) {
         String sql =
-                "SELECT id, korisnickoIme, lozinka, email, ime, prezime, datumRodjenja, adresa, brojTelefona," +
-                        "datumIVremeRegistracije, uloga FROM korisnici " +
-                        "WHERE id = ? " +
-                        "ORDER BY id";
+                "SELECT * from korisnici where id = ?";
         KorisnikRowCallBackHandler rowCallbackHandler = new KorisnikRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler, id);
         return rowCallbackHandler.getKorisnici().get(0);
@@ -74,7 +70,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
     @Override
     public Korisnik findOneByUsername(String korisnickoIme) {
         String sql =
-                "SELECT * FROM mojateretana.korisnik WHERE korisnickoIme = ?";
+                "SELECT * FROM korisnici WHERE korisnickoIme = ?";
         KorisnikRowCallBackHandler rowCallbackHandler = new KorisnikRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler, korisnickoIme);
         if(rowCallbackHandler.getKorisnici().size() == 0) {
@@ -84,13 +80,13 @@ public class KorisnikDAOImpl implements KorisnikDAO{
     }
 
     @Override
-    public Korisnik findOne(String korisnickoIme, String lozinka) {
+    public Korisnik findOne(String email, String lozinka) {
         String sql =
-                "SELECT id, korisnickoIme, lozinka, email, ime, prezime, datumRodjenja, adresa, brojTelefona," +
-                        "datumIVremeRegistracije, uloga FROM korisnici " +
-                        "WHERE korisnickoIme = ? AND lozinka = ?";
+                "SELECT * from korisnici "
+                +"where email = ? and " +
+                "lozinka = ?";
         KorisnikRowCallBackHandler rowCallbackHandler = new KorisnikRowCallBackHandler();
-        jdbcTemplate.query(sql, rowCallbackHandler, korisnickoIme, lozinka);
+        jdbcTemplate.query(sql, rowCallbackHandler, email, lozinka);
         if(rowCallbackHandler.getKorisnici().size() == 0) {
             return null;
         }
@@ -100,9 +96,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
     @Override
     public List<Korisnik> findAll() {
         String sql =
-                "SELECT id, korisnickoIme, lozinka, email, ime, prezime, datumRodjenja, adresa, brojTelefona," +
-                        "datumIVremeRegistracije, uloga FROM korisnici " +
-                        "ORDER BY id";
+                "SELECT * from korisnici where id not like 5";
         KorisnikRowCallBackHandler rowCallbackHandler = new KorisnikRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler);
         return rowCallbackHandler.getKorisnici();
@@ -116,7 +110,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 String sql = "INSERT INTO korisnici (korisnickoIme, lozinka, email, ime," +
-                        "prezime, datumRodjenja, adresa, brojTelefona, datumIVremeRegistracije,uloga)" +
+                        "prezime, datumRodjenja, adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika)" +
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 int index = 1;
@@ -130,7 +124,6 @@ public class KorisnikDAOImpl implements KorisnikDAO{
                 preparedStatement.setString(index++, korisnik.getBrojTelefona());
                 preparedStatement.setTimestamp(index++, Timestamp.valueOf(korisnik.getDatumIVremeRegistracije().atStartOfDay()));
                 preparedStatement.setString(index++, korisnik.getTipKorisnika().toString());
-                preparedStatement.setString(index++, korisnik.getUloga());
                 return preparedStatement;
             }
         };
@@ -149,8 +142,8 @@ public class KorisnikDAOImpl implements KorisnikDAO{
     @Transactional
 	@Override
 	public int update(Korisnik korisnik) {
-		String sql = "UPDATE korisnici set korisnickoIme = ?, lozinka = ?, email = ?, ime = ?, prezime = ?, tipKorisnika = ?, uloga = ?  where id = ?";
-		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getLozinka(), korisnik.getEmail(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getTipKorisnika().toString(), korisnik.getUloga(), korisnik.getId()) == 1;
+		String sql = "UPDATE korisnici set korisnickoIme = ?, lozinka = ?, email = ?, ime = ?, prezime = ?, tipKorisnika = ?, aktivan = ?  where id = ?";
+		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getLozinka(), korisnik.getEmail(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getTipKorisnika().toString(),korisnik.isAktivan(), korisnik.getId()) == 1;
 		
 		return uspeh?1:0;
 		

@@ -6,9 +6,8 @@ public class Trening {
     private String naziv;
     private String trener;
     private String kratakOpis;
-    private String slika;
     private TipTreninga tipTreninga;
-    private int cena;
+    private float cena;
     private EVrstaTreninga vrstaTreninga;
     private ENivoTreninga nivoTreninga;
     private int trajanjeTreninga;
@@ -16,26 +15,23 @@ public class Trening {
 
     
   
-    public Trening(String naziv1, String kratakOpis1, String slika, int cena1,EVrstaTreninga vrstaTreninga,ENivoTreninga nivoTreninga
-    		,int trajanjeTreninga1, String trener,  int prosecnaOcena1) {
-        this.naziv = naziv1;
-        this.kratakOpis = kratakOpis1;
-        this.slika = slika;
-        this.cena = cena1;
-        this.vrstaTreninga = vrstaTreninga;
-        this.nivoTreninga = nivoTreninga;
-        this.trajanjeTreninga = trajanjeTreninga1;
-        this.trener = trener;
-        this.prosecnaOcena = prosecnaOcena1;
+    public Trening(String naziv2, String kratakOpis2, int cena2,EVrstaTreninga vrstaTreninga2
+    		,ENivoTreninga nivoTreninga2, String trener2, int trajanjeTreninga2,  int prosecnaOcena2) {
+        this.naziv = naziv2;
+        this.kratakOpis = kratakOpis2;
+        this.cena = cena2;
+        this.vrstaTreninga = vrstaTreninga2;
+        this.nivoTreninga = nivoTreninga2;
+        this.trajanjeTreninga = trajanjeTreninga2;
+        this.trener = trener2;
+        this.prosecnaOcena = prosecnaOcena2;
     }
-    public Trening(Long id1, String naziv1, String kratakOpis1, String slika,TipTreninga tipTreninga1,
-                   int cena1, EVrstaTreninga vrstaTreninga1, ENivoTreninga nivoTreninga1,
+    public Trening(Long id1, String naziv1, String kratakOpis1,
+    				float cena1, EVrstaTreninga vrstaTreninga1, ENivoTreninga nivoTreninga1,
                    int trajanjeTreninga1, int prosecnaOcena1, String trener) {
         this.id = id1;
         this.naziv = naziv1;
         this.kratakOpis = kratakOpis1;
-        this.slika = slika;
-        this.tipTreninga = tipTreninga1;
         this.cena = cena1;
         this.vrstaTreninga = vrstaTreninga1;
         this.nivoTreninga = nivoTreninga1;
@@ -43,12 +39,11 @@ public class Trening {
         this.prosecnaOcena = prosecnaOcena1;
         this.trener = trener;
     }
-    public Trening(String naziv1, String kratakOpis1, String slika,TipTreninga tipTreninga1,
-                   int cena1, EVrstaTreninga vrstaTreninga1, ENivoTreninga nivoTreninga1,
+    public Trening(String naziv1, String kratakOpis1,TipTreninga tipTreninga1,
+                   float cena1, EVrstaTreninga vrstaTreninga1, ENivoTreninga nivoTreninga1,
                    int trajanjeTreninga1, int prosecnaOcena1, String trener) {
         this.naziv = naziv1;
         this.kratakOpis = kratakOpis1;
-        this.slika = slika;
         this.tipTreninga = tipTreninga1;
         this.cena = cena1;
         this.vrstaTreninga = vrstaTreninga1;
@@ -58,43 +53,13 @@ public class Trening {
         this.trener = trener;
     }
     
-    public Trening(int cena) {
+    public Trening(float cena) {
     	this.cena = cena;
     }
     
     public Trening(Long id1) {
     	this.id = id1;
     }
-    
-    public Trening(String naziv2, String trener2, String kratakOpis2, String slika2, int cena2,
-			EVrstaTreninga vrstaTreninga2, ENivoTreninga nivoTreninga2, int trajanjeTreninga2, int prosecnaOcena2) {
-		this.naziv = naziv2;
-		this.trener = trener2;
-		this.kratakOpis = kratakOpis2;
-		this.slika = slika2;
-		this.cena = cena2;
-		this.vrstaTreninga = vrstaTreninga2;
-		this.nivoTreninga = nivoTreninga2;
-		this.trajanjeTreninga = trajanjeTreninga2;
-		this.prosecnaOcena = prosecnaOcena2;
-	}
-	@Override
-    public String toString() {
-        return "Trening{" +
-                "id=" + id +
-                ", naziv='" + naziv + '\'' +
-                ", trener='" + trener + '\'' +
-                ", opis='" + kratakOpis + '\'' +
-                ", slika='" + slika + '\'' +
-                ", cena=" + cena +
-                ", tipTreninga=" + tipTreninga +
-                ", vrstaTreninga=" + vrstaTreninga +
-                ", nivoTreninga=" + nivoTreninga +
-                ", trajanjeTreninga=" + trajanjeTreninga +
-                ", prosecnaOcena=" + prosecnaOcena +
-                '}';
-    }
-
 	public Long getId() {
 		return id;
 	}
@@ -127,13 +92,6 @@ public class Trening {
 		this.kratakOpis = kratakOpis;
 	}
 
-	public String getSlika() {
-		return slika;
-	}
-
-	public void setSlika(String slika) {
-		this.slika = slika;
-	}
 
 	public TipTreninga getTipTreninga() {
 		return tipTreninga;
@@ -143,11 +101,11 @@ public class Trening {
 		this.tipTreninga = tipTreninga;
 	}
 
-	public int getCena() {
+	public float getCena() {
 		return cena;
 	}
 
-	public void setCena(int cena) {
+	public void setCena(float cena) {
 		this.cena = cena;
 	}
 

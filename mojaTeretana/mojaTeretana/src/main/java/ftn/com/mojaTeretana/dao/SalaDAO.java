@@ -6,9 +6,9 @@ import ftn.com.mojaTeretana.model.Sala;
 
 public interface SalaDAO {
 
-	int save(Sala sala);
-	int delete(Long id);
-	int update(Sala sala);
+	public int save(Sala sala);
+	public int delete(Long id);
+	public int update(Sala sala);
 	
 	
 	List<Sala> findAll();

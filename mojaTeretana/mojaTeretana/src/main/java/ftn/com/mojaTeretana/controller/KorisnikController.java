@@ -34,9 +34,9 @@ public class KorisnikController implements ServletContextAware{
 	
 	@Controller
 	public class ViewController {
-		@RequestMapping("/local")
-		public String local() {
-			return "local";
+		@RequestMapping("/locale")
+		public String locale() {
+			return "locale";
 		}
 	}
 	
@@ -80,10 +80,10 @@ public class KorisnikController implements ServletContextAware{
 		
 		LocalDate datumIVremeRegistracije = LocalDate.now();
 		
-		Korisnik korisnik = new Korisnik(korisnickoIme, email, lozinka, ime, prezime, datumRodjenja, adresa, 
-				brojTelefona, tipKorisnika, datumIVremeRegistracije);
+		Korisnik korisnik = new Korisnik(korisnickoIme, lozinka,email, ime, prezime, datumRodjenja, adresa, 
+				brojTelefona,datumIVremeRegistracije, tipKorisnika);
 		korisnikService.save(korisnik);
-		response.sendRedirect(bURL + "registracija.html");
+		response.sendRedirect(bURL + "index.html");
 		
 	}
 	
@@ -98,10 +98,10 @@ public class KorisnikController implements ServletContextAware{
 	
 	@PostMapping(value = "/login")
 	public void postLogin(
-	@RequestParam(required = false) String korisnickoIme,
+	@RequestParam(required = false) String email,
 	@RequestParam(required = false) String lozinka,
 	HttpSession session, HttpServletResponse response) throws IOException {
-		Korisnik korisnik = korisnikService.findOne(korisnickoIme, lozinka);
+		Korisnik korisnik = korisnikService.findOne(email, lozinka);
 		String greska = "";
 		if(korisnik == null) 
 			greska = "Kredencijali nisu ispravni! <br/>";
@@ -113,19 +113,20 @@ public class KorisnikController implements ServletContextAware{
 			
 			
 			StringBuilder rtVal = new StringBuilder();
-			rtVal.append("<DOCTYPE html>\r\n" + "<html>\r\n" + "<head>\r\n" + "<meta charset =\"UTF-8\">\r\n"
-			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/home.css\"/>\r\n"
-			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/prijava.css\"/>\r\n"
+			rtVal.append("<!DOCTYPE html>\r\n" + "<html>\r\n" + "<head>\r\n" + "<meta charset =\"UTF-8\">\r\n"
+			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/StiloveForma.css\"/>\r\n"
+			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/StiloviHorizontalniMeni.css\"/>\r\n"
 			+ "<link rel =\"stylesheet\" type =\"text/css\" href = \"css/registracija.css\"/>\r\n"
-			+ "<base href = \"/MojaTeretana/\"> \r\n" 
+			+ "<base href = \"/ProjekatTeretana/\"> \r\n" 
 			+ "<title>Prijava korisnika</title>\r\n"
+		
 			+ "</head>\r\n" + "<body>\r\n" + "<ul>\r\n");
 			
 		if(!greska.equals(""))
 			rtVal.append("<div>" + greska + "</div>\r\n");
 		rtVal.append("<form method = \"post\" action = \"korisnici/login\">\r\n" + "<table>\r\n" 
 			+ "<caption>Prijava korisnika na sistem</caption>\r\n"
-			+ "<tr><th>Jmbg:</th><td><input type =\"text\" value = \"\" name = \"jmbg\" required/></td></tr>\r\n" 
+			+ "<tr><th>Email:</th><td><input type =\"text\" value = \"\" name = \"email\" required/></td></tr>\r\n" 
 			+ "<tr><th>Lozinka:</th><td><input type = \"password\" value = \"\" name = \"lozinka\" required/></td></tr>\r\n" 
 			+ "<tr><th>>/th><td><input type = \"submit\" value = \"Prijavite se\" /></td>\r\n" 
 			+ "</table>\r\n" + "</form>\r\n" + "<br/>\r\n" + "</body>\r\n" + "</html>");
@@ -144,7 +145,7 @@ public class KorisnikController implements ServletContextAware{
 			
 			StringBuilder rtVal = new StringBuilder();
 			rtVal.append("<!DOCTYPE html>\r\n" + "<html>\r\n" + "<head>\r\n" + "<meta charset =\"UTF-8\">\r\n"
-			+ "<base href = \"/MojaTeretana/\">\r\n" 
+			+ "<base href = \"/ProjekatTeretana/\">\r\n" 
 			+ "<title>Prijava korisnika</title>\r\n" 
 			+ "</head>\r\n" + "<body>\r\n" + "<ul>\r\n");
 			

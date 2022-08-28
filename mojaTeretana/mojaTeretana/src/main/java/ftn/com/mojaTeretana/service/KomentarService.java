@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface KomentarService {
 
-    List<Komentar> FindAllById(Long id);
-    List<Komentar> FindAll();
+    List<Komentar> findAllById(Long id);
+    List<Komentar> findAll();
     
     Komentar save(Komentar komentar);
     Komentar update(Komentar komentar);
-    Komentar FindOneById(Long id);
+    Komentar findOneById(Long id);
     Komentar delete(Long id);
     Komentar odobreno(Long id);
 }

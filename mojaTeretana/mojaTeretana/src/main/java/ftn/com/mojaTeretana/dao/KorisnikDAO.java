@@ -10,7 +10,7 @@ public interface KorisnikDAO{
 
     Korisnik findOneByUsername(String korisnickoIme);
 
-    Korisnik findOne(String korisnickoIme, String lozinka);
+    Korisnik findOne(String email, String lozinka);
 
     List<Korisnik> findAll();
 

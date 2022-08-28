@@ -25,19 +25,6 @@ public class TerminTreninga {
     	this.datumTermina = datumTermina;
     	
     }
-    
-    
-    
-    
-    @Override
-    public String toString() {
-        return "Termin{" +
-                "salaId=" + salaId +
-                ", treningId=" + treningId +
-                ", datumTermina='" + datumTermina + '\'' +
-                '}';
-    }
-
 
 
 	public Long getId() {

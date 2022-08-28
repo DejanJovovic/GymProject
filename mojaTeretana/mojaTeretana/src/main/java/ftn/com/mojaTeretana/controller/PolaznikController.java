@@ -44,7 +44,7 @@ import ftn.com.mojaTeretana.service.TreningService;
 public class PolaznikController implements ServletContextAware{
 
 	
-	public static final String TERMIN_ZELJA = "odabrani_termin";
+	public static final String TERMIN_ZELJA = "zeljeni_termin";
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -186,7 +186,7 @@ public class PolaznikController implements ServletContextAware{
 	@PostMapping(value = "/korpa/ukloni")
 	@ResponseBody
 	public void ukloniIzKopre(
-		@RequestParam(name = "terminId") Long id, HttpSession session, HttpServletResponse response) throws IOException {
+		@RequestParam(name = "idTermina") Long id, HttpSession session, HttpServletResponse response) throws IOException {
 		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);
 		for (TerminTreninga termin : zaKorpu) {
 			if(termin.getId().equals(id)) {
@@ -200,7 +200,7 @@ public class PolaznikController implements ServletContextAware{
 	
 	@PostMapping(value = "/korpa/zakazi")
 	public void dodajUKorpu(
-	@RequestParam(name = "terminId") Long id, HttpServletResponse response, HttpSession session	) throws IOException {
+	@RequestParam(name = "idTermina") Long id, HttpServletResponse response, HttpSession session	) throws IOException {
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		TerminTreninga terminTreninga = terminTreningaService.findOneById(id);
 		Korpa korpa = new Korpa(ulogovan, terminTreninga);
@@ -217,11 +217,11 @@ public class PolaznikController implements ServletContextAware{
 	
 	@PostMapping(value = "korpa/ukloniIzKorpe")
 	private void deleteZakazano(
-	@RequestParam(name = "terminId") Long id,
-	@RequestParam(name = "termId") Long terminId, HttpServletResponse response, HttpSession session) throws IOException{
-		Korpa obrisiIzKorpe = korpaService.delete(id);
+	@RequestParam(name = "idTermina") Long id,
+	@RequestParam(name = "idTerm") Long idTermin, HttpServletResponse response, HttpSession session) throws IOException{
+		Korpa obrisiIzKorpe = korpaService.deleteZakazano(id);
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
-		TerminTreninga terminTreninga = terminTreningaService.findOneById(terminId);
+		TerminTreninga terminTreninga = terminTreningaService.findOneById(idTermin);
 		int broj = (int) (terminTreninga.getTreningId().getCena() / 500);
 		ClanskaKarta clanskaKarta = clanskaKartaService.findOdobreno(ulogovan.getId());
 		clanskaKarta.setBrojPoena(clanskaKarta.getBrojPoena() - broj);
@@ -236,8 +236,8 @@ public class PolaznikController implements ServletContextAware{
 	@ResponseBody
 	public ModelAndView details(
 	@RequestParam Long id, HttpServletResponse httpServletResponse) {
-		Trening trening = treningService.findOneById(id);
-		List<Komentar> komentari = komentarService.FindAllById(id);
+		Trening trening = treningService.findOne(id);
+		List<Komentar> komentari = komentarService.findAllById(id);
 		List<TerminTreninga> terminiTreninga = terminTreningaService.findAll(id);
 		List<TipTreninga> tipTreninga = tipTreningaService.findAll(id);
 		ModelAndView rezultati = new ModelAndView("trening");
@@ -250,20 +250,20 @@ public class PolaznikController implements ServletContextAware{
 		
 	}
 	
-	@PostMapping(value = "/dodajKomentar")
+	@PostMapping(value = "/add/Komentar")
 	public void create(
-	@RequestParam int ocena,
 	@RequestParam String tekstKomentara,
+	@RequestParam int ocena,
 	@RequestParam Long id,
 	@RequestParam(required = false) boolean anoniman, HttpServletResponse response, HttpSession session)  throws IOException{
 		LocalDate datum = LocalDate.now();
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		EStatusKomentara statusKomentara = EStatusKomentara.CEKANJE;
-		Trening trening = treningService.findOneById(id);
-		Komentar komentar = new Komentar(tekstKomentara, ocena, datum, statusKomentara, ulogovan, trening, anoniman);
+		Trening trening = treningService.findOne(id);
+		Komentar komentar = new Komentar(tekstKomentara, ocena, datum,ulogovan,trening, statusKomentara, anoniman);
 		if(anoniman == true) {
-			Long anonimanId = (long) 5;
-			Korisnik anonimanKorisnik = korisnikService.findOneById(anonimanId);
+			Long idAnoniman = (long) 5;
+			Korisnik anonimanKorisnik = korisnikService.findOneById(idAnoniman);
 			komentar.setAutor(anonimanKorisnik);
 		}
 		komentarService.save(komentar);

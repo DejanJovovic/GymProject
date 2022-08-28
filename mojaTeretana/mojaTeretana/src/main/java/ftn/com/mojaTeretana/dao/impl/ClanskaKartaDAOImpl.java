@@ -33,8 +33,8 @@ public class ClanskaKartaDAOImpl implements ClanskaKartaDAO{
 		public void processRow(ResultSet resultSet) throws SQLException {
 			int index = 1;
 			Long id = resultSet.getLong(index ++);
-			Long korisnikId = resultSet.getLong(index ++);
-			Korisnik korisnik = korisnikDAO.findOneById(korisnikId);
+			Long idKorisnika = resultSet.getLong(index ++);
+			Korisnik korisnik = korisnikDAO.findOneById(idKorisnika);
 			Integer popust = resultSet.getInt(index++);
 			Integer brojPoena = resultSet.getInt(index++);
 			String statusClanskeKarte = resultSet.getString(index++);
@@ -70,7 +70,7 @@ public class ClanskaKartaDAOImpl implements ClanskaKartaDAO{
 
 	@Override
 	public int update(ClanskaKarta clanskaKarta) {
-		String sql = "update clanskeKarte set popust = ?, bodovi = ? where id = ?";
+		String sql = "update clanskeKarte set popust = ?, brojPoena = ? where id = ?";
 		boolean uspesanUpdate = jdbcTemplate.update(sql, clanskaKarta.getPopust(), clanskaKarta.getBrojPoena(), clanskaKarta.getId()) ==1;
 		return 0;
 	}

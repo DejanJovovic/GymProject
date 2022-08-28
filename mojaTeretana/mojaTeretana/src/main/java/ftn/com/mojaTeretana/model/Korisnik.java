@@ -15,7 +15,6 @@ public class Korisnik {
     private String brojTelefona;
     private LocalDate datumIVremeRegistracije;
     private ETipKorisnika tipKorisnika;
-    private String uloga;
     private boolean aktivan;
     
     
@@ -24,25 +23,19 @@ public class Korisnik {
     }
     
     
-    public Korisnik(String korisnickoIme, String email, String lozinka, String ime, String prezime,
-    		String datumRodjenja, String adresa, String brojTelefona, ETipKorisnika tipKorisnika, LocalDate datumIVremeRegistracije ) {
+    public Korisnik(long id,String korisnickoIme, String email, String ime, String prezime) {
+    	this.id = id;
     	this.korisnickoIme = korisnickoIme;
     	this.email = email;
-    	this.lozinka = lozinka;
     	this.ime = ime;
     	this.prezime = prezime;
-    	this.datumRodjenja = datumRodjenja;
-    	this.adresa = adresa;
-    	this.brojTelefona = brojTelefona;
-    	this.tipKorisnika = tipKorisnika;
-    	this.datumIVremeRegistracije = datumIVremeRegistracije;
     	
     }
     
 
     public Korisnik(String korisnickoIme1, String lozinka1, String email1, String ime1,
                     String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
-                    LocalDate datumIVremeRegistracije1, ETipKorisnika tipKorisnika, String uloga) {
+                    LocalDate datumIVremeRegistracije1, ETipKorisnika tipKorisnika) {
         this.korisnickoIme = korisnickoIme1;
         this.lozinka = lozinka1;
         this.email = email1;
@@ -52,12 +45,11 @@ public class Korisnik {
         this.adresa = adresa1;
         this.brojTelefona = brojTelefona1;
         this.datumIVremeRegistracije = datumIVremeRegistracije1;
-        this.uloga = uloga;
     }
 
     public Korisnik(Long id1, String korisnickoIme1, String lozinka1, String email1, String ime1,
                     String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
-                    LocalDate datumIVremeRegistracije1 , ETipKorisnika tipKorisnika1,  String uloga, boolean aktivan) {
+                    LocalDate datumIVremeRegistracije1 , ETipKorisnika tipKorisnika1, boolean aktivan) {
         this.id = id1;
         this.korisnickoIme = korisnickoIme1;
         this.lozinka = lozinka1;
@@ -69,29 +61,44 @@ public class Korisnik {
         this.brojTelefona = brojTelefona1;
         this.datumIVremeRegistracije = datumIVremeRegistracije1;
         this.tipKorisnika = tipKorisnika1;
-        this.uloga = uloga;
         this.aktivan = aktivan;
     }
+    
+    public Korisnik(long idKorisnika, String korisnickoIme) {
+    	this.id = idKorisnika;
+    	this.korisnickoIme = korisnickoIme;
+    	
+    }
+
+    
+    
+
+    public Korisnik(Long idKorisnika, String korisnickoIme1, String lozinka1, String email1, String ime1,
+                    String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
+                    LocalDate datumIVremeRegistracije1, ETipKorisnika tipKorisnika) {
+        this.id = idKorisnika;
+    	this.korisnickoIme = korisnickoIme1;
+        this.lozinka = lozinka1;
+        this.email = email1;
+        this.ime = ime1;
+        this.prezime = prezime1;
+        this.datumRodjenja = datumRodjenja1;
+        this.adresa = adresa1;
+        this.brojTelefona = brojTelefona1;
+        this.datumIVremeRegistracije = datumIVremeRegistracije1;
+    }
+    
+    public Korisnik(String anoniman) {
+    	this.korisnickoIme = anoniman;
+    }
+    
 
 
 	@Override
-    public String toString() {
-        return "Korisnik{" +
-                "id=" + id +
-                ", korisnickoIme='" + korisnickoIme + '\'' +
-                ", lozinka='" + lozinka + '\'' +
-                ", email='" + email + '\'' +
-                ", ime='" + ime + '\'' +
-                ", prezime='" + prezime + '\'' +
-                ", datumRodjenja='" + datumRodjenja + '\'' +
-                ", adresa='" + adresa + '\'' +
-                ", brojTelefona='" + brojTelefona + '\'' +
-                ", datumIVremeRegistracije='" + datumIVremeRegistracije + '\'' +
-                ", tipKorisnika=" + tipKorisnika +
-                ", uloga=" + uloga +
-                ", aktivan=" + aktivan +
-                '}';
-    }
+	public String toString() {
+		return "Korisnik [korisnickoIme=" + korisnickoIme + "]";
+	}
+
     
     
     public long getId() {
@@ -167,14 +174,6 @@ public class Korisnik {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUloga() {
-		return uloga;
-	}
-
-	public void setUloga(String uloga) {
-		this.uloga = uloga;
 	}
 
 	public boolean isAktivan() {

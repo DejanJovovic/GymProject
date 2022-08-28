@@ -35,7 +35,7 @@ public class DatabaseKorpaServiceImpl implements KorpaService{
 	}
 
 	@Override
-	public Korpa delete(Long id) {
+	public Korpa deleteZakazano(Long id) {
 		Korpa korpa = korpaDAO.findOne(id);
 		if(korpa != null) {
 			korpaDAO.deleteZakazane(id);

@@ -39,10 +39,10 @@ public class KorpaDAOImpl implements KorpaDAO {
 		public void processRow(ResultSet resultSet) throws SQLException {
 			int index = 1;
 			Long id = resultSet.getLong(index++);
-			Long korisnikId = resultSet.getLong(index++);
-			Korisnik korisnik = korisnikDAO.findOneById(korisnikId);
-			Long terminId = resultSet.getLong(index++);
-			TerminTreninga termin = terminTreningaDAO.findOneById(terminId);
+			Long idKorisnika = resultSet.getLong(index++);
+			Korisnik korisnik = korisnikDAO.findOneById(idKorisnika);
+			Long idTermina = resultSet.getLong(index++);
+			TerminTreninga termin = terminTreningaDAO.findOneById(idTermina);
 			Korpa korpa = korpe.get(id);
 			if(korpa == null) {
 				korpa = new Korpa(id, korisnik, termin);

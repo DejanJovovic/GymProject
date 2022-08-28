@@ -18,13 +18,13 @@ public class DatabaseKomentarServiceImpl implements KomentarService {
     
     
     @Override
-    public List<Komentar> FindAllById(Long id) {
-        return komentarDAO.FindAllById(id);
+    public List<Komentar> findAllById(Long id) {
+        return komentarDAO.findAllById(id);
     }
 
     @Override
-    public List<Komentar> FindAll() {
-        return komentarDAO.FindAll();
+    public List<Komentar> findAll() {
+        return komentarDAO.findAll();
     }
 
     @Override
@@ -33,8 +33,8 @@ public class DatabaseKomentarServiceImpl implements KomentarService {
         return komentar;
     }
 
-    public Komentar FindOneById(Long id){
-        return komentarDAO.FindOneById(id);
+    public Komentar findOneById(Long id){
+        return komentarDAO.findOne(id);
     }
 
 	@Override
@@ -45,7 +45,7 @@ public class DatabaseKomentarServiceImpl implements KomentarService {
 
 	@Override
 	public Komentar delete(Long id) {
-		Komentar komentar = komentarDAO.FindOneById(id);
+		Komentar komentar = komentarDAO.findOne(id);
 		if(komentar != null) {
 			komentarDAO.delete(id);
 		}
@@ -54,7 +54,7 @@ public class DatabaseKomentarServiceImpl implements KomentarService {
 
 	@Override
 	public Komentar odobreno(Long id) {
-		Komentar komentar = komentarDAO.FindOneById(id);
+		Komentar komentar = komentarDAO.findOne(id);
 		if(komentar != null) {
 			komentarDAO.odobreno(id);
 		}

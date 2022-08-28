@@ -25,40 +25,27 @@ public class ClanskaKarta {
     	this.status = status;
     }
     
-
-	@Override
-    public String toString() {
-        return "ClanskaKarta{" +
-        		"id=" + id +
-                "popust=" + popust +
-                ", brojPoena=" + brojPoena +
-                '}';
-    }
     
+    public ClanskaKarta() {
+    	
+    }
     
     
     public Long getId() {
 		return id;
 	}
 
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	public Korisnik getKorisnikId() {
 		return korisnikId;
 	}
 
-
-
 	public void setKorisnikId(Korisnik korisnikId) {
 		this.korisnikId = korisnikId;
 	}
-
 
     public int getPopust() {
         return popust;
@@ -78,9 +65,5 @@ public class ClanskaKarta {
 	public void setStatus(EStatusClanskeKarte status) {
 		this.status = status;
 	}
-
-	
-	
-    
-    
+   
 }

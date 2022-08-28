@@ -181,7 +181,7 @@ public class AdminController implements ServletContextAware{
 	
 	@GetMapping(value = "/komentari")
 	public ModelAndView komentari() {
-		List<Komentar> komentari = komentarService.FindAll();
+		List<Komentar> komentari = komentarService.findAll();
 		ModelAndView rezultati = new ModelAndView("komentari");
 		rezultati.addObject("komentari", komentari);
 		
@@ -242,8 +242,8 @@ public class AdminController implements ServletContextAware{
 	@ResponseBody
 	public ModelAndView detaljiTreninga(
 	@RequestParam Long id, HttpServletResponse httpServletResponse) {
-		Trening trening = treningService.findOneById(id);
-		List<Komentar> komentari = komentarService.FindAllById(id);
+		Trening trening = treningService.findOne(id);
+		List<Komentar> komentari = komentarService.findAllById(id);
 		List<TerminTreninga> terminiTreninga = terminTreningaService.findAll(id);
 		List<TipTreninga> tipoviTreninga = tipTreningaService.findAll(id);
 		ModelAndView rezultati = new ModelAndView("treningAdmin");
@@ -325,7 +325,7 @@ public class AdminController implements ServletContextAware{
 	@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datumTermina,
 	@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime vreme, HttpServletResponse response) throws IOException{
 		LocalDateTime datumIVremeTermina = LocalDateTime.of(datumTermina, vreme);
-		Trening trening = treningService.findOneById(treningId);
+		Trening trening = treningService.findOne(treningId);
 		Sala sala = salaService.findOneById(salaId);
 		TerminTreninga terminTreninga = new TerminTreninga(trening, sala, datumIVremeTermina);
 		terminTreningaService.save(terminTreninga);
@@ -339,13 +339,12 @@ public class AdminController implements ServletContextAware{
 	@RequestParam String naziv,
 	@RequestParam String trener,
 	@RequestParam String kratakOpis,
-	@RequestParam String slika,
 	@RequestParam int cena,
 	@RequestParam EVrstaTreninga vrstaTreninga,
 	@RequestParam ENivoTreninga nivoTreninga,
 	@RequestParam int trajanjeTreninga,
 	@RequestParam int prosecnaOcena, HttpServletResponse response) throws IOException{
-		Trening trening = new Trening(naziv, trener, kratakOpis, slika, cena, vrstaTreninga, nivoTreninga,
+		Trening trening = new Trening(naziv, kratakOpis, cena, vrstaTreninga, nivoTreninga,trener,
 				trajanjeTreninga, prosecnaOcena);
 		Trening saved = treningService.save(trening);
 		response.sendRedirect(bURL + "admin");

@@ -38,10 +38,9 @@ public class SalaDAOImpl implements SalaDAO {
 			int index = 1;
 			Long id = resultSet.getLong(index++);
 			Integer kapacitet = resultSet.getInt(index++);
-			String oznakaSale = resultSet.getString(index++);
 			Sala sala = sale.get(id);
 			if(sala == null) {
-				sala = new Sala(id, kapacitet, oznakaSale);
+				sala = new Sala(id, kapacitet);
 				sale.put(sala.getId(), sala);
 			}
 			
@@ -60,11 +59,10 @@ public class SalaDAOImpl implements SalaDAO {
 			
 			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-				String sql = "Insert into sale (kapacitet, oznakaSale) Values (?, ?)";
+				String sql = "Insert into sale (kapacitet) Values (?)";
 				PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				int index = 1;
 				preparedStatement.setInt(index++, sala.getKapacitet());
-				preparedStatement.setString(index++, sala.getOznakaSale());
 				return preparedStatement;
 			}
 		};
@@ -82,8 +80,8 @@ public class SalaDAOImpl implements SalaDAO {
 
 	@Override
 	public int update(Sala sala) {
-		String sql = "Update sale set kapacitet = ? and oznakaSale = ? where id = ?";
-		boolean uspeh = jdbcTemplate.update(sql, sala.getKapacitet(), sala.getOznakaSale(), sala.getId()) == 1;
+		String sql = "Update sale set kapacitet = ? where id = ?";
+		boolean uspeh = jdbcTemplate.update(sql, sala.getKapacitet(), sala.getId()) == 1;
 		return 0;
 	}
 

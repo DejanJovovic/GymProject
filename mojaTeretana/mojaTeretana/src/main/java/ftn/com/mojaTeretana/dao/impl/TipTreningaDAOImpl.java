@@ -39,8 +39,8 @@ public class TipTreningaDAOImpl implements TipTreningaDAO{
 		public void processRow(ResultSet resultSet) throws SQLException {
 			int index = 1;
 			Long id = resultSet.getLong(index++);
-			Long treningId = resultSet.getLong(index++);
-			Trening trening = treningDAO.findOneById(treningId);
+			Long idTreninga = resultSet.getLong(index++);
+			Trening trening = treningDAO.findOne(idTreninga);
 			String ime = resultSet.getString(index++);
 			String opis = resultSet.getString(index++);
 			

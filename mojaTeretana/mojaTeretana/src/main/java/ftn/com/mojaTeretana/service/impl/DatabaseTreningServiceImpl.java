@@ -22,8 +22,8 @@ public class DatabaseTreningServiceImpl implements TreningService {
     }
 
     @Override
-    public Trening findOneById(Long id) {
-        return treningDAO.findOneById(id);
+    public Trening findOne(Long treningId) {
+        return treningDAO.findOne(treningId);
     }
 
     @Override

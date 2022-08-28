@@ -46,10 +46,10 @@ public class KomentarDAOImpl implements KomentarDAO {
             Integer ocena = resultSet.getInt(index++);
             LocalDate datum = resultSet.getTimestamp(index++).toLocalDateTime().toLocalDate();
             EStatusKomentara statusKomentara = EStatusKomentara.valueOf(resultSet.getString(index++));
-            Long korisnikId = resultSet.getLong(index++);
-            Korisnik autor = korisnikDAO.findOneById(korisnikId);
-            Long treningId = resultSet.getLong(index++);
-            Trening trening = treningDAO.findOneById(treningId);
+            Long idKorisnika = resultSet.getLong(index++);
+            Korisnik autor = korisnikDAO.findOneById(idKorisnika);
+            Long idTreninga = resultSet.getLong(index++);
+            Trening trening = treningDAO.findOne(idTreninga);
 
             boolean anoniman = resultSet.getBoolean(index++);
             Komentar komentar = komentari.get(id);
@@ -65,7 +65,7 @@ public class KomentarDAOImpl implements KomentarDAO {
     }
 
     @Override
-    public List<Komentar> FindAllById(Long id) {
+    public List<Komentar> findAllById(Long id) {
         String sql = "SELECT * from komentari WHERE trening = ? and statusKomentara = 'ODOBREN' ";
 
         KomentarRowCallBackHandler rowCallbackHandler = new KomentarRowCallBackHandler();
@@ -74,7 +74,7 @@ public class KomentarDAOImpl implements KomentarDAO {
     }
 
     @Override
-    public List<Komentar> FindAll() {
+    public List<Komentar> findAll() {
         String sql = "SELECT * FROM komentari where statusKomentara = 'CEKANJE'";
         KomentarRowCallBackHandler rowCallbackHandler = new KomentarRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler);
@@ -92,7 +92,7 @@ public class KomentarDAOImpl implements KomentarDAO {
     }
 
     @Override
-    public Komentar FindOneById(Long id) {
+    public Komentar findOne(Long id) {
         String sql = "SELECT * FROM komentari WHERE id = ? ";
 
         KomentarRowCallBackHandler rowCallbackHandler = new KomentarRowCallBackHandler();

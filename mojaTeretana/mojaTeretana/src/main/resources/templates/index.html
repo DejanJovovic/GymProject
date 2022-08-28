@@ -9,9 +9,18 @@
 </head>
 <body>
 <img src="/img/background.jpg">
-  <div class="center">
-    <a href="login.html"><button class="btn prijava">PRIJAVA</button></a>
-    <a href="registracija.html"><button class="btn prijava">REGISTRACIJA</button></a>
-  </div>
-</body>
+ <ul>
+		<li><a href="registracija.html">Registruj se</a></li>
+	</ul>
+	<br/>
+	<form method="post" action="korisnici/login">
+		<div class="center">
+		<table>
+			<h1 th:text="#{prijava}">Login</h1>
+			<tr><th th:text="#{korisnickoIme}">KorisnickoIme</th><td><input type="text" value="" name="korisnickoIme" required/></td></tr>
+			<tr><th th:text="#{lozinka}">Password</th><td><input type="password" value="" name="sifra" required/></td></tr>
+			<tr><th></th><td><input type="submit" value="Prijavi se" /></td>
+		</table>
+		</div>
+	</form>
 </html>			

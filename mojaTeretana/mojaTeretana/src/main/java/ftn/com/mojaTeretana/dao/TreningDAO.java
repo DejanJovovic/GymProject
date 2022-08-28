@@ -7,11 +7,11 @@ import java.util.List;
 public interface TreningDAO {
     List<Trening> findAll();
 
-    Trening findOneById(Long id);
+    Trening findOne(Long treningId);
 
     void update(Trening trening);
 
-    int save(Trening trening);
+    public int save(Trening trening);
     
     Float sum(Long id);
 

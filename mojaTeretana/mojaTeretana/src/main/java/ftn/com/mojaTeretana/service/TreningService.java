@@ -8,7 +8,7 @@ public interface TreningService {
 
     List<Trening> findAll();
 
-    Trening findOneById(Long id);
+    Trening findOne(Long treningId);
 
     Trening save(Trening trening);
 

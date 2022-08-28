@@ -36,7 +36,6 @@ public class TreningDAOImpl implements TreningDAO {
             Long id = resultSet.getLong(index++);
             String naziv = resultSet.getString(index++);
             String kratakOpis = resultSet.getString(index++);
-            String slika = resultSet.getString(index++);
             Integer cena = resultSet.getInt(index++);
             EVrstaTreninga vrstaTreninga = EVrstaTreninga.valueOf(resultSet.getString(index++));
             ENivoTreninga nivoTreninga = ENivoTreninga.valueOf(resultSet.getString(index++));
@@ -46,8 +45,8 @@ public class TreningDAOImpl implements TreningDAO {
 
             Trening trening = treninzi.get(id);
             if (trening == null) {
-                trening = new Trening(id, naziv, kratakOpis, slika,
-                        null, cena, vrstaTreninga, nivoTreninga,
+                trening = new Trening(id, naziv, kratakOpis,
+                		cena, vrstaTreninga, nivoTreninga,
                         trajanjeTreninga, prosecnaOcena, trener);
                 treninzi.put(trening.getId(), trening); // dodavanje u kolekciju
             }
@@ -60,8 +59,7 @@ public class TreningDAOImpl implements TreningDAO {
     @Override
     public List<Trening> findAll() {
         String sql =
-                "SELECT id, naziv, kratakOpis, slika, tipTreninga, cena, vrstaTreninga, nivoTreninga," +
-                        "trajanjeTreninga, prosecnaOcena, trener FROM treninzi";
+                "SELECT * from treninzi";
 
         TreningRowCallBackHandler rowCallbackHandler = new TreningRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler);
@@ -70,20 +68,20 @@ public class TreningDAOImpl implements TreningDAO {
     }
 
     @Override
-    public Trening findOneById(Long id) {
+    public Trening findOne(Long treningId) {
         String sql =
                 "SELECT * FROM treninzi WHERE id = ? ";
 
         TreningRowCallBackHandler rowCallbackHandler = new TreningRowCallBackHandler();
-        jdbcTemplate.query(sql, rowCallbackHandler, id);
+        jdbcTemplate.query(sql, rowCallbackHandler, treningId);
         return rowCallbackHandler.getTreninzi().get(0);
     }
 
     @Transactional
     @Override
     public void update(Trening trening) {
-        String sql = "UPDATE mojaTeretana.trening SET naziv = ?, kratakOpis = ?, slika = ?, tipTreninga = ?, cena = ?, vrstaTreninga = ?, nivoTreninga = ?, trajanjeTreninga = ?, prosecnaOcena = ?, trener = ? WHERE idTrening = ?";
-        jdbcTemplate.update(sql, trening.getNaziv(), trening.getKratakOpis(), trening.getSlika(), trening.getTipTreninga(), trening.getCena(), trening.getVrstaTreninga(), trening.getNivoTreninga(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
+        String sql = "UPDATE mojaTeretana.trening SET naziv = ?, kratakOpis = ?, tipTreninga = ?, cena = ?, vrstaTreninga = ?, nivoTreninga = ?, trajanjeTreninga = ?, prosecnaOcena = ?, trener = ? WHERE idTrening = ?";
+        jdbcTemplate.update(sql, trening.getNaziv(), trening.getKratakOpis(), trening.getTipTreninga(), trening.getCena(), trening.getVrstaTreninga(), trening.getNivoTreninga(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
 
         return;
     }
@@ -94,15 +92,14 @@ public class TreningDAOImpl implements TreningDAO {
 
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                String sql = "INSERT INTO treninzi (naziv, kratakOpis, slika, tipTreninga," +
+                String sql = "INSERT INTO treninzi (naziv, kratakOpis, tipTreninga," +
                         "cena, vrstaTreninga, nivoTreninga, trajanjeTreninga, prosecnaOcena, trener)" +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 int index = 1;
                 preparedStatement.setString(index++, trening.getNaziv());
                 preparedStatement.setString(index++, trening.getKratakOpis());
-                preparedStatement.setString(index++, trening.getSlika());
-                preparedStatement.setInt(index++, trening.getCena());
+                preparedStatement.setFloat(index++, trening.getCena());
                 preparedStatement.setString(index++, trening.getVrstaTreninga().toString());
                 preparedStatement.setString(index++, trening.getNivoTreninga().toString());
                 preparedStatement.setInt(index++, trening.getTrajanjeTreninga());

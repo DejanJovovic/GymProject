@@ -42,11 +42,12 @@ datumRodjenja VARCHAR(20) NOT NULL,
 adresa VARCHAR(20) NOT NULL,
 brojTelefona VARCHAR(20) NOT NULL,
 datumIVremeRegistracije VARCHAR(20) NOT NULL,
-uloga VARCHAR(20) NOT NULL,
+uloga VARCHAR(20) NOT NULL, 		
 PRIMARY KEY(id)
 );
 
 ALTER TABLE korisnici
+Add aktivan bit
 ADD tipKorisnika enum('ADMINISTRATOR', 'POLAZNIK')
 
 CREATE TABLE clanskeKarte (
@@ -77,6 +78,7 @@ PRIMARY KEY(id)
 );
 
 ALTER TABLE terminTreninga
+Add vreme bigint not null,
 ADD treningId bigint,
 Add salaId bigint,
 ADD foreign key(salaId) references sale(id),
@@ -96,6 +98,8 @@ FOREIGN KEY(treningId) REFERENCES treninzi(id)
 );
 
 ALTER TABLE komentari
+Add autor varchar(50),
+Add trening varchar(50)
 ADD statusKomentara enum('CEKANJE', 'ODOBREN', 'ODBIJEN')
 
 CREATE TABLE korpe(
@@ -106,7 +110,10 @@ PRIMARY KEY(id),
 FOREIGN KEY(korisnikId) REFERENCES korisnici(id),
 FOREIGN KEY(terminId) REFERENCES terminTreninga(id)
 );
+Alter table korpe
+Add cena bigint not null
 
+	
 	
 INSERT INTO korisnici (korisnickoIme, lozinka, email, ime, prezime, datumRodjenja, adresa, brojTelefona, datumIVremeRegistracije, uloga)
 VALUES ('admin', 'admin','admin@admin.rs','Marko','Markovic','27.05.2000.','neka tamo adresa','063857281','11.07.2022. 15:37','admin');

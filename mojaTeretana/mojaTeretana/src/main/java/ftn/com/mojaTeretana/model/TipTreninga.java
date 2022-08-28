@@ -8,15 +8,6 @@ public class TipTreninga {
     private String ime;
     private String opis;
 
-
-    @Override
-    public String toString() {
-        return "TipTreninga{" +
-                "ime='" + ime + '\'' +
-                ", opis='" + opis + '\'' +
-                '}';
-    }
-
     public TipTreninga() {
     }
     

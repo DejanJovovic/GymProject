@@ -15,7 +15,7 @@ public interface ClanskaKartaDAO {
 	
 	List<ClanskaKarta> findByStatus(EStatusClanskeKarte status);
 	
-	int update(ClanskaKarta clanskaKarta);
+	public int update(ClanskaKarta clanskaKarta);
 	int delete(Long id);
 	int odobrena(Long id);
 	

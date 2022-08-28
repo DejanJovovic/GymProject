@@ -7,16 +7,16 @@ import java.util.List;
 
 public interface KomentarDAO {
 
-    List<Komentar> FindAllById(Long id);
+    List<Komentar> findAllById(Long id);
 
-    List<Komentar> FindAll();
+    List<Komentar> findAll();
 
     void update(Komentar komentar);
     int save(Komentar komentar);
     int delete(Long id);
     int odobreno(Long id);
 
-    Komentar FindOneById(Long id);
+    Komentar findOne(Long id);
     
     
     List<Komentar> findAllByTreningId(Long treningId);

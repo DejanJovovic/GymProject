@@ -13,14 +13,10 @@ public class Komentar {
     private EStatusKomentara statusKomentara;
     private boolean anoniman;
 
-    public Komentar() {
-    	
-    }
     
 
     public Komentar(Long id1, String tekstKomentara1, int ocena1, LocalDate datum1, Korisnik autor, Trening trening1,
 			EStatusKomentara statusKomentara1, boolean anoniman1) {
-		super();
 		this.id = id1;
 		this.tekstKomentara = tekstKomentara1;
 		this.ocena = ocena1;
@@ -33,7 +29,6 @@ public class Komentar {
     
     public Komentar(String tekstKomentara1, int ocena1, LocalDate datum1, Korisnik autor, Trening trening1,
 			EStatusKomentara statusKomentara1, boolean anoniman1) {
-		super();
 		this.tekstKomentara = tekstKomentara1;
 		this.ocena = ocena1;
 		this.datum = datum1;
@@ -43,33 +38,17 @@ public class Komentar {
 		this.anoniman = anoniman1;
 	}
     
-    
-	public Komentar(String tekstKomentara2, int ocena2, LocalDate datum2, EStatusKomentara statusKomentara2,
-			Korisnik ulogovan, Trening trening2, boolean anoniman2) {
-		this.tekstKomentara = tekstKomentara2;
-		this.ocena = ocena2;
-		this.datum = datum2;
-		this.statusKomentara = statusKomentara2;
-		this.trening = trening2;
-		this.anoniman = anoniman2;
-		
-	}
-
-
-	@Override
-    public String toString() {
-        return "Komentar{" +
-                "id=" + id +
-                ", tekstKomentara='" + tekstKomentara + '\'' +
-                ", ocena=" + ocena +
-                ", datumPostavljanja='" + datum + '\'' +
-                ", autor=" + autor +
-                ", trening=" + trening +
-                ", status='" + statusKomentara + '\'' +
-                ", anoniman=" + anoniman +
-                '}';
+    public Komentar(Long id, Korisnik autor) {
+    	this.id = id;
+    	this.autor = autor;
     }
+	
 
+    @Override
+	public String toString() {
+		return "Komentar [id=" + id + ", tekstKomentara=" + tekstKomentara + ", ocena=" + ocena + ", datum=" + datum
+				+ ", statusKomentara=" + statusKomentara + ", autor=" + autor + ", trening=" + trening + ", anoniman=" + anoniman + "]";
+	}
 
 	public Long getId() {
 		return id;

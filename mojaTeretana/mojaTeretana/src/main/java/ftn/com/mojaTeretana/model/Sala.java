@@ -2,7 +2,6 @@ package ftn.com.mojaTeretana.model;
 
 public class Sala {
 	private Long id;
-    private String oznakaSale;
     private int kapacitet;
 
     
@@ -10,25 +9,20 @@ public class Sala {
     	
     }
     
-    public Sala(Long id, int kapacitet, String oznakaSale) {
+    public Sala(Long id) {
+    	this.id = id;
+    }
+    
+    public Sala(Long id, int kapacitet) {
     	this.id = id;
     	this.kapacitet = kapacitet;
-    	this.oznakaSale = oznakaSale;
     	
     }
     
     public Sala(int kapacitet) {
     	this.kapacitet = kapacitet;
     }
-    
-	@Override
-    public String toString() {
-        return "Sala{" +
-        		"id=" + id +
-                "oznakaSale='" + oznakaSale + '\'' +
-                ", kapacitet=" + kapacitet +
-                '}';
-    }
+   
    
 
 	public Long getId() {
@@ -39,13 +33,6 @@ public class Sala {
 		this.id = id;
 	}
 
-
-    public String getOznakaSale() {
-        return oznakaSale;
-    }
-    public void setOznakaSale(String oznakaSale) {
-        this.oznakaSale = oznakaSale;
-    }
     public int getKapacitet() {
         return kapacitet;
     }

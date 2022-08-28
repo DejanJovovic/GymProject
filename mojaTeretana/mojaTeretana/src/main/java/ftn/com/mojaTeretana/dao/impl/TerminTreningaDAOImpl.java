@@ -42,10 +42,10 @@ public class TerminTreningaDAOImpl implements TerminTreningaDAO{
 		public void processRow(ResultSet resultSet) throws SQLException {
 			int index = 1;
 			Long id = resultSet.getLong(index++);
-			Long treningId = resultSet.getLong(index++);
-			Trening trening = treningDAO.findOneById(treningId);
-			Long salaId = resultSet.getLong(index++);
-			Sala sala = salaService.findOneById(salaId);
+			Long idTreninga = resultSet.getLong(index++);
+			Trening trening = treningDAO.findOne(idTreninga);
+			Long idSala = resultSet.getLong(index++);
+			Sala sala = salaService.findOneById(idSala);
 			LocalDateTime datumTermina = resultSet.getTimestamp(index++).toLocalDateTime();
 			TerminTreninga termin = termini.get(id);
 			if(termin == null) {
