@@ -6,10 +6,16 @@
 </script>
 		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
 		<title>Korisnik profil</title>     
-		<link rel="stylesheet"  type="text/css"  href="css/Tabela.css"/>     
-	 	<link rel="stylesheet"  type="text/css" href="css/Meni.css"/>   
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+	 	<link rel="stylesheet"  type="text/css"  href="css/home.css"/>
 	 </head>     
 	 <body>   
+	 
+	 <a href="index.html"><button class="btn povratak">Back</button></a>
+	<img src="/img/background.jpg">
+	 
+	 
 	 <li><a href="korisnik/profil" th:text="#{profil}"></a></li>  
 	 <li><a href="korisnik/korpa" th:text="#{korpa}"></a></li>  
 	 <li><a href="korisnik/clanskaKarta" th:text="#{clanskaKarta}"></a></li> 

@@ -42,7 +42,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
             String datumRodjenja = resultSet.getString(index++);
             String adresa = resultSet.getString(index++);
             String brojTelefona = resultSet.getString(index++);
-            LocalDate datumIVremeRegistracije = resultSet.getTimestamp(index++).toLocalDateTime().toLocalDate();
+            String datumIVremeRegistracije = resultSet.getString(index++);;
             ETipKorisnika tipKorisnika = ETipKorisnika.valueOf(resultSet.getString(index++));
             boolean aktivan = resultSet.getBoolean(index++);
             
@@ -122,7 +122,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
                 preparedStatement.setString(index++, korisnik.getDatumRodjenja());
                 preparedStatement.setString(index++, korisnik.getAdresa());
                 preparedStatement.setString(index++, korisnik.getBrojTelefona());
-                preparedStatement.setTimestamp(index++, Timestamp.valueOf(korisnik.getDatumIVremeRegistracije().atStartOfDay()));
+                preparedStatement.setString(index++, korisnik.getDatumIVremeRegistracije());
                 preparedStatement.setString(index++, korisnik.getTipKorisnika().toString());
                 return preparedStatement;
             }

@@ -4,10 +4,15 @@
 		<meta charset="UTF-8">     
 		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
 		<title>Profil</title>     
-		<link rel="stylesheet"  type="text/css"  href="css/Tabela.css"/>     
-	 	<link rel="stylesheet"  type="text/css" href="css/Meni.css"/>   
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+	 	<link rel="stylesheet"  type="text/css" href="css/home.css"/> 
 	 </head> 
 <body>
+
+	<a href="index.html"><button class="btn povratak">Back</button></a>
+	<img src="/img/background.jpg">
+
 	<form method="post" action="admin/edit">
  		<input type="hidden" name="id" th:value="${korisnik.id}"/>
 		<table class="forma">

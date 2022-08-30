@@ -5,11 +5,15 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
 </script>
 		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
-		<title>Treninzi</title>     
-		<link rel="stylesheet"  type="text/css"  href="css/Tabela.css"/>     
-	 	<link rel="stylesheet"  type="text/css" href="css/Meni.css"/>   
+		<title>Admin stranica</title> 
+		<link rel="stylesheet"  type="text/css"  href="css/home.css"/>    
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head>     
 	 <body>   
+	 <a href="index.html"><button class="btn povratak">Back</button></a>
+	<img src="/img/background.jpg">
+	
 	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
 	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
 	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
@@ -20,7 +24,7 @@
 	 			<h1 th:text="#{treninzi}"></h1></caption>     
 	 			<tr>      
 	 			    <th th:text="#{nazivTreninga}"></th> 
-	 				<th th:text="#{opisTreninga}"></th>     
+	 				<th th:text="#{kratakOpisTreninga}"></th>     
 	 				<th th:text="#{cenaTreninga}"></th>  
 	 				<th th:text="#{trener}"></th> 
 	 				<th th:text="#{vrstaTreninga}"></th> 
@@ -31,7 +35,7 @@
 	 			</tr>
 	 			<tr th:each="itTrening, status: ${treninzi}">  
 	 			    <td ><a th:href="|admin/detailsT?id=${itTrening.id}|" th:text="${itTrening.naziv}"></td>    
-	 				<td th:text="${itTrening.opis}"></td>    
+	 				<td th:text="${itTrening.kratakOpis}"></td>    
 	 				<td th:text="${itTrening.cena}"></td>
 	 				<td th:text="${itTrening.trener}"></td>   
 	 				<td th:text="${itTrening.vrstaTreninga}"></td>   

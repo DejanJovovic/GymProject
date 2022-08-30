@@ -75,10 +75,9 @@ public class KorisnikController implements ServletContextAware{
 	@RequestParam(required = true) String datumRodjenja,
 	@RequestParam(required = true) String adresa,
 	@RequestParam(required = true) String brojTelefona,
+	@RequestParam(required = true) String datumIVremeRegistracije,
 	HttpSession session, HttpServletResponse response) throws IOException {
 		ETipKorisnika tipKorisnika = ETipKorisnika.POLAZNIK;
-		
-		LocalDate datumIVremeRegistracije = LocalDate.now();
 		
 		Korisnik korisnik = new Korisnik(korisnickoIme, lozinka,email, ime, prezime, datumRodjenja, adresa, 
 				brojTelefona,datumIVremeRegistracije, tipKorisnika);
@@ -90,7 +89,7 @@ public class KorisnikController implements ServletContextAware{
 	
 	@GetMapping(value = "/login")
 	public void getLogin(
-	@RequestParam(required = false) String korisnickoIme,
+	@RequestParam(required = false) String email,
 	@RequestParam(required = false) String lozinka,
 	HttpSession session, HttpServletResponse response) throws IOException {
 		
@@ -160,11 +159,11 @@ public class KorisnikController implements ServletContextAware{
 		}
 		if(korisnik.getTipKorisnika().equals(ETipKorisnika.ADMINISTRATOR)) {
 			session.setAttribute(KORISNIK_KEY, korisnik);
-			response.sendRedirect(bURL + "admin");
+			response.sendRedirect(bURL + "/admin");
 		}
 		else if(korisnik.getTipKorisnika().equals(ETipKorisnika.POLAZNIK) && korisnik.isAktivan() == true) {
 			session.setAttribute(KORISNIK_KEY, korisnik);
-			response.sendRedirect(bURL + "korisnik");
+			response.sendRedirect(bURL + "/korisnik");
 		}
 		else {
 			System.out.println("Korisnik je blokiran");

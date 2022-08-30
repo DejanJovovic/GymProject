@@ -13,7 +13,7 @@ public class Korisnik {
     private String datumRodjenja;
     private String adresa;
     private String brojTelefona;
-    private LocalDate datumIVremeRegistracije;
+    private String datumIVremeRegistracije;
     private ETipKorisnika tipKorisnika;
     private boolean aktivan;
     
@@ -35,7 +35,7 @@ public class Korisnik {
 
     public Korisnik(String korisnickoIme1, String lozinka1, String email1, String ime1,
                     String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
-                    LocalDate datumIVremeRegistracije1, ETipKorisnika tipKorisnika) {
+                    String datumIVremeRegistracije1, ETipKorisnika tipKorisnika) {
         this.korisnickoIme = korisnickoIme1;
         this.lozinka = lozinka1;
         this.email = email1;
@@ -45,11 +45,12 @@ public class Korisnik {
         this.adresa = adresa1;
         this.brojTelefona = brojTelefona1;
         this.datumIVremeRegistracije = datumIVremeRegistracije1;
+        this.tipKorisnika = tipKorisnika;
     }
 
     public Korisnik(Long id1, String korisnickoIme1, String lozinka1, String email1, String ime1,
                     String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
-                    LocalDate datumIVremeRegistracije1 , ETipKorisnika tipKorisnika1, boolean aktivan) {
+                    String datumIVremeRegistracije1 , ETipKorisnika tipKorisnika1, boolean aktivan) {
         this.id = id1;
         this.korisnickoIme = korisnickoIme1;
         this.lozinka = lozinka1;
@@ -75,7 +76,7 @@ public class Korisnik {
 
     public Korisnik(Long idKorisnika, String korisnickoIme1, String lozinka1, String email1, String ime1,
                     String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
-                    LocalDate datumIVremeRegistracije1, ETipKorisnika tipKorisnika) {
+                    String datumIVremeRegistracije1, ETipKorisnika tipKorisnika) {
         this.id = idKorisnika;
     	this.korisnickoIme = korisnickoIme1;
         this.lozinka = lozinka1;
@@ -92,7 +93,6 @@ public class Korisnik {
     	this.korisnickoIme = anoniman;
     }
     
-
 
 	@Override
 	public String toString() {
@@ -156,11 +156,11 @@ public class Korisnik {
         this.brojTelefona = brojTelefona;
     }
 
-    public LocalDate getDatumIVremeRegistracije() {
+    public String getDatumIVremeRegistracije() {
 		return datumIVremeRegistracije;
 	}
 
-	public void setDatumIVremeRegistracije(LocalDate datumIVremeRegistracije) {
+	public void setDatumIVremeRegistracije(String datumIVremeRegistracije) {
 		this.datumIVremeRegistracije = datumIVremeRegistracije;
 	}
 

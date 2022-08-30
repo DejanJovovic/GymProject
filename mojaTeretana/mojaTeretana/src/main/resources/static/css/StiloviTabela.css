@@ -17,13 +17,20 @@ td.broj {
 
 th {
 	color: white;
-	background-color: pink;
+	background-color: DodgerBlue;
 }
 
 tr:nth-child(even) {
-	background-color: pink;
+	background-color: LightGray;
 }
 
 input[type="search"] {
 	width: 100%;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
 }

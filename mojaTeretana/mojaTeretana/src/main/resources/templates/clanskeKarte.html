@@ -3,11 +3,15 @@
 	<head>     
 		<meta charset="UTF-8">     
 		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
-		<title>Treninzi</title>     
-		<link rel="stylesheet"  type="text/css"  href="css/Tabela.css"/>     
-	 	<link rel="stylesheet"  type="text/css" href="css/Meni.css"/>   
+		<title>Clanske karte stranica</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/home.css"/>    
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head>     
-	 <body>   
+	 <body>  
+	 <a href="index.html"><button class="btn povratak">Back</button></a>
+	<img src="/img/background.jpg">
+	 
 	 <li><a href="admin/profil"  th:text="#{profil}"></a></li>
 	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
 	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
