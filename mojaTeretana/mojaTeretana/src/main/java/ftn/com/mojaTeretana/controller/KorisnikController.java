@@ -1,8 +1,10 @@
 package ftn.com.mojaTeretana.controller;
 
+
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
+
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -75,9 +77,9 @@ public class KorisnikController implements ServletContextAware{
 	@RequestParam(required = true) String datumRodjenja,
 	@RequestParam(required = true) String adresa,
 	@RequestParam(required = true) String brojTelefona,
-	@RequestParam(required = true) String datumIVremeRegistracije,
 	HttpSession session, HttpServletResponse response) throws IOException {
 		ETipKorisnika tipKorisnika = ETipKorisnika.POLAZNIK;
+		String datumIVremeRegistracije = new String("11.07.2022, 15:39");
 		
 		Korisnik korisnik = new Korisnik(korisnickoIme, lozinka,email, ime, prezime, datumRodjenja, adresa, 
 				brojTelefona,datumIVremeRegistracije, tipKorisnika);
@@ -95,6 +97,8 @@ public class KorisnikController implements ServletContextAware{
 		
 	}
 	
+	
+	
 	@PostMapping(value = "/login")
 	public void postLogin(
 	@RequestParam(required = false) String email,
@@ -104,6 +108,16 @@ public class KorisnikController implements ServletContextAware{
 		String greska = "";
 		if(korisnik == null) 
 			greska = "Kredencijali nisu ispravni! <br/>";
+		if(korisnik != null) {
+			if(korisnik.getUloga().equals("admin")) {
+				session.setAttribute(KORISNIK_KEY, korisnik);
+				response.sendRedirect(bURL + "admin");
+			}
+			else if(korisnik.getUloga().equals("clanTeretane")) {
+				session.setAttribute(KORISNIK_KEY, korisnik);
+				response.sendRedirect(bURL + "korisnik");
+			}
+		}
 	
 		if(!greska.equals("")) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -159,11 +173,11 @@ public class KorisnikController implements ServletContextAware{
 		}
 		if(korisnik.getTipKorisnika().equals(ETipKorisnika.ADMINISTRATOR)) {
 			session.setAttribute(KORISNIK_KEY, korisnik);
-			response.sendRedirect(bURL + "/admin");
+			response.sendRedirect(bURL + "admin");
 		}
-		else if(korisnik.getTipKorisnika().equals(ETipKorisnika.POLAZNIK) && korisnik.isAktivan() == true) {
+		else if(korisnik.getTipKorisnika().equals(ETipKorisnika.POLAZNIK)) {
 			session.setAttribute(KORISNIK_KEY, korisnik);
-			response.sendRedirect(bURL + "/korisnik");
+			response.sendRedirect(bURL + "korisnik");
 		}
 		else {
 			System.out.println("Korisnik je blokiran");

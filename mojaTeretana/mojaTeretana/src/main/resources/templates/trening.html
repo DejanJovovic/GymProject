@@ -26,7 +26,9 @@
             <h1 th:text="#{infoOTreningu}"></h1></caption>   
  			<tr th:each="itTrening, status: ${trening}">
  			<th th:text="#{nazivTreninga}"></th>
- 			<td th:text="${itTrening.naziv}" name="naziv"/></td></tr>    
+ 			<td th:text="${itTrening.naziv}" name="naziv"/></td></tr> 
+ 			<th th:text="#{slika}"></th>
+ 			<td th:text="${itTrening.slika}" name="slika"/></td></tr>    
  			<tr th:each="itTrening, status: ${trening}">
  			<th th:text="#{kratakOpis}"></th><td th:text="${itTrening.kratakOpis}" name="kratakOpis"></td></tr>   
  			<tr th:each="itTrening, status: ${trening}">

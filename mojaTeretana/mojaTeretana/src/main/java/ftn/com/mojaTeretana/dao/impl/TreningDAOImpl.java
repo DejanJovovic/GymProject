@@ -36,9 +36,11 @@ public class TreningDAOImpl implements TreningDAO {
             Long id = resultSet.getLong(index++);
             String naziv = resultSet.getString(index++);
             String kratakOpis = resultSet.getString(index++);
-            Integer cena = resultSet.getInt(index++);
-            EVrstaTreninga vrstaTreninga = EVrstaTreninga.valueOf(resultSet.getString(index++));
-            ENivoTreninga nivoTreninga = ENivoTreninga.valueOf(resultSet.getString(index++));
+            Float cena = resultSet.getFloat(index++);
+            String vrsta = resultSet.getString(index++);
+            String nivo = resultSet.getString(index++);
+            EVrstaTreninga vrstaTreninga = EVrstaTreninga.valueOf(vrsta);
+            ENivoTreninga nivoTreninga = ENivoTreninga.valueOf(nivo);
             Integer trajanjeTreninga = resultSet.getInt(index++);
             Integer prosecnaOcena = resultSet.getInt(index++);
             String trener = resultSet.getString(index++);
@@ -81,7 +83,7 @@ public class TreningDAOImpl implements TreningDAO {
     @Override
     public void update(Trening trening) {
         String sql = "UPDATE mojaTeretana.trening SET naziv = ?, kratakOpis = ?, tipTreninga = ?, cena = ?, vrstaTreninga = ?, nivoTreninga = ?, trajanjeTreninga = ?, prosecnaOcena = ?, trener = ? WHERE idTrening = ?";
-        jdbcTemplate.update(sql, trening.getNaziv(), trening.getKratakOpis(), trening.getTipTreninga(), trening.getCena(), trening.getVrstaTreninga(), trening.getNivoTreninga(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
+        jdbcTemplate.update(sql, trening.getNaziv(), trening.getKratakOpis(), trening.getTipTreninga(), trening.getCena(), trening.getVrstaTreninga().toString(), trening.getNivoTreninga().toString(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
 
         return;
     }

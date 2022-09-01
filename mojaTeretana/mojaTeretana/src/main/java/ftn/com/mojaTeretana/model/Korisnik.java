@@ -1,7 +1,5 @@
 package ftn.com.mojaTeretana.model;
 
-import java.time.LocalDate;
-
 public class Korisnik {
 
     private Long id;
@@ -14,7 +12,8 @@ public class Korisnik {
     private String adresa;
     private String brojTelefona;
     private String datumIVremeRegistracije;
-    private ETipKorisnika tipKorisnika;
+    private String uloga;
+	private ETipKorisnika tipKorisnika;
     private boolean aktivan;
     
     
@@ -50,7 +49,7 @@ public class Korisnik {
 
     public Korisnik(Long id1, String korisnickoIme1, String lozinka1, String email1, String ime1,
                     String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
-                    String datumIVremeRegistracije1 , ETipKorisnika tipKorisnika1, boolean aktivan) {
+                    String datumIVremeRegistracije1 , ETipKorisnika tipKorisnika1, boolean aktivan, String uloga1) {
         this.id = id1;
         this.korisnickoIme = korisnickoIme1;
         this.lozinka = lozinka1;
@@ -63,6 +62,7 @@ public class Korisnik {
         this.datumIVremeRegistracije = datumIVremeRegistracije1;
         this.tipKorisnika = tipKorisnika1;
         this.aktivan = aktivan;
+        this.uloga = uloga1;
     }
     
     public Korisnik(long idKorisnika, String korisnickoIme) {
@@ -184,6 +184,16 @@ public class Korisnik {
 	public void setAktivan(boolean aktivan) {
 		this.aktivan = aktivan;
 	}
+	
+	
+	  public String getUloga() {
+			return uloga;
+		}
+
+
+		public void setUloga(String uloga) {
+			this.uloga = uloga;
+		}
 
 	
 }

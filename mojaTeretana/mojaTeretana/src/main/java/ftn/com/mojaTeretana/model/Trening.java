@@ -8,7 +8,7 @@ public class Trening {
     private String kratakOpis;
     private TipTreninga tipTreninga;
     private float cena;
-    private EVrstaTreninga vrstaTreninga;
+	private EVrstaTreninga vrstaTreninga;
     private ENivoTreninga nivoTreninga;
     private int trajanjeTreninga;
     private int prosecnaOcena;
@@ -25,6 +25,8 @@ public class Trening {
         this.trajanjeTreninga = trajanjeTreninga2;
         this.trener = trener2;
         this.prosecnaOcena = prosecnaOcena2;
+       
+        
     }
     public Trening(Long id1, String naziv1, String kratakOpis1,
     				float cena1, EVrstaTreninga vrstaTreninga1, ENivoTreninga nivoTreninga1,
@@ -38,6 +40,7 @@ public class Trening {
         this.trajanjeTreninga = trajanjeTreninga1;
         this.prosecnaOcena = prosecnaOcena1;
         this.trener = trener;
+      
     }
     public Trening(String naziv1, String kratakOpis1,TipTreninga tipTreninga1,
                    float cena1, EVrstaTreninga vrstaTreninga1, ENivoTreninga nivoTreninga1,
@@ -141,6 +144,5 @@ public class Trening {
 		this.prosecnaOcena = prosecnaOcena;
 	}
 
-    
     
 }

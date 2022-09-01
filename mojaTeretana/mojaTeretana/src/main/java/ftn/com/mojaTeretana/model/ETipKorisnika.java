@@ -4,4 +4,8 @@ public enum ETipKorisnika {
 	ADMINISTRATOR,
 	POLAZNIK
 
+	
 }
+
+
+
