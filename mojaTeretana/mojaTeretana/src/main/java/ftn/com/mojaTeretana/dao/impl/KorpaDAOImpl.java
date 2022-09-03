@@ -41,8 +41,8 @@ public class KorpaDAOImpl implements KorpaDAO {
 			Long id = resultSet.getLong(index++);
 			Long idKorisnika = resultSet.getLong(index++);
 			Korisnik korisnik = korisnikDAO.findOneById(idKorisnika);
-			Long idTermina = resultSet.getLong(index++);
-			TerminTreninga termin = terminTreningaDAO.findOneById(idTermina);
+			Long terminId = resultSet.getLong(index++);
+			TerminTreninga termin = terminTreningaDAO.findOneById(terminId);
 			Korpa korpa = korpe.get(id);
 			if(korpa == null) {
 				korpa = new Korpa(id, korisnik, termin);

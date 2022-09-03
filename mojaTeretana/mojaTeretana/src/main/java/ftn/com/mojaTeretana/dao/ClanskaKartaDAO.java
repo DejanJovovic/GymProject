@@ -12,15 +12,9 @@ public interface ClanskaKartaDAO {
 	
 	
 	List<ClanskaKarta> findAll();
-	
-	List<ClanskaKarta> findByStatus(EStatusClanskeKarte status);
-	
-	public int update(ClanskaKarta clanskaKarta);
+	int update(ClanskaKarta clanskaKarta);
 	int delete(Long id);
-	int odobrena(Long id);
-	
-	
-	ClanskaKarta findByKorisnikIdAndStatus(Long korisnikId, EStatusClanskeKarte status);
+	int odobri(Long id);
 	
 	
 	ClanskaKarta findOneById(Long id);

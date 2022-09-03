@@ -10,18 +10,18 @@
 	<title>Dodaj termin treninga</title>
 </head>
 <div>
-<a href="index.html"><button class="btn povratak">Back</button></a>
+<a href="add"><button class="btn povratak">Back</button></a>
 	<img src="/img/background.jpg">
 
 
 <form method="post" action="addTerminTreninga">
 			<table class="forma">
 			
-				 <li><a href="admin/profil" th:text="#{profil}"></a></li>
-	             <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
-	             <li><a href="admin/sale" th:text="#{sale}"></a></li> 
-	             <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
-	             <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
+				 <li><a href="profil" th:text="#{profil}"></a></li>
+	             <li><a href="korisnici" th:text="#{korisnici}"></a></li>  
+	             <li><a href="sale" th:text="#{sale}"></a></li> 
+	             <li><a href="komentari" th:text="#{komentari}"></a></li>
+	             <li><a href="clanskeKarte" th:text="#{clanskeKarte}"></a></li>
 				<h1 th:text="#{termini}"></h1></caption>  
 				
 	   
@@ -37,12 +37,12 @@
 					 <th th:text="#{sala}"></th> 
 					<td>
 						<select name="salaId">
-							<option th:each="itSala: ${sala}" th:value="${itSala.id}" th:text=" 'Oznaka: '+${itSala.id}+' Kapacitet: '+${itSala.kapacitet}"></option>
+							<option th:each="itSala: ${sala}" th:value="${itSala.id}" th:text=" ' Kapacitet: '+${itSala.kapacitet}"></option>
 						</select>	
 					</td>
 				</tr>
 				<tr>
-				<th th:text="#{datumIVremeRegistracije}"></th> 
+				<th th:text="#{datumIVremeTermina}"></th> 
 
 					<td>
 						<input type="date" th:value="2020-04-01" name="datum"/>&nbsp;
@@ -54,8 +54,8 @@
 			</table>
 		</form>
 	 			 	<ul>     
-	 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
-	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 		<li><a href="add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="logout" th:text="#{logOut}"></a></li>   
 	 	</ul>
 	</div>
 </body>

@@ -108,12 +108,12 @@ public class PolaznikController implements ServletContextAware{
 	@PostMapping(value = "/profil")
 	public void editProfil(
 	@ModelAttribute Korisnik profilEdit, 
-	@RequestParam(name ="ponovljenaLozinka") String ponovljenaLozinka, HttpServletResponse response) throws IOException {
+	HttpServletResponse response) throws IOException {
 		Korisnik korisnik = korisnikService.findOneById(profilEdit.getId());
 		if(korisnik != null) {
 			if(profilEdit.getKorisnickoIme() != null && !profilEdit.getKorisnickoIme().trim().equals(""))
 				korisnik.setKorisnickoIme(profilEdit.getKorisnickoIme());
-			if(profilEdit.getLozinka() != null && profilEdit.getLozinka().equals(ponovljenaLozinka))
+			if(profilEdit.getLozinka() != null && profilEdit.getLozinka().equals(""))
 				korisnik.setLozinka(profilEdit.getLozinka());
 			if(profilEdit.getEmail() != null && !profilEdit.getEmail().trim().equals(""))
 				korisnik.setEmail(profilEdit.getEmail());
@@ -159,11 +159,9 @@ public class PolaznikController implements ServletContextAware{
 	public ModelAndView dodajZeljeno(HttpSession session) {
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);
-		List<Korpa> korpa = korpaService.findKorpa(ulogovan.getId());
-		Float sum = treningService.sum(ulogovan.getId());
+		List<Korpa> korpa = korpaService.findKorpa(null);
 		ModelAndView rezultati = new ModelAndView("korpa");
 		rezultati.addObject("terminTreninga", zaKorpu);
-		rezultati.addObject("sum", sum);
 		rezultati.addObject("korpa", korpa);
 		
 		return rezultati;		
@@ -257,10 +255,11 @@ public class PolaznikController implements ServletContextAware{
 	@RequestParam Long id,
 	@RequestParam(required = false) boolean anoniman, HttpServletResponse response, HttpSession session)  throws IOException{
 		LocalDate datum = LocalDate.now();
+		Korisnik autor = new Korisnik("Dejan");
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		EStatusKomentara statusKomentara = EStatusKomentara.CEKANJE;
 		Trening trening = treningService.findOne(id);
-		Komentar komentar = new Komentar(tekstKomentara, ocena, datum,ulogovan,trening, statusKomentara, anoniman);
+		Komentar komentar = new Komentar(id, tekstKomentara, ocena, datum,ulogovan,trening, statusKomentara, anoniman, autor);
 		if(anoniman == true) {
 			Long idAnoniman = (long) 5;
 			Korisnik anonimanKorisnik = korisnikService.findOneById(idAnoniman);

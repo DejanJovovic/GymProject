@@ -44,9 +44,10 @@ public class DatabaseClanskaKartaServiceImpl implements ClanskaKartaService{
 	public ClanskaKarta odobri(Long id) {
 		ClanskaKarta clanskaKarta = clanskaKartaDAO.findOneById(id);
 		if(clanskaKarta != null) {
-			clanskaKartaDAO.odobrena(id);
+			clanskaKartaDAO.odobri(id);
 		}
 		return clanskaKarta;
+		
 	}
 
 	@Override
@@ -56,6 +57,7 @@ public class DatabaseClanskaKartaServiceImpl implements ClanskaKartaService{
 
 	@Override
 	public List<ClanskaKarta> findAll() {
-		return clanskaKartaDAO.findAll();	}
+		return clanskaKartaDAO.findAll();	
+	}
 
 }

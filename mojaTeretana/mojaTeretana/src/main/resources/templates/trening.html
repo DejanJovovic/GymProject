@@ -12,7 +12,7 @@
 	 </head> 
 <body>
 
-<a href="index.html"><button class="btn povratak">Back</button></a>
+<a href="korisnik"><button class="btn povratak">Back</button></a>
 	<img src="/img/background.jpg">
 
 
@@ -25,10 +25,9 @@
  		<table class = "forma">   
             <h1 th:text="#{infoOTreningu}"></h1></caption>   
  			<tr th:each="itTrening, status: ${trening}">
+ 			<td ><a th:href="|korisnik/details?id=${itTrening.id}|" th:text="${itTrening.naziv}"></td>  
  			<th th:text="#{nazivTreninga}"></th>
- 			<td th:text="${itTrening.naziv}" name="naziv"/></td></tr> 
- 			<th th:text="#{slika}"></th>
- 			<td th:text="${itTrening.slika}" name="slika"/></td></tr>    
+ 			<td th:text="${itTrening.naziv}" name="naziv"/></td></tr>    
  			<tr th:each="itTrening, status: ${trening}">
  			<th th:text="#{kratakOpis}"></th><td th:text="${itTrening.kratakOpis}" name="kratakOpis"></td></tr>   
  			<tr th:each="itTrening, status: ${trening}">
@@ -109,7 +108,7 @@
 	 		</table>
  </div>
  	<div>
-        <form method="post" action="korisnik/dodajKomentar">
+        <form method="post" action="korisnik/add/Komentar">
 			
             <h1 th:text="#{postaviKomentar}"></h1></caption>   
 				

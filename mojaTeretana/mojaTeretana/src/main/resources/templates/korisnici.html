@@ -10,7 +10,7 @@
 	 </head>     
 	 <body> 
 	 
-	 <a href="index.html"><button class="btn povratak">Back</button></a>
+	 <a href="admin"><button class="btn povratak">Back</button></a>
 	<img src="/img/background.jpg">
 	   
 	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
@@ -40,7 +40,7 @@
 	 				<td th:text="${itKorisnik.prezime}"></td>    
 	 				<td th:text="${itKorisnik.email}"></td>   
 	 				<td th:text="${itKorisnik.lozinka}"></td>   
-	 				<td th:text="${itKorisnik.datRodjenja}"></td>   
+	 				<td th:text="${itKorisnik.datumRodjenja}"></td>   
 	 				<td th:text="${itKorisnik.brojTelefona}"></td>   
 	 				<td th:text="${itKorisnik.datumIVremeRegistracije}"></td>  
 	 				<td th:text="${itKorisnik.tipKorisnika}"></td>  
@@ -49,7 +49,7 @@
 	 			</tr>
 	 		</table>
 	 	<ul>     
-	 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
 	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreninga}"></a></li>   
 	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
 	 	</ul>

@@ -2,6 +2,7 @@ package ftn.com.mojaTeretana.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -29,6 +30,7 @@ public class TerminTreningaDAOImpl implements TerminTreningaDAO{
 	@Autowired
 	private TreningDAO treningDAO;
 	
+	
 	@Autowired
 	private SalaService salaService;
 	
@@ -47,9 +49,10 @@ public class TerminTreningaDAOImpl implements TerminTreningaDAO{
 			Long idSala = resultSet.getLong(index++);
 			Sala sala = salaService.findOneById(idSala);
 			LocalDateTime datumTermina = resultSet.getTimestamp(index++).toLocalDateTime();
+			LocalDateTime vreme = resultSet.getTimestamp(index++).toLocalDateTime();
 			TerminTreninga termin = termini.get(id);
 			if(termin == null) {
-				termin = new TerminTreninga(id, trening, sala, datumTermina);
+				termin = new TerminTreninga(id, trening, sala, vreme, datumTermina);
 				termini.put(termin.getId(), termin);
 			}
 			
@@ -63,14 +66,14 @@ public class TerminTreningaDAOImpl implements TerminTreningaDAO{
 
 	@Override
 	public int save(TerminTreninga termin) {
-		String sql = "Insert into terminTreninga (treningId, salaId, datumTermina) Values(?, ?, ?)";
+		String sql = "Insert into termintreninga (treningId, salaId, datumTermina) Values(?, ?, ?)";
 		return jdbcTemplate.update(sql, termin.getTreningId().getId(), termin.getSalaId().getId(), termin.getDatumTermina());
 	}
 
 
 	@Override
 	public List<TerminTreninga> findAll(Long id) {
-		String sql = "Select * from terminTreninga where treningId = ?";
+		String sql = "Select * from termintreninga where treningId = ?";
 		TerminTreningaRowCallbackHandler rowCallbackHandler = new TerminTreningaRowCallbackHandler();
 		jdbcTemplate.query(sql, rowCallbackHandler, id);
 		return rowCallbackHandler.getTermini();
@@ -80,7 +83,7 @@ public class TerminTreningaDAOImpl implements TerminTreningaDAO{
 
 	@Override
 	public TerminTreninga findOneById(Long id) {
-		String sql = "Select * from terminTreninga where id = ?";
+		String sql = "Select * from termintreninga where id = ?";
 		TerminTreningaRowCallbackHandler rowCallbackHandler = new TerminTreningaRowCallbackHandler();
 		jdbcTemplate.query(sql, rowCallbackHandler, id);
 		return rowCallbackHandler.getTermini().get(0);
@@ -89,7 +92,7 @@ public class TerminTreningaDAOImpl implements TerminTreningaDAO{
 
 	@Override
 	public List<TerminTreninga> checkIfExists(Long id) {
-		String sql = "Select * from terminTreninga where salaId = ?";
+		String sql = "Select * from termintreninga where salaId = ?";
 		TerminTreningaRowCallbackHandler rowCallbackHandler = new TerminTreningaRowCallbackHandler();
 		jdbcTemplate.query(sql, rowCallbackHandler, id);
 		return rowCallbackHandler.getTermini();

@@ -1,5 +1,6 @@
 package ftn.com.mojaTeretana.model;
 
+
 import java.time.LocalDateTime;
 
 public class TerminTreninga {
@@ -9,20 +10,21 @@ public class TerminTreninga {
     private LocalDateTime datumTermina;
    
     
-    public TerminTreninga(Long id1, Trening treningId, Sala salaId, LocalDateTime datumTermina ) {
+    public TerminTreninga(Long id1, Trening treningId, Sala salaId, LocalDateTime vreme, LocalDateTime datumTermina ) {
     	this.id = id1;
     	this.treningId = treningId;
     	this.salaId = salaId;
+    	this.datumTermina = vreme;
     	this.datumTermina = datumTermina;
     	
     }
     
     
     
-    public TerminTreninga(Trening treningId, Sala salaId, LocalDateTime datumTermina ) {
+    public TerminTreninga(Trening treningId, Sala salaId, LocalDateTime vreme ) {
     	this.treningId = treningId;
     	this.salaId = salaId;
-    	this.datumTermina = datumTermina;
+    	this.datumTermina = vreme;
     	
     }
 

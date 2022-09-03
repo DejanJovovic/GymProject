@@ -17,6 +17,9 @@ trener varchar(255) NOT NULL,
 PRIMARY KEY(id)
 );
 
+alter table treninzi 
+drop tipTreninga
+
 Create table tipTreninga (
 id BIGINT AUTO_INCREMENT NOT NULL,
 ime VARCHAR(255) NOT NULL,
@@ -40,19 +43,21 @@ brojTelefona VARCHAR(20) NOT NULL,
 datumIVremeRegistracije VARCHAR(20) NOT NULL,
 uloga VARCHAR(20) NOT NULL,
 tipKorisnika enum('ADMINISTRATOR', 'POLAZNIK'),
-aktivan bit,		
+aktivan bit	,		
 PRIMARY KEY(id)
 );
+
 
 CREATE TABLE clanskeKarte (
 id BIGINT AUTO_INCREMENT NOT NULL,
 popust INT(50) NOT NULL,
 brojPoena INT(100) NOT NULL,
-status enum('CEKANJE', 'ODOBREN', 'ODBIJEN') NOT NULL,
+status enum('CEKANJE', 'ODOBREN', 'ODBIJEN'),
 korisnikId bigint,
 PRIMARY KEY(id),
 FOREIGN KEY(korisnikId) REFERENCES korisnici(id)
 );
+
 
 CREATE TABLE sale (
 id BIGINT AUTO_INCREMENT NOT NULL,
@@ -64,7 +69,8 @@ Create TABLE terminTreninga (
 id BIGINT AUTO_INCREMENT NOT NULL,
 sala VARCHAR(100) NOT NULL,
 trening VARCHAR(100) NOT NULL,
-datumTermina DATE NOT NULL,
+datumTermina date not null,
+vreme time not null,
 treningId bigint,
 salaId bigint,
 PRIMARY KEY(id),
@@ -72,14 +78,15 @@ foreign key(salaId) references sale(id),
 foreign keY(treningId) references treninzi(id)
 );
 
+
 CREATE TABLE komentari (
 id BIGINT AUTO_INCREMENT NOT NULL,
 tekstKomentara VARCHAR(300) NOT NULL,
-ocena INT(20),
+ ocena int(20) not null,
 datum DATE NOT NULL,
 anoniman BIT NOT NULL,
-autor varchar(50),
-trening varchar(50),
+autor varchar(50) not null,
+trening varchar(50) not null,
 statusKomentara enum('CEKANJE', 'ODOBREN', 'ODBIJEN') NOT NULL,
 korisnikId bigint,
 treningId bigint,
@@ -91,13 +98,13 @@ FOREIGN KEY(treningId) REFERENCES treninzi(id)
 CREATE TABLE korpe(
 id BIGINT AUTO_INCREMENT NOT NULL,
 korisnikId bigint,
-terminId bigint,
+terminId bigint not null,
 PRIMARY KEY(id),
 FOREIGN KEY(korisnikId) REFERENCES korisnici(id),
 FOREIGN KEY(terminId) REFERENCES terminTreninga(id)
 );
 
-	
+
 	
 	
 INSERT INTO korisnici (tipKorisnika,korisnickoIme, lozinka, email, ime, prezime, datumRodjenja, adresa, brojTelefona, datumIVremeRegistracije, uloga)
@@ -116,11 +123,11 @@ VALUES('Fitness sa Ivom','Iva','Trening fitness opis treninga','https://i.inside
 INSERT INTO treninzi (naziv, trener, kratakOpis, slika, tipTreninga, cena, vrstaTreninga, nivoTreninga, trajanjeTreninga, prosecnaOcena)
 VALUES('Fitness sa Milicom','Milica','Trening fitness opis treninga','https://i.imgur.com/iehRYNF.jpg','fitness',600,'POJEDINACNI','AMATERSKI',30,4.1);
 
-INSERT INTO clanskeKarte(popust, brojPoena) VALUES(10,3);
-INSERT INTO clanskeKarte(popust, brojPoena) VALUES(15,1);
-INSERT INTO clanskeKarte(popust, brojPoena) VALUES(20,5);
-INSERT INTO clanskeKarte(popust, brojPoena) VALUES(15,2);
-INSERT INTO clanskeKarte(popust, brojPoena) VALUES(10,7);
+INSERT INTO clanskeKarte(popust, brojPoena, status) VALUES(10,3, "ODBIJEN");
+INSERT INTO clanskeKarte(popust, brojPoena, status) VALUES(15,1, "ODBIJEN");
+INSERT INTO clanskeKarte(popust, brojPoena, status) VALUES(20,5, "ODOBREN");
+INSERT INTO clanskeKarte(popust, brojPoena, status) VALUES(15,2, "ODOBREN");
+INSERT INTO clanskeKarte(popust, brojPoena,status) VALUES(10,7, "ODOBREN");
 
 INSERT INTO sale( kapacitet) VALUES(30);
 INSERT INTO sale( kapacitet) VALUES(40);
@@ -128,8 +135,12 @@ INSERT INTO sale( kapacitet) VALUES(25);
 INSERT INTO sale(kapacitet) VALUES(50);
 INSERT INTO sale(kapacitet) VALUES(10);
 
-INSERT INTO terminTreninga(sala, trening, datumTermina) VALUES(2,2,'15.02.2022.');
+INSERT INTO terminTreninga(sala, trening, datumTermina) VALUES(2,2 ,'15.02.2022.');
 INSERT INTO terminTreninga(sala, trening, datumTermina) VALUES(1,3,'27.02.2022.');
 INSERT INTO terminTreninga(sala, trening, datumTermina) VALUES(2,3,'22.02.2022.');
 INSERT INTO terminTreninga(sala, trening, datumTermina) VALUES(5,2,'11.03.2022.');
 INSERT INTO terminTreninga(sala, trening, datumTermina) VALUES(4,1,'22.03.2022.');
+
+
+INSERT INTO komentari(tekstKomentara, ocena, datum, anoniman, trening, statusKomentara, autor)
+VALUES('test', 2, '15.02.2022.' , true, 'test', 'ODBIJEN', 1)

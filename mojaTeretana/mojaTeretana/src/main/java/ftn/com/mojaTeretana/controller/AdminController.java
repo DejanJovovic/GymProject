@@ -116,7 +116,7 @@ public class AdminController implements ServletContextAware{
 	@GetMapping(value = "/profil")
 	public ModelAndView profil(HttpSession session) {
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
-		Korisnik korisnik = korisnikService.findOneById(ulogovan.getId());
+		Korisnik korisnik = korisnikService.findOneById(null);
 		ModelAndView rezultati = new ModelAndView("profil");
 		rezultati.addObject("korisnik", korisnik);
 		
@@ -129,12 +129,12 @@ public class AdminController implements ServletContextAware{
 	@PostMapping(value = "/profil")
 	public void editProfil(
 	@ModelAttribute Korisnik profilEdit,
-	@RequestParam(name = "ponovljenaLozinka") String ponovljenaLozinka, HttpServletResponse response) throws IOException{
+	 HttpServletResponse response) throws IOException{
 		Korisnik korisnik = korisnikService.findOneById(profilEdit.getId());
 		if(korisnik != null) {
 			if(profilEdit.getKorisnickoIme() != null && !profilEdit.getKorisnickoIme().trim().equals(""))
 				korisnik.setKorisnickoIme(profilEdit.getKorisnickoIme());
-			if(profilEdit.getLozinka() != null && profilEdit.getLozinka().equals(ponovljenaLozinka))
+			if(profilEdit.getLozinka() != null && profilEdit.getLozinka().equals(""))
 				korisnik.setLozinka(profilEdit.getLozinka());
 			else korisnik.setLozinka(profilEdit.getLozinka());
 			
@@ -302,6 +302,8 @@ public class AdminController implements ServletContextAware{
 			System.out.println("Nije moguce obrisati salu zato sto vec postoji termin treninga za nju!");
 			return;
 		}
+		Sala obrisan = salaService.delete(id);	
+		response.sendRedirect(bURL + "admin");
 		
 	}
 	
@@ -330,6 +332,7 @@ public class AdminController implements ServletContextAware{
 		TerminTreninga terminTreninga = new TerminTreninga(trening, sala, datumIVremeTermina);
 		terminTreningaService.save(terminTreninga);
 		response.sendRedirect(bURL + "admin");
+		
 	}
 	
 	
@@ -343,7 +346,8 @@ public class AdminController implements ServletContextAware{
 	@RequestParam EVrstaTreninga vrstaTreninga,
 	@RequestParam ENivoTreninga nivoTreninga,
 	@RequestParam int trajanjeTreninga,
-	@RequestParam int prosecnaOcena, HttpServletResponse response) throws IOException{
+	@RequestParam int prosecnaOcena,
+	HttpServletResponse response) throws IOException{
 		Trening trening = new Trening(naziv, kratakOpis, cena, vrstaTreninga, nivoTreninga,trener,
 				trajanjeTreninga, prosecnaOcena);
 		Trening saved = treningService.save(trening);

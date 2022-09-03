@@ -24,12 +24,7 @@ public class ClanskaKarta {
     	this.brojPoena = brojPoena;
     	this.status = status;
     }
-    
-    
-    public ClanskaKarta() {
-    	
-    }
-    
+   
     
     public Long getId() {
 		return id;

@@ -3,50 +3,88 @@
 	<head>
 		<meta charset="UTF-8">
 		<base th:href="@{/}">
-		<title>Korisnicka Korpa</title>
+		<title>Korisnicka korpa</title>
 		<link rel="stylesheet" type="text/css" href="css/StiloviTabela.css"/>
 		<link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>
-		<link rel="stylesheet" type="text/css" href="css/home.css"/>
+		<link rel="stylesheet"  type="text/css"  href="css/home.css"/>  
+		
 	</head>
 	<body>
-	<a href="index.html"><button class="btn povratak">Back</button></a>
+	
+	<a href="korisnik"><button class="btn povratak">Back</button></a>
 	<img src="/img/background.jpg">
-	<img src="/img/korpa.jpg">
 	
 	
 	
 		<ul>
-		 <li><a href="admin/profil" th:text="#{profil}"></a></li>
-	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
-	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
-	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
-	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
+			 	 <li><a href="korisnik/profil" th:text="#{profil}"></a></li>  
+	             <li><a href="korisnik/korpa" th:text="#{korpa}"></a></li>  
+	             <li><a href="korisnik/clanskaKarta" th:text="#{clanskaKarta}"></a></li> 
+			 
 			</ul>
-				<table>
-	 			<h1 th:text="#{zakazaniTermini}"></h1>    
+		<table>
+	 			<h1 th:text="#{listaZelja}"></h1></caption>     
 			<tr>
-				<th th:text="#{korisnickoIme}"></th>
-				<th th:text="#{naziv}"></th>
+				<th th:text="#{nazivTreninga}"></th>
 				<th th:text="#{trener}"></th>
-				<th th:text="#{cena}"></th>
-				<th th:text="#{sala}"></th>
 				<th th:text="#{datumIVreme}"></th>
+				<th></th>
+			</tr>
+			
+			<tr th:each="itTermin, status: ${termin}">  
+ 				<td th:text="${itTermin.treningId.naziv}"></td>    
+ 				<td th:text="${itTermin.treningId.trener}"></td>    
+ 				<td th:text="${itTermin.datum}"></td>    
+ 				<td>
+					<form method="post" action="korisnik/korpa/ukloniIzKorpe">
+						<input type="hidden" name="terminId" th:value="${itTermin.id}">
+						<input type="submit" value="Ukloni iz korpe">
+					</form>
+				</td> 
+ 				<td>
+					<form method="post" action="korisnik/korpa/zakazi">
+						<input type="hidden" name="terminId" th:value="${itTermin.id}">
+						<input type="submit" value="Zakazi termin">
+					</form>
+				</td> 
+ 	
+		</tr>
+		</table>
+				<table>
+	 			<h1 th:text="#{zakazaniTreninzi}"></h1></caption>     
+			<tr>
+				<th th:text="#{nazivTreninga}"></th>
+				<th th:text="#{cenaTreninga}"></th>
+				<th th:text="#{datumIVreme}"></th>
+				<th></th>
 			</tr>
 			
 			<tr th:each="itKorpa, status: ${korpa}">  
-			<td th:text="${itKorpa.korisnikId.korisnickoIme}"></td>   
  				<td th:text="${itKorpa.terminId.treningId.naziv}"></td>    
- 				<td th:text="${itKorpa.terminId.treningId.trener}"></td>   
  				<td th:text="${itKorpa.terminId.treningId.cena}"></td>    
- 				<td th:text="${itKorpa.terminId.salaId.Id}"></td>   
- 				<td th:text="${#temporals.format(itKorpa.terminId.datum,'dd-MM-yyyy HH:mm')}"></td>  
+ 				<td th:text = "${#temporals.format(itKorpa.terminId.datum,'dd-MM-yyyy HH:mm')}"></td>
+  
+ 				<td>
+					<form method="post" action="korisnik/korpa/ukloniIzKorpe">
+						<input type="hidden" name="terminId" th:value="${itKorpa.id}">
+						<input type="hidden" name="termId" th:value="${itKorpa.terminId.id}">
+						<input type="submit" th:value="#{ukloniIzKorpe}">
+					</form>
+				</td> 
+		</tr>
+		</table>
+				</table>
+				<table>
+	 			
+			<tr>
+				<th th:text="#{UkupnaCena}"></th>
+			</tr>
+			
+			
+ 				<td th:text="${sum}"></td>     
 		</tr>
 		</table>
 	</body>
-	 			 	<ul>     
-	 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
-	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreninga}"></a></li>   
-	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
-	 	</ul>
+	 		<li><a href="korisnik/logout"  th:text="#{logOut}">Izloguj se</a></li>   
 	
 </html>

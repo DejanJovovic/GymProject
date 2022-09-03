@@ -27,6 +27,7 @@
  		<table class = "forma">   
             <h1 th:text="#{infoOTreningu}"></h1></caption>   
  			<tr th:each="itTrening, status: ${trening}">
+ 			<td ><a th:href="|admin/detaljiTreninga?id=${itTrening.id}|" th:text="${itTrening.naziv}"></td>  
  			<th th:text="#{nazivTreninga}"></th>
  			<td th:text="${itTrening.naziv}" name="naziv"/></td></tr>    
  			<tr th:each="itTrening, status: ${trening}">
@@ -89,7 +90,7 @@
  </div>
 	
 	 	<ul>     
-	 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
 	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreninga}"></a></li>   
 	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
 	 	</ul>

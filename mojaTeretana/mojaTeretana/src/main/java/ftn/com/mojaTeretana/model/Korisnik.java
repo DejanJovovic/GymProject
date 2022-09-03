@@ -22,7 +22,7 @@ public class Korisnik {
     }
     
     
-    public Korisnik(long id,String korisnickoIme, String email, String ime, String prezime) {
+    public Korisnik(Long id,String korisnickoIme, String email, String ime, String prezime) {
     	this.id = id;
     	this.korisnickoIme = korisnickoIme;
     	this.email = email;
@@ -65,7 +65,7 @@ public class Korisnik {
         this.uloga = uloga1;
     }
     
-    public Korisnik(long idKorisnika, String korisnickoIme) {
+    public Korisnik(Long idKorisnika, String korisnickoIme) {
     	this.id = idKorisnika;
     	this.korisnickoIme = korisnickoIme;
     	
@@ -101,10 +101,10 @@ public class Korisnik {
 
     
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getKorisnickoIme() {
@@ -172,10 +172,7 @@ public class Korisnik {
 		this.tipKorisnika = tipKorisnika;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public boolean isAktivan() {
 		return aktivan;
 	}

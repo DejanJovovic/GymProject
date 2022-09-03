@@ -6,7 +6,6 @@ public class Trening {
     private String naziv;
     private String trener;
     private String kratakOpis;
-    private TipTreninga tipTreninga;
     private float cena;
 	private EVrstaTreninga vrstaTreninga;
     private ENivoTreninga nivoTreninga;
@@ -47,7 +46,6 @@ public class Trening {
                    int trajanjeTreninga1, int prosecnaOcena1, String trener) {
         this.naziv = naziv1;
         this.kratakOpis = kratakOpis1;
-        this.tipTreninga = tipTreninga1;
         this.cena = cena1;
         this.vrstaTreninga = vrstaTreninga1;
         this.nivoTreninga = nivoTreninga1;
@@ -96,13 +94,7 @@ public class Trening {
 	}
 
 
-	public TipTreninga getTipTreninga() {
-		return tipTreninga;
-	}
 
-	public void setTipTreninga(TipTreninga tipTreninga) {
-		this.tipTreninga = tipTreninga;
-	}
 
 	public float getCena() {
 		return cena;

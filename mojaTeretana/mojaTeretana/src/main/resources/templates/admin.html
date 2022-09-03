@@ -6,21 +6,24 @@
 </script>
 		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
 		<title>Admin stranica</title> 
-		<link rel="stylesheet"  type="text/css"  href="css/home.css"/>    
-		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
-	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+		  
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/> 
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/> 
+	 	<link rel="stylesheet"  type="text/css"  href="css/home.css"/>     
 	 </head>     
 	 <body>   
-	 <a href="index.html"><button class="btn povratak">Back</button></a>
-	<img src="/img/background.jpg">
 	
+	 <img src="/img/background.jpg">
+	
+	<ul>
 	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
 	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
 	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
 	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
 	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
-   
-	 		<table>     
+   	</ul>
+	 		<table> 
+	 		  
 	 			<h1 th:text="#{treninzi}"></h1></caption>     
 	 			<tr>      
 	 			    <th th:text="#{nazivTreninga}"></th> 
@@ -34,7 +37,7 @@
 
 	 			</tr>
 	 			<tr th:each="itTrening, status: ${treninzi}">  
-	 			    <td ><a th:href="|admin/detailsT?id=${itTrening.id}|" th:text="${itTrening.naziv}"></td>    
+	 			    <td ><a th:href="|admin/detaljiTreninga?id=${itTrening.id}|" th:text="${itTrening.naziv}"></td>    
 	 				<td th:text="${itTrening.kratakOpis}"></td>    
 	 				<td th:text="${itTrening.cena}"></td>
 	 				<td th:text="${itTrening.trener}"></td>   
@@ -45,7 +48,7 @@
 	 			</tr>
 	 		</table>
 	 	<ul>     
-	 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
 	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreninga}"></a></li>   
 	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
 	 	</ul>

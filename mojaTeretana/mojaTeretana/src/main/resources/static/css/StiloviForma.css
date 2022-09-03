@@ -3,6 +3,7 @@ table {
 	margin: 5px;
 }
 
+
 caption {
 	font-size: 16pt
 }
@@ -34,12 +35,6 @@ input[type="checkbox"], input[type="radio"] {
 	width: 20px;
 }
 
-img{
-    width: 100%;
-    height: 100%;
-    object-position: center;
-    object-fit: cover;
-}
 
 .center {
     margin: 0;
@@ -49,3 +44,4 @@ img{
     transform: translate(-50%, -50%);
     /*transform: translate(-50%, -200%);;*/
 }
+

@@ -9,7 +9,7 @@
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head>     
 	 <body>  
-	 <a href="index.html"><button class="btn povratak">Back</button></a>
+	 <a href="admin"><button class="btn povratak">Back</button></a>
 	<img src="/img/background.jpg">
 	 
 	 <li><a href="admin/profil"  th:text="#{profil}"></a></li>
@@ -18,22 +18,22 @@
 	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
    
  			 <table>     
-	 			<h1 th:text="#{clanskeKarte}"></h1></caption>         
+	 			<h1 th:text="#{clanskeKarta}"></h1></caption>         
 	 			<tr>      
                     <th th:text="#{username}"></th> 
 	 			    <th th:text="#{opcija}"></th> 
 	 			
 
 	 			</tr>
-	 			<tr  th:each="itClanska, status: ${clanska}">  
-	 			<td th:text="${itClanska.korisnikId.korisnickoIme}" name="korisnickoIme"></td>  
+	 			 <tr  th:each="itClanskaKarta, status: ${clanskaKarta}"> 
+	 			<td th:text="${itClanskaKarta.korisnikId.korisnickoIme}" name="korisnickoIme"></td>  
 	 			<td>    
 	 					<form method="post" action="admin/clanskeKarte/obrisiClanskuKartu" >     
-	 						<input type="hidden"  name="id"  th:value="${itClanska.id}">     
+	 						<input type="hidden"  name="id"  th:value="${itClanskaKarta.id}">     
 	 						<input type="submit"  value="Obrisi" >    
 	 					</form>  
 	 					<form method="post" action="admin/clanskeKarte/odobriClanskuKartu" >     
-	 						<input type="hidden"  name="id"  th:value="${itClanska.id}">     
+	 						<input type="hidden"  name="id"  th:value="${itClanskaKarta.id}">     
 	 						<input type="submit"  th:value="#{odobri}" >    
 	 					</form> 
 	 			</td> 
@@ -42,7 +42,7 @@
      
 	 		</table>
 	 			 	<ul>     
-	 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
 	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreninga}"></a></li>   
 	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
 	 	</ul>

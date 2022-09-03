@@ -12,7 +12,7 @@
 </head>
 <body>
 	
-	<a href="index.html"><button class="btn povratak">Back</button></a>
+	<a href="korisnici"><button class="btn povratak">Back</button></a>
 	<img src="/img/background.jpg">
 	
 	 		<table>     
@@ -30,11 +30,12 @@
 	 				<form method="post" action="sale/editSala">
 	 				<input type="number" name="kapacitet">
 	 	            <input type="hidden"  name="id"  th:value="${itSala.id}">     
-	 				<input type="submit" th:value="Izmeni salu">
+	 				<input type="submit" value="Izmeni salu">
                     </form>
                     </td>
 	 				<td>    
-	 				<form method="post" action="sale/deleteSala" >     
+	 				<form method="post" action="sale/deleteSala" >  
+	 						<input type="number" name="kapacitet">   
 	 						<input type="hidden"  name="id"  th:value="${itSala.id}">     
 	 						<input type="submit"  value="Obriši salu" >    
 	 				</form>    

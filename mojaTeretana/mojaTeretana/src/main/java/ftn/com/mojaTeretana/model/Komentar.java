@@ -27,15 +27,15 @@ public class Komentar {
 		this.anoniman = anoniman1;
 	}
     
-    public Komentar(String tekstKomentara1, int ocena1, LocalDate datum1, Korisnik autor, Trening trening1,
-			EStatusKomentara statusKomentara1, boolean anoniman1) {
+    public Komentar(String tekstKomentara1, int ocena1, LocalDate datum1,Trening trening1,
+			EStatusKomentara statusKomentara1, boolean anoniman1,  Korisnik autor) {
 		this.tekstKomentara = tekstKomentara1;
 		this.ocena = ocena1;
 		this.datum = datum1;
-		this.autor = autor;
 		this.trening = trening1;
 		this.statusKomentara = statusKomentara1;
 		this.anoniman = anoniman1;
+		this.autor = autor;
 	}
     
     public Komentar(Long id, Korisnik autor) {
@@ -44,7 +44,19 @@ public class Komentar {
     }
 	
 
-    @Override
+    public Komentar(Long id2, String tekstKomentara2, int ocena2, LocalDate datum2, Korisnik ulogovan, Trening trening2,
+			EStatusKomentara statusKomentara2, boolean anoniman2, Korisnik autor2) {
+    	this.id = id2;
+		this.tekstKomentara = tekstKomentara2;
+		this.ocena = ocena2;
+		this.datum = datum2;
+		this.trening = trening2;
+		this.statusKomentara = statusKomentara2;
+		this.anoniman = anoniman2;
+		this.autor = autor2;
+	}
+
+	@Override
 	public String toString() {
 		return "Komentar [id=" + id + ", tekstKomentara=" + tekstKomentara + ", ocena=" + ocena + ", datum=" + datum
 				+ ", statusKomentara=" + statusKomentara + ", autor=" + autor + ", trening=" + trening + ", anoniman=" + anoniman + "]";

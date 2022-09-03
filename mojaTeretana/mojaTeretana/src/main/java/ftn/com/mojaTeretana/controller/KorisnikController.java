@@ -109,11 +109,11 @@ public class KorisnikController implements ServletContextAware{
 		if(korisnik == null) 
 			greska = "Kredencijali nisu ispravni! <br/>";
 		if(korisnik != null) {
-			if(korisnik.getUloga().equals("admin")) {
+			if(korisnik.getUloga().equals("ADMINISTRATOR")) {
 				session.setAttribute(KORISNIK_KEY, korisnik);
 				response.sendRedirect(bURL + "admin");
 			}
-			else if(korisnik.getUloga().equals("clanTeretane")) {
+			else if(korisnik.getUloga().equals("POLAZNIK")) {
 				session.setAttribute(KORISNIK_KEY, korisnik);
 				response.sendRedirect(bURL + "korisnik");
 			}

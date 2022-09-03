@@ -10,11 +10,12 @@
 	 </head>     
 	 <body>   
 	 
-	 <a href="index.html"><button class="btn povratak">Back</button></a>
+	 <a href="admin"><button class="btn povratak">Back</button></a>
 	<img src="/img/background.jpg">
 	 
   
-   	<ul>    
+   	<ul>   
+   	<li><a href="admin/profil" th:text="#{profil}"></a></li> 
 	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
 	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
 	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
@@ -23,9 +24,7 @@
  	</ul>   
 
            <form method="post" action="admin/profil">
-           <input type="hidden" name="id" th:value="${korisnik.id}"/>
- 			<table>   
-	 		<h1 th:text="#{profil}"></h1></caption>     
+          
  			<tr th:each="itKorisnik, status: ${korisnik}">
  			<th th:text="#{ime}"></th>
  			<td><input type="text" th:value="${itKorisnik.ime}"  name="ime"></td>
@@ -52,20 +51,17 @@
  			</tr>  
  			<tr th:each="itKorisnik, status: ${korisnik}">  
  			<th th:text="#{datumRodjenja}"></th>
- 			<td><input type="text" th:value="${itKorisnik.datRodjenja}" name="datRodjenja"/></td>
+ 			<td><input type="text" th:value="${itKorisnik.datumRodjenja}" name="datumRodjenja"/></td>
  			</tr>
  			<tr th:each="itKorisnik, status: ${korisnik}">  
  			<th th:text="#{lozinka}"></th>
  			<td><input type="password" th:value="${itKorisnik.lozinka}" name="lozinka"/></td>
  			</tr>
- 			 <th th:text="#{ponoviteLozinku}"></th>
- 			<td><input type="text" name="lozinkaPonovljena"/></td>
- 			</tr>
  			<tr><th></th><td><input type="submit" th:value="izmeni"></td></tr>
  			  
  		</table>   
  		</form>
- 			 		<li><a href="admin/addTrening" th:text="#{dodajTrening}"></a></li>   
+ 			 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
 	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreninga}"></a></li>   
 	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
 	 	</ul>

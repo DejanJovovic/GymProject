@@ -53,6 +53,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
                 korisnik = new Korisnik(id, korisnickoIme, lozinka, email, ime, prezime, datumRodjenja,
                         adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika, aktivan,uloga);
                 korisnici.put(korisnik.getId(), korisnik); // dodavanje u kolekciju
+                
             }
         }
         public List<Korisnik> getKorisnici() {
@@ -66,15 +67,18 @@ public class KorisnikDAOImpl implements KorisnikDAO{
                 "SELECT * from korisnici where id = ?";
         KorisnikRowCallBackHandler rowCallbackHandler = new KorisnikRowCallBackHandler();
         jdbcTemplate.query(sql, rowCallbackHandler, id);
+        if(rowCallbackHandler.getKorisnici().size() == 0) {
+            return null;
+        }
         return rowCallbackHandler.getKorisnici().get(0);
     }
 
     @Override
-    public Korisnik findOneByUsername(String korisnickoIme) {
+    public Korisnik findOneByEmail(String email) {
         String sql =
-                "SELECT * FROM korisnici WHERE korisnickoIme = ?";
+                "SELECT * FROM korisnici WHERE email = ?";
         KorisnikRowCallBackHandler rowCallbackHandler = new KorisnikRowCallBackHandler();
-        jdbcTemplate.query(sql, rowCallbackHandler, korisnickoIme);
+        jdbcTemplate.query(sql, rowCallbackHandler, email);
         if(rowCallbackHandler.getKorisnici().size() == 0) {
             return null;
         }
@@ -155,7 +159,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
 	@Override
 	public int updateProfil(Korisnik korisnik) {
 		String sql = "UPDATE korisnici set korisnickoIme = ?, lozinka = ?, email = ?, ime = ?, prezime = ?, tipKorisnika = ?  where id = ?";
-		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getLozinka(), korisnik.getEmail(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getTipKorisnika().toString(), korisnik.getId()) == 1;
+		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getLozinka(), korisnik.getEmail(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getTipKorisnika().toString(), korisnik.getId()) == 2;
 		
 		return uspeh?1:0;
 	}

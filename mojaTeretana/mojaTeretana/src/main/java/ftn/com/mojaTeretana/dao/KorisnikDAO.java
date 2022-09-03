@@ -8,7 +8,7 @@ public interface KorisnikDAO{
 
     Korisnik findOneById(Long id);
 
-    Korisnik findOneByUsername(String korisnickoIme);
+    Korisnik findOneByEmail(String email);
 
     Korisnik findOne(String email, String lozinka);
 

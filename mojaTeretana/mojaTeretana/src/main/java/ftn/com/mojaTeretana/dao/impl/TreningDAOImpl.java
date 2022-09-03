@@ -82,8 +82,8 @@ public class TreningDAOImpl implements TreningDAO {
     @Transactional
     @Override
     public void update(Trening trening) {
-        String sql = "UPDATE mojaTeretana.trening SET naziv = ?, kratakOpis = ?, tipTreninga = ?, cena = ?, vrstaTreninga = ?, nivoTreninga = ?, trajanjeTreninga = ?, prosecnaOcena = ?, trener = ? WHERE idTrening = ?";
-        jdbcTemplate.update(sql, trening.getNaziv(), trening.getKratakOpis(), trening.getTipTreninga(), trening.getCena(), trening.getVrstaTreninga().toString(), trening.getNivoTreninga().toString(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
+        String sql = "UPDATE mojaTeretana.trening SET naziv = ?, kratakOpis = ?, cena = ?, vrstaTreninga = ?, nivoTreninga = ?, trajanjeTreninga = ?, prosecnaOcena = ?, trener = ? WHERE id = ?";
+        jdbcTemplate.update(sql, trening.getNaziv(), trening.getKratakOpis(), trening.getCena(), trening.getVrstaTreninga().toString(), trening.getNivoTreninga().toString(), trening.getTrajanjeTreninga(), trening.getProsecnaOcena(), trening.getTrener(), trening.getId());
 
         return;
     }
@@ -94,9 +94,7 @@ public class TreningDAOImpl implements TreningDAO {
 
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                String sql = "INSERT INTO treninzi (naziv, kratakOpis, tipTreninga," +
-                        "cena, vrstaTreninga, nivoTreninga, trajanjeTreninga, prosecnaOcena, trener)" +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO treninzi (naziv, kratakOpis, cena, vrstaTreninga,nivoTreninga,trajanjeTreninga,prosecnaOcena,trener) VALUES (?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 int index = 1;
                 preparedStatement.setString(index++, trening.getNaziv());
@@ -136,7 +134,7 @@ public class TreningDAOImpl implements TreningDAO {
 
 	@Override
 	public Float sum(Long id) {
-		String sql = "select sum(cena) from treninzi tr left join terminTreninga t on t.treningId = tr.id left join Korpa k on k.terminId = t.id where k.korisnikId = ?";
+		String sql = "select sum(cena) from treninzi tr left join terminTreninga t on t.treningId = tr.id left join korpe k on k.terminId = t.id where k.korisnikId = ?";
 		
 		CenaHandler rowCallbackHandler = new CenaHandler();
 			jdbcTemplate.query(sql, rowCallbackHandler, id);
