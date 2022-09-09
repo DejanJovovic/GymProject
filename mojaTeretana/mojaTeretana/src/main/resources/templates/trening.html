@@ -59,17 +59,18 @@
  		</table>    
  		<form method ="post" action="korisnik/dodajUKorpu">
 		<table class="forma">
-                <h1 th:text="#{listaZelja}"></h1></caption>   
+		
+             <h1 th:text="#{listaZelja}"></h1>  
 			<tr>
 				<th th:text="#{termin}"></th> 
 				<td>
 					<select name="terminId">
-						<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${itTermin.datum} + ' Sala: '+${itTermin.salaId.id}"></option>
+						<option th:each="itTermin: ${terminiTreninga}" th:value="${itTermin.id}" th:text="${itTermin.datumTermina} + ' Sala: '+${itTermin.salaId.id}"></option>
 					</select>	
 				</td>
 				
 			</tr>
-			<tr><th></th><td><input type="submit" th:value="dodajUKorpu"/></td></tr>
+			<tr><th></th><td><input type="submit" th:value="dodaj"/></td></tr>
 			</table>
 			</form>
 			
@@ -77,10 +78,10 @@
 		    <table class="forma">
                 <h1 th:text="#{ZakaziterminTreninga}"></h1></caption>   
 			<tr>
-				<th th:text="#{terminTreninga}"></th> 
+				<th th:text="#{termini}"></th> 
 				<td>
 					<select name="terminId">
-						<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${#temporals.format(itTermin.datum,'dd-MM-yyyy HH:mm')} + ' Sala: '+${itTermin.salaId.id}"></option>
+						<option th:each="itTermin: ${terminiTreninga}" th:value="${itTermin.id}" th:text="${#temporals.format(itTermin.datumTermina,'dd-MM-yyyy HH:mm')} + ' Sala: '+${itTermin.salaId.id}"></option>
 					</select>	
 				</td>
 				
@@ -93,31 +94,36 @@
 			
 			
 
- 			 <table>     
-             <h1 th:text="#{komentari}"></h1></caption>  			<tr>      
- 			    <th  th:text="#{autor}"></th> 
- 				<th  th:text="#{datumIVreme}"></th>     
- 				<th  th:text="#{tekstKomentara}"></th>     
- 				<th  th:text="#{ocena}"></th>   
- 			</tr>
-	 		<tr  th:each="itKomentar, status: ${komentar}">  
-	 		<td th:text="${itKomentar.autor.korisnickoIme}" name="autor"></td>  
-	 		<td th:text="${itKomentar.datum}" name="datum"></td> 
-	 		<td th:text="${itKomentar.tekstKomentara}" name="TekstKomentara"></td> 
-	 		<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
+ 			<table>     
+	 			<h1 th:text="#{komentar}"></h1>  
+
+	 			<tr>  
+	 				<th th:text="#{datum}">Datum</th>     
+	 				<th th:text="#{tekstKomentara}">Tekst</th>     
+	 				<th th:text="#{ocena}">Ocena</th>   
+	 				<th th:text="#{imeTreninga}">Naziv treninga</th>   
+	 			
+
+	 			</tr>
+	 			<tr  th:each="itKomentar, status: ${komentar}">  
+	 			<td th:text="${itKomentar.datum}" name="datum"></td> 
+	 			<td th:text="${itKomentar.tekstKomentara}" name="Tekst"></td> 
+	 			<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
+	 			<td th:text="${itKomentar.trening.naziv}" name="naziv"></td> 
+	 			<td> 
 	 		</table>
  </div>
  	<div>
-        <form method="post" action="korisnik/add/Komentar">
+        <form method="post" action="korisnik/addKomentar">
 			
             <h1 th:text="#{postaviKomentar}"></h1></caption>   
 				
 			<input type="hidden" name="id" th:value="${trening.id}"/>
 				 	    
  			<tr><th th:text="#{komentar}"></th><td><input type="text" value="" name="tekstKomentara"/></td></tr>  
- 			<tr><th th:text="#{ocena}"></th><td><input type="number" min="1" max= "5" name="ocena"/></td></tr>     
- 		    <tr><th th:text="#{anoniman}"></th><td><input type = "checkbox" name="anoniman"/></td></tr>
-		    <tr><th></th><td><input type="submit" th:value="#{dodajKomentar}"/></td></tr>
+ 			<tr><th th:text="#{ocena}"></th><td><input type="number" min="1" max= "5" name="ocena"/></td></tr>
+ 			<tr><th th:text="#{anoniman}"></th><td><input type = "checkbox" name="anoniman"/></td></tr>    
+		    <tr><th></th><td><input type="submit" th:value="#{dodaj}"/></td></tr>
 			
 		</form>
 	</div> 

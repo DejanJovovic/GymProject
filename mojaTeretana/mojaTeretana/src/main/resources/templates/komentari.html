@@ -16,16 +16,14 @@
 	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
 	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
 	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
-	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
 	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
 	
  			 <table>     
-	 			<h1 th:text="#{komentari}"></h1>  
+	 			<h1 th:text="#{komentar}"></h1>  
 
-	 			<tr>      
-	 			    <th th:text="#{autor}">Autor</th> 
-	 				<th th:text="#{datumiVreme}">Datum</th>     
-	 				<th th:text="#{tekstt}">Tekst</th>     
+	 			<tr>  
+	 				<th th:text="#{datum}">Datum</th>     
+	 				<th th:text="#{tekstKomentara}">Tekst</th>     
 	 				<th th:text="#{ocena}">Ocena</th>   
 	 				<th th:text="#{imeTreninga}">Naziv treninga</th>  
 	 				<th th:text="#{opcija}">Opcija</th>  
@@ -33,7 +31,6 @@
 
 	 			</tr>
 	 			<tr  th:each="itKomentar, status: ${komentar}">  
-	 			<td th:text="${itKomentar.autor.korisnickoIme}" name="autor"></td>  
 	 			<td th:text="${itKomentar.datum}" name="datum"></td> 
 	 			<td th:text="${itKomentar.tekstKomentara}" name="Tekst"></td> 
 	 			<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
@@ -41,11 +38,11 @@
 	 			<td>    
 	 					<form method="post" action="admin/komentari/obrisiKomentar" >     
 	 						<input type="hidden"  name="id"  th:value="${itKomentar.id}">     
-	 						<input type="submit"  th:value="#{obrisiKomentar}">    
+	 						<input type="submit"  th:value="#{obrisi}">    
 	 					</form>  
 	 					<form method="post" action="admin/komentari/odobriKomentar" >     
 	 						<input type="hidden"  name="id"  th:value="${itKomentar.id}">     
-	 						<input type="submit"  th:value="#{odobriKomentar}">    
+	 						<input type="submit"  th:value="#{odobri}">    
 	 					</form> 
 	 			</td> 
 	 		</table>

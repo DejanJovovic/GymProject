@@ -22,8 +22,8 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.com.mojaTeretana.model.ClanskaKarta;
-import ftn.com.mojaTeretana.model.EStatusClanskeKarte;
-import ftn.com.mojaTeretana.model.EStatusKomentara;
+import ftn.com.mojaTeretana.model.Status;
+import ftn.com.mojaTeretana.model.StatusClanskeKarte;
 import ftn.com.mojaTeretana.model.Komentar;
 import ftn.com.mojaTeretana.model.Korisnik;
 import ftn.com.mojaTeretana.model.Korpa;
@@ -145,8 +145,8 @@ public class PolaznikController implements ServletContextAware{
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		int procenat = 50;
 		int brojBodova = 10;
-		EStatusClanskeKarte statusClanskeKarte = EStatusClanskeKarte.CEKANJE;
-		ClanskaKarta clanskaKarta = new ClanskaKarta(ulogovan, procenat, brojBodova, statusClanskeKarte);
+		StatusClanskeKarte statusC = StatusClanskeKarte.CEKANJE;
+		ClanskaKarta clanskaKarta = new ClanskaKarta(ulogovan, procenat, brojBodova, statusC);
 		clanskaKartaService.save(clanskaKarta);
 		response.sendRedirect(bURL + "korisnik");
 		
@@ -202,11 +202,11 @@ public class PolaznikController implements ServletContextAware{
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		TerminTreninga terminTreninga = terminTreningaService.findOneById(id);
 		Korpa korpa = new Korpa(ulogovan, terminTreninga);
-		int brojPoena = (int) (terminTreninga.getTreningId().getCena() / 500);
+		int broj = (int) (terminTreninga.getTreningId().getCena() / 500);
 		ClanskaKarta clanskaKarta = clanskaKartaService.findOdobreno(ulogovan.getId());
-		clanskaKarta.setBrojPoena(clanskaKarta.getBrojPoena() + brojPoena);
-		int popust = brojPoena * 5;
-		clanskaKarta.setPopust(clanskaKarta.getPopust() + popust);
+		clanskaKarta.setBrojPoena(clanskaKarta.getBrojPoena() + broj);
+		int popustC = broj * 5;
+		clanskaKarta.setPopust(clanskaKarta.getPopust() + popustC);
 		clanskaKartaService.update(clanskaKarta);
 		korpaService.save(korpa);
 		response.sendRedirect(bURL + "korisnik");
@@ -242,29 +242,32 @@ public class PolaznikController implements ServletContextAware{
 		rezultati.addObject("trening", trening);
 		rezultati.addObject("terminiTreninga", terminiTreninga);
 		rezultati.addObject("tipTreninga", tipTreninga);
-		rezultati.addObject("komentari", komentari);
+		rezultati.addObject("komentar", komentari);
 		
 		return rezultati;
 		
 	}
 	
-	@PostMapping(value = "/add/Komentar")
+	@PostMapping(value = "/addKomentar")
 	public void create(
 	@RequestParam String tekstKomentara,
 	@RequestParam int ocena,
 	@RequestParam Long id,
-	@RequestParam(required = false) boolean anoniman, HttpServletResponse response, HttpSession session)  throws IOException{
+	@RequestParam(required=false) boolean anoniman,
+	 HttpServletResponse response, HttpSession session)  throws IOException{
 		LocalDate datum = LocalDate.now();
-		Korisnik autor = new Korisnik("Dejan");
-		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
-		EStatusKomentara statusKomentara = EStatusKomentara.CEKANJE;
+		String autor = new String("Dejan");
+		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		Status status = Status.CEKANJE;
 		Trening trening = treningService.findOne(id);
-		Komentar komentar = new Komentar(id, tekstKomentara, ocena, datum,ulogovan,trening, statusKomentara, anoniman, autor);
+		Komentar komentar = new Komentar(id, tekstKomentara, ocena, datum,ulogovani,trening, status, anoniman, autor);
+		
 		if(anoniman == true) {
-			Long idAnoniman = (long) 5;
-			Korisnik anonimanKorisnik = korisnikService.findOneById(idAnoniman);
-			komentar.setAutor(anonimanKorisnik);
+			String anonimanKorisnik = new String("true");
+		} else {
+			String korisnik = new String("false");
 		}
+	
 		komentarService.save(komentar);
 		response.sendRedirect(bURL + "korisnik");
 		
@@ -273,7 +276,7 @@ public class PolaznikController implements ServletContextAware{
 	
 	@PostMapping(value = "/zakaziTrening") 
 	public void zakaziTrening(
-	@RequestParam(name = "terminId") Long id, HttpServletResponse response, HttpSession session	) throws IOException{
+	@RequestParam(required = false) Long id, HttpServletResponse response, HttpSession session	) throws IOException{
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		TerminTreninga terminTreninga = terminTreningaService.findOneById(id);
 		Korpa korpa = new Korpa(ulogovan, terminTreninga);

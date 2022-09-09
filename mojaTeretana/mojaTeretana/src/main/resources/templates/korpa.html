@@ -18,7 +18,6 @@
 	
 		<ul>
 			 	 <li><a href="korisnik/profil" th:text="#{profil}"></a></li>  
-	             <li><a href="korisnik/korpa" th:text="#{korpa}"></a></li>  
 	             <li><a href="korisnik/clanskaKarta" th:text="#{clanskaKarta}"></a></li> 
 			 
 			</ul>
@@ -31,19 +30,19 @@
 				<th></th>
 			</tr>
 			
-			<tr th:each="itTermin, status: ${termin}">  
+			<tr th:each="itTermin, status: ${terminTreninga}">  
  				<td th:text="${itTermin.treningId.naziv}"></td>    
  				<td th:text="${itTermin.treningId.trener}"></td>    
- 				<td th:text="${itTermin.datum}"></td>    
+ 				<td th:text="${itTermin.datumTermina}"></td>    
  				<td>
-					<form method="post" action="korisnik/korpa/ukloniIzKorpe">
-						<input type="hidden" name="terminId" th:value="${itTermin.id}">
+					<form method="post" action="korisnik/korpa/ukloni">
+						<input type="hidden" name="idTermina" th:value="${itTermin.id}">
 						<input type="submit" value="Ukloni iz korpe">
 					</form>
 				</td> 
  				<td>
 					<form method="post" action="korisnik/korpa/zakazi">
-						<input type="hidden" name="terminId" th:value="${itTermin.id}">
+						<input type="hidden" name="idTermina" th:value="${itTermin.id}">
 						<input type="submit" value="Zakazi termin">
 					</form>
 				</td> 
@@ -62,12 +61,12 @@
 			<tr th:each="itKorpa, status: ${korpa}">  
  				<td th:text="${itKorpa.terminId.treningId.naziv}"></td>    
  				<td th:text="${itKorpa.terminId.treningId.cena}"></td>    
- 				<td th:text = "${#temporals.format(itKorpa.terminId.datum,'dd-MM-yyyy HH:mm')}"></td>
+ 				<td th:text = "${#temporals.format(itKorpa.terminId.datumTermina,'dd-MM-yyyy HH:mm')}"></td>
   
  				<td>
 					<form method="post" action="korisnik/korpa/ukloniIzKorpe">
-						<input type="hidden" name="terminId" th:value="${itKorpa.id}">
-						<input type="hidden" name="termId" th:value="${itKorpa.terminId.id}">
+						<input type="hidden" name="idTermina" th:value="${itKorpa.id}">
+						<input type="hidden" name="idTerm" th:value="${itKorpa.terminId.id}">
 						<input type="submit" th:value="#{ukloniIzKorpe}">
 					</form>
 				</td> 

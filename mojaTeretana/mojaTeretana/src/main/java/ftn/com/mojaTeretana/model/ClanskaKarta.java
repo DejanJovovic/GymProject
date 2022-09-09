@@ -5,24 +5,28 @@ public class ClanskaKarta {
     private int popust;
     private int brojPoena;
     private Korisnik korisnikId;
-    private EStatusClanskeKarte status;
+    private StatusClanskeKarte statusC;
 
-    
-    public ClanskaKarta(Long id, Korisnik korisnikId, int popust, int brojPoena, EStatusClanskeKarte status) {
+
+
+
+	public ClanskaKarta(Long id, Korisnik korisnikId, int popust, int brojPoena, StatusClanskeKarte statusC) {
     	super();
     	this.id = id;
     	this.korisnikId = korisnikId;
     	this.popust = popust;
     	this.brojPoena = brojPoena;
-    	this.status = status;
+    	this.statusC = statusC;
+    	
     }
     
-    public ClanskaKarta(Korisnik korisnikId, int popust, int brojPoena, EStatusClanskeKarte status) {
+    public ClanskaKarta(Korisnik korisnikId, int popust, int brojPoena, StatusClanskeKarte statusC) {
     	super();
       	this.korisnikId = korisnikId;
     	this.popust = popust;
     	this.brojPoena = brojPoena;
-    	this.status = status;
+    	this.statusC = statusC;
+
     }
    
     
@@ -54,11 +58,12 @@ public class ClanskaKarta {
     public void setBrojPoena(int brojPoena) {
         this.brojPoena = brojPoena;
     }
-	public EStatusClanskeKarte getStatus() {
-		return status;
+	public StatusClanskeKarte getStatusC() {
+		return statusC;
 	}
-	public void setStatus(EStatusClanskeKarte status) {
-		this.status = status;
+	public void setStatus(StatusClanskeKarte statusC) {
+		this.statusC = statusC;
 	}
+
    
 }

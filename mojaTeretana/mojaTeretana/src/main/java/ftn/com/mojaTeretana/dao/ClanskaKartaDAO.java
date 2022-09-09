@@ -3,7 +3,6 @@ package ftn.com.mojaTeretana.dao;
 import java.util.List;
 
 import ftn.com.mojaTeretana.model.ClanskaKarta;
-import ftn.com.mojaTeretana.model.EStatusClanskeKarte;
 
 public interface ClanskaKartaDAO {
 	

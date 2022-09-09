@@ -1,7 +1,6 @@
 package ftn.com.mojaTeretana.dao.impl;
 
 import ftn.com.mojaTeretana.dao.KorisnikDAO;
-import ftn.com.mojaTeretana.model.EStatusKomentara;
 import ftn.com.mojaTeretana.model.ETipKorisnika;
 import ftn.com.mojaTeretana.model.Korisnik;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,7 +154,7 @@ public class KorisnikDAOImpl implements KorisnikDAO{
 		return uspeh?1:0;
 		
 	}
-
+    @Transactional
 	@Override
 	public int updateProfil(Korisnik korisnik) {
 		String sql = "UPDATE korisnici set korisnickoIme = ?, lozinka = ?, email = ?, ime = ?, prezime = ?, tipKorisnika = ?  where id = ?";

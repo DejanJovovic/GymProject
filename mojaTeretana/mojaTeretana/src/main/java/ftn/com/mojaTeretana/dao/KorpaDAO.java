@@ -12,7 +12,7 @@ public interface KorpaDAO {
 	
 	public Korpa sum(Long id);
 	public List <Korpa> findKorpa(Long id);
-	public Korpa findOne(Long id);
+	public Korpa findOneById(Long id);
 	
 
 }

@@ -17,7 +17,7 @@ td.broj {
 
 th {
 	color: white;
-	background-color: DodgerBlue;
+	background-color: red;
 }
 
 tr:nth-child(even) {

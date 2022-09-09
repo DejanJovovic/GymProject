@@ -1,30 +1,30 @@
 package ftn.com.mojaTeretana.model;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class TerminTreninga {
 	private Long id;
     private Sala salaId;
     private Trening treningId;
-    private LocalDateTime datumTermina;
+    private LocalDate datumTermina;
    
     
-    public TerminTreninga(Long id1, Trening treningId, Sala salaId, LocalDateTime vreme, LocalDateTime datumTermina ) {
+    public TerminTreninga(Long id1, Trening treningId, Sala salaId, LocalDate datumTermina) {
     	this.id = id1;
     	this.treningId = treningId;
     	this.salaId = salaId;
-    	this.datumTermina = vreme;
     	this.datumTermina = datumTermina;
     	
     }
     
     
     
-    public TerminTreninga(Trening treningId, Sala salaId, LocalDateTime vreme ) {
+    public TerminTreninga(Trening treningId, Sala salaId, LocalDate datumTermina ) {
     	this.treningId = treningId;
     	this.salaId = salaId;
-    	this.datumTermina = vreme;
+    	this.datumTermina = datumTermina;
     	
     }
 
@@ -65,13 +65,13 @@ public class TerminTreninga {
 
 
 
-	public LocalDateTime getDatumTermina() {
+	public LocalDate getDatumTermina() {
 		return datumTermina;
 	}
 
 
 
-	public void setDatumTermina(LocalDateTime datumTermina) {
+	public void setDatumTermina(LocalDate datumTermina) {
 		this.datumTermina = datumTermina;
 	}
 

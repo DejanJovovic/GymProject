@@ -25,15 +25,15 @@
 	 			
 
 	 			</tr>
-	 			 <tr  th:each="itClanskaKarta, status: ${clanskaKarta}"> 
-	 			<td th:text="${itClanskaKarta.korisnikId.korisnickoIme}" name="korisnickoIme"></td>  
+	 			 <tr  th:each="itClanska, status: ${clanskaKarta}"> 
+	 			<td th:text="${itClanska.korisnikId.korisnickoIme}" name="korisnickoIme"></td>  
 	 			<td>    
 	 					<form method="post" action="admin/clanskeKarte/obrisiClanskuKartu" >     
-	 						<input type="hidden"  name="id"  th:value="${itClanskaKarta.id}">     
-	 						<input type="submit"  value="Obrisi" >    
+	 						<input type="hidden"  name="id"  th:value="${itClanska.id}">     
+	 						<input type="submit"  th:value="#{obrisana}" >    
 	 					</form>  
 	 					<form method="post" action="admin/clanskeKarte/odobriClanskuKartu" >     
-	 						<input type="hidden"  name="id"  th:value="${itClanskaKarta.id}">     
+	 						<input type="hidden"  name="id"  th:value="${itClanska.id}">     
 	 						<input type="submit"  th:value="#{odobri}" >    
 	 					</form> 
 	 			</td> 

@@ -12,6 +12,9 @@
 </head>
 <body>
 
+<a href="addTerminTreninga"><button class="btn povratak">Back</button></a>
+	<img src="/img/background.jpg">
+
  	<form method="post" action="addTrening">    
  		<table>   
 	 		<h1 th:text="#{dodajTrening}"></h1></caption>     
@@ -39,10 +42,14 @@
  			</td>
  			</tr>  
  			<tr><th th:text="#{trajanjeTreninga}"></th><td><input type="number" min="1" name="trajanjeTreninga"/></td></tr>   
- 			<tr><th th:text="#{prosecnaOcena}"></th><td><input type="number" min="1" name="prosecnaOcena"/></td></tr>   
+ 			<tr><th th:text="#{prosecnaOcena}"></th><td><input type="number" min="1" max = "5" name="prosecnaOcena"/></td></tr>   
  			<tr><th></th><td><input type="submit" th:value="#{dodaj}"/></td>    
  		</table>    
  	</form> 
+ 		<ul>       
+	 		<li><a href="admin/addTerminTreninga" th:text="#{dodajTerminTreninga}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
 
 </body>
 </html>

@@ -79,10 +79,11 @@ public class KorisnikController implements ServletContextAware{
 	@RequestParam(required = true) String brojTelefona,
 	HttpSession session, HttpServletResponse response) throws IOException {
 		ETipKorisnika tipKorisnika = ETipKorisnika.POLAZNIK;
+		String uloga = new String("POLAZNIK");
 		String datumIVremeRegistracije = new String("11.07.2022, 15:39");
 		
 		Korisnik korisnik = new Korisnik(korisnickoIme, lozinka,email, ime, prezime, datumRodjenja, adresa, 
-				brojTelefona,datumIVremeRegistracije, tipKorisnika);
+				brojTelefona,datumIVremeRegistracije, tipKorisnika, uloga);
 		korisnikService.save(korisnik);
 		response.sendRedirect(bURL + "index.html");
 		

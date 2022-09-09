@@ -27,11 +27,6 @@ public class DatabaseKomentarServiceImpl implements KomentarService {
         return komentarDAO.findAll();
     }
 
-    @Override
-    public Komentar update(Komentar komentar) {
-        komentarDAO.update(komentar);
-        return komentar;
-    }
 
     public Komentar findOneById(Long id){
         return komentarDAO.findOne(id);
@@ -60,4 +55,5 @@ public class DatabaseKomentarServiceImpl implements KomentarService {
 		}
 		return komentar;
 	}
+
 }

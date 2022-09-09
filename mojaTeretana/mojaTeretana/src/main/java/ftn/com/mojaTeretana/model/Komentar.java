@@ -8,50 +8,49 @@ public class Komentar {
     private String tekstKomentara;
     private int ocena;
     private LocalDate datum;
-    private Korisnik autor;
     private Trening trening;
-    private EStatusKomentara statusKomentara;
+    private String autor;
     private boolean anoniman;
+
+	private Status status;
 
     
 
-    public Komentar(Long id1, String tekstKomentara1, int ocena1, LocalDate datum1, Korisnik autor, Trening trening1,
-			EStatusKomentara statusKomentara1, boolean anoniman1) {
+    public Komentar(Long id1, String tekstKomentara1, int ocena1, LocalDate datum1, Trening trening1,
+    		Status status1, String autor1, boolean anoniman1) {
 		this.id = id1;
 		this.tekstKomentara = tekstKomentara1;
 		this.ocena = ocena1;
 		this.datum = datum1;
-		this.autor = autor;
 		this.trening = trening1;
-		this.statusKomentara = statusKomentara1;
+		this.status = status1;
+		this.autor = autor1;
 		this.anoniman = anoniman1;
 	}
     
     public Komentar(String tekstKomentara1, int ocena1, LocalDate datum1,Trening trening1,
-			EStatusKomentara statusKomentara1, boolean anoniman1,  Korisnik autor) {
+    		Status status1) {
 		this.tekstKomentara = tekstKomentara1;
 		this.ocena = ocena1;
 		this.datum = datum1;
 		this.trening = trening1;
-		this.statusKomentara = statusKomentara1;
-		this.anoniman = anoniman1;
-		this.autor = autor;
+		this.status = status1;
 	}
     
-    public Komentar(Long id, Korisnik autor) {
+    public Komentar(Long id, String autor) {
     	this.id = id;
     	this.autor = autor;
     }
 	
 
-    public Komentar(Long id2, String tekstKomentara2, int ocena2, LocalDate datum2, Korisnik ulogovan, Trening trening2,
-			EStatusKomentara statusKomentara2, boolean anoniman2, Korisnik autor2) {
+	public Komentar(Long id2, String tekstKomentara2, int ocena2, LocalDate datum2, Korisnik ulogovani, Trening trening2,
+    		Status status2, boolean anoniman2, String autor2) {
     	this.id = id2;
 		this.tekstKomentara = tekstKomentara2;
 		this.ocena = ocena2;
 		this.datum = datum2;
 		this.trening = trening2;
-		this.statusKomentara = statusKomentara2;
+		this.status = status2;
 		this.anoniman = anoniman2;
 		this.autor = autor2;
 	}
@@ -59,7 +58,7 @@ public class Komentar {
 	@Override
 	public String toString() {
 		return "Komentar [id=" + id + ", tekstKomentara=" + tekstKomentara + ", ocena=" + ocena + ", datum=" + datum
-				+ ", statusKomentara=" + statusKomentara + ", autor=" + autor + ", trening=" + trening + ", anoniman=" + anoniman + "]";
+				+ ", status=" + status + ", trening=" + trening + ", autor=" + autor +  ", anoniman=" + anoniman +  "]";
 	}
 
 	public Long getId() {
@@ -101,15 +100,6 @@ public class Komentar {
 	}
 
 
-	public Korisnik getAutor() {
-		return autor;
-	}
-
-
-	public void setAutor(Korisnik autor) {
-		this.autor = autor;
-	}
-
 
 	public Trening getTrening() {
 		return trening;
@@ -120,21 +110,29 @@ public class Komentar {
 	}
 
 
-	public EStatusKomentara getStatusKomentara() {
-		return statusKomentara;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setStatusKomentara(EStatusKomentara statusKomentara) {
-		this.statusKomentara = statusKomentara;
-	}
-
-	public boolean isAnoniman() {
-		return anoniman;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 
-	public void setAnoniman(boolean anoniman) {
-		this.anoniman = anoniman;
-	}
+	 public String getAutor() {
+			return autor;
+		}
+
+		public void setAutor(String autor) {
+			this.autor = autor;
+		}
+	
+		public boolean isAnoniman() {
+			return anoniman;
+		}
+
+		public void setAnoniman(boolean anoniman) {
+			this.anoniman = anoniman;
+		}
 
 }

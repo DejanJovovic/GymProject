@@ -11,7 +11,6 @@ public interface KomentarService {
     List<Komentar> findAll();
     
     Komentar save(Komentar komentar);
-    Komentar update(Komentar komentar);
     Komentar findOneById(Long id);
     Komentar delete(Long id);
     Komentar odobreno(Long id);

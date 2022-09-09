@@ -15,8 +15,8 @@ import org.springframework.stereotype.Repository;
 import ftn.com.mojaTeretana.dao.ClanskaKartaDAO;
 import ftn.com.mojaTeretana.dao.KorisnikDAO;
 import ftn.com.mojaTeretana.model.ClanskaKarta;
-import ftn.com.mojaTeretana.model.EStatusClanskeKarte;
 import ftn.com.mojaTeretana.model.Korisnik;
+import ftn.com.mojaTeretana.model.StatusClanskeKarte;
 
 @Repository
 public class ClanskaKartaDAOImpl implements ClanskaKartaDAO{
@@ -34,15 +34,19 @@ public class ClanskaKartaDAOImpl implements ClanskaKartaDAO{
 		public void processRow(ResultSet resultSet) throws SQLException {
 			int index = 1;
 			Long id = resultSet.getLong(index ++);
-			Long idKorisnika = resultSet.getLong(index ++);
-			Korisnik korisnik = korisnikDAO.findOneById(idKorisnika);
 			Integer popust = resultSet.getInt(index++);
 			Integer brojPoena = resultSet.getInt(index++);
-			EStatusClanskeKarte status = EStatusClanskeKarte.valueOf(resultSet.getString(index++));
+			StatusClanskeKarte statusC = StatusClanskeKarte.valueOf(resultSet.getString(index++));
+			Long idKorisnika = resultSet.getLong(index ++);
+			
+			
+			Korisnik korisnik = korisnikDAO.findOneById(idKorisnika);
+			
+		
 			
 			ClanskaKarta clanskaKarta = clanskeKarte.get(id);
 			if (clanskaKarta == null) {
-				clanskaKarta = new ClanskaKarta(id, korisnik, brojPoena, popust, status);
+				clanskaKarta = new ClanskaKarta(id, korisnik, brojPoena, popust, statusC);
 				clanskeKarte.put(clanskaKarta.getId(), clanskaKarta);
 			}
 			
@@ -58,8 +62,8 @@ public class ClanskaKartaDAOImpl implements ClanskaKartaDAO{
 
 	@Override
 	public int save(ClanskaKarta clanskaKarta) {
-		String sql = "INSERT INTO clanskekarte (korisnikId, popust, brojPoena, status) VALUES(?, ?, ?, ?)";
-		return jdbcTemplate.update(sql,clanskaKarta.getKorisnikId().getId(), clanskaKarta.getPopust(), clanskaKarta.getBrojPoena(), clanskaKarta.getStatus().toString());
+		String sql = "INSERT INTO clanskekarte (korisnikId, popust, brojPoena, statusC) VALUES(?, ?, ?, ?)";
+		return jdbcTemplate.update(sql,clanskaKarta.getKorisnikId().getId(), clanskaKarta.getPopust(), clanskaKarta.getBrojPoena(), clanskaKarta.getStatusC().toString());
 		
 	}
 
@@ -83,7 +87,7 @@ public class ClanskaKartaDAOImpl implements ClanskaKartaDAO{
 
 	@Override
 	public List<ClanskaKarta> findAll() {
-		String sql = "select * from clanskekarte where status = 'CEKANJE'";
+		String sql = "select * from clanskekarte where statusC = 'CEKANJE'";
 		ClanskaKartaRowCallbackHandler rowCallbackHandler = new ClanskaKartaRowCallbackHandler();
 		jdbcTemplate.query(sql, rowCallbackHandler);
 		
@@ -99,14 +103,14 @@ public class ClanskaKartaDAOImpl implements ClanskaKartaDAO{
 
 	@Override
 	public int odobri(Long id) {
-		String sql = "update clanskekarte set status = 'ODOBREN' where id = ?";
+		String sql = "update clanskekarte set statusC = 'ODOBREN' where id = ?";
 		
 		return jdbcTemplate.update(sql, id);
 	}
 
 	@Override
 	public ClanskaKarta findOdobrena(Long id) {
-		String sql = "select * from clanskekarte where korisnikId = ? and status = 'ODOBREN'";
+		String sql = "select * from clanskekarte where korisnikId = ? and statusC = 'ODOBREN'";
 		ClanskaKartaRowCallbackHandler rowBackHandler = new ClanskaKartaRowCallbackHandler();
 		jdbcTemplate.query(sql, rowBackHandler, id);
 		if(rowBackHandler.getClanskeKarte().size() == 0) {

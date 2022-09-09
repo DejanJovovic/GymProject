@@ -45,7 +45,7 @@
  			<td><input type="text" th:value="${itKorisnik.adresa}" name="adresa"/></td>
  			</tr>   
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th th:text="#{profil}"></th>
+ 			<th th:text="#{brojTelefona}"></th>
  			<td><input type="text" th:value="${itKorisnik.brojTelefona}" name="telefon"/></td>
  			</tr>  
  			<tr th:each="itKorisnik, status: ${korisnik}">  
@@ -60,7 +60,7 @@
  			  
  		</table>   
  		</form>  
-	 		<li><a href="polaznik/logout" th:text="#{logOut}"></a></li>      
+	 		<li><a href="korisnik/logout" th:text="#{logOut}"></a></li>      
 	 	</ul>
 
 

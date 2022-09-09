@@ -116,13 +116,14 @@ public class AdminController implements ServletContextAware{
 	@GetMapping(value = "/profil")
 	public ModelAndView profil(HttpSession session) {
 		Korisnik ulogovan = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
-		Korisnik korisnik = korisnikService.findOneById(null);
+		Korisnik korisnik = korisnikService.findOneById(ulogovan.getId());
 		ModelAndView rezultati = new ModelAndView("profil");
 		rezultati.addObject("korisnik", korisnik);
 		
 		return rezultati;
 		
 	}
+	
 	
 	
 	@SuppressWarnings("unused")
@@ -182,16 +183,16 @@ public class AdminController implements ServletContextAware{
 	@GetMapping(value = "/komentari")
 	public ModelAndView komentari() {
 		List<Komentar> komentari = komentarService.findAll();
-		ModelAndView rezultati = new ModelAndView("komentari");
-		rezultati.addObject("komentari", komentari);
+		ModelAndView rezultat = new ModelAndView("komentari");
+		rezultat.addObject("komentar", komentari);
 		
-		return rezultati;
+		return rezultat;
 	}
 	
 	@SuppressWarnings("unused")
 	@PostMapping(value = "komentari/odobriKomentar")
 	private void odobriKomentar(
-	@RequestParam Long id, HttpServletResponse response) throws IOException{
+	@RequestParam(name = "id") Long id, HttpServletResponse response) throws IOException{
 		Komentar komentar = komentarService.odobreno(id);
 		response.sendRedirect(bURL + "admin");
 		
@@ -200,9 +201,10 @@ public class AdminController implements ServletContextAware{
 	@SuppressWarnings("unused")
 	@PostMapping(value = "komentari/obrisiKomentar")
 	private void obrisiKomentar(
-	@RequestParam Long id, HttpServletResponse response	) throws IOException{
+	@RequestParam (name = "id") Long id, HttpServletResponse response	) throws IOException{
 		Komentar komentar = komentarService.delete(id);
 		response.sendRedirect(bURL + "admin");
+		
 		
 	}
 	
@@ -218,15 +220,15 @@ public class AdminController implements ServletContextAware{
 	
 	@PostMapping(value = "clanskeKarte/odobriClanskuKartu")
 	private void odobriClanskuKartu(
-	@RequestParam Long id, HttpServletResponse response) throws IOException{
+	@RequestParam (name = "id")Long id, HttpServletResponse response) throws IOException{
 		ClanskaKarta clanskaKarta = clanskaKartaService.odobri(id);
 		response.sendRedirect(bURL + "admin");	
 	}
 	
 	@PostMapping(value = "clanskeKarte/obrisiClanskuKartu")
 	private void obrisiClanskuKartu(
-	@RequestParam Long id, HttpServletResponse response) throws IOException{
-		ClanskaKarta obrisanaClanskaKarta = clanskaKartaService.delete(id);
+	@RequestParam (name = "id") Long id, HttpServletResponse response) throws IOException{
+		ClanskaKarta clanskaKarta = clanskaKartaService.delete(id);
 		response.sendRedirect(bURL + "admin");
 	}
 	
@@ -316,6 +318,7 @@ public class AdminController implements ServletContextAware{
 		rezultati.addObject("sala", sale);
 		
 		return rezultati;
+		
 	}
 	
 	
@@ -324,12 +327,11 @@ public class AdminController implements ServletContextAware{
 	public void create(
 	@RequestParam Long treningId,
 	@RequestParam Long salaId,
-	@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datumTermina,
-	@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime vreme, HttpServletResponse response) throws IOException{
-		LocalDateTime datumIVremeTermina = LocalDateTime.of(datumTermina, vreme);
+	 HttpServletResponse response) throws IOException{
+		LocalDate datumTermina = LocalDate.now();
 		Trening trening = treningService.findOne(treningId);
 		Sala sala = salaService.findOneById(salaId);
-		TerminTreninga terminTreninga = new TerminTreninga(trening, sala, datumIVremeTermina);
+		TerminTreninga terminTreninga = new TerminTreninga(trening, sala, datumTermina);
 		terminTreningaService.save(terminTreninga);
 		response.sendRedirect(bURL + "admin");
 		
@@ -369,9 +371,9 @@ public class AdminController implements ServletContextAware{
 	
 	@GetMapping(value = "/korpa")
 	@ResponseBody
-	public ModelAndView detaljiKorpe(@RequestParam Long id) {
+	public ModelAndView detaljiKorpe(@RequestParam(name = "id") Long id) {
 		Korpa korpa = korpaService.findOneById(id);
-		ModelAndView rezultati = new ModelAndView("korpa");
+		ModelAndView rezultati = new ModelAndView("korpe");
 		rezultati.addObject("korpa", korpa);
 		
 		return rezultati;

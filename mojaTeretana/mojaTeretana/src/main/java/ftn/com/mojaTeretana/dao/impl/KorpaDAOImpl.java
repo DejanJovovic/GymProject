@@ -86,7 +86,7 @@ public class KorpaDAOImpl implements KorpaDAO {
 	}
 
 	@Override
-	public Korpa findOne(Long id) {
+	public Korpa findOneById(Long id) {
 		String sql = "Select * from korpe where id = ?";
 		KorpaRowCallbackHandler rowCallbackHandler = new KorpaRowCallbackHandler();
 		jdbcTemplate.query(sql, rowCallbackHandler, id);

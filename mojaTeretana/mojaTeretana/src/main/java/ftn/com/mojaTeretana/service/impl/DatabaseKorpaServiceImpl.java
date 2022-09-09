@@ -31,12 +31,12 @@ public class DatabaseKorpaServiceImpl implements KorpaService{
 
 	@Override
 	public Korpa findOneById(Long id) {
-		return korpaDAO.findOne(id);
+		return korpaDAO.findOneById(id);
 	}
 
 	@Override
 	public Korpa deleteZakazano(Long id) {
-		Korpa korpa = korpaDAO.findOne(id);
+		Korpa korpa = korpaDAO.findOneById(id);
 		if(korpa != null) {
 			korpaDAO.deleteZakazane(id);
 		}

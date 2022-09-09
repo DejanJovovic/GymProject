@@ -11,7 +11,6 @@ public interface KomentarDAO {
 
     List<Komentar> findAll();
 
-    void update(Komentar komentar);
     int save(Komentar komentar);
     int delete(Long id);
     int odobreno(Long id);
@@ -19,5 +18,6 @@ public interface KomentarDAO {
     Komentar findOne(Long id);
     
     
-    List<Komentar> findAllByTreningId(Long treningId);
+ 
+    
 }

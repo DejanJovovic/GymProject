@@ -3,7 +3,6 @@ package ftn.com.mojaTeretana.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -44,15 +43,15 @@ public class TerminTreningaDAOImpl implements TerminTreningaDAO{
 		public void processRow(ResultSet resultSet) throws SQLException {
 			int index = 1;
 			Long id = resultSet.getLong(index++);
-			Long idTreninga = resultSet.getLong(index++);
-			Trening trening = treningDAO.findOne(idTreninga);
-			Long idSala = resultSet.getLong(index++);
-			Sala sala = salaService.findOneById(idSala);
-			LocalDateTime datumTermina = resultSet.getTimestamp(index++).toLocalDateTime();
-			LocalDateTime vreme = resultSet.getTimestamp(index++).toLocalDateTime();
+			LocalDate datumTermina = resultSet.getTimestamp(index++).toLocalDateTime().toLocalDate();
 			TerminTreninga termin = termini.get(id);
+			Long treningId = resultSet.getLong(index++);
+			Trening trening = treningDAO.findOne(treningId);
+			Long salaId = resultSet.getLong(index++);
+			Sala sala = salaService.findOneById(salaId);
+	
 			if(termin == null) {
-				termin = new TerminTreninga(id, trening, sala, vreme, datumTermina);
+				termin = new TerminTreninga(id, trening, sala, datumTermina);
 				termini.put(termin.getId(), termin);
 			}
 			

@@ -11,7 +11,7 @@
 	 </head> 
 <body>
 
-<a href="index.html"><button class="btn povratak">Back</button></a>
+<a href="admin"><button class="btn povratak">Back</button></a>
 	<img src="/img/background.jpg">
 
 
@@ -61,12 +61,12 @@
  		</table>    
 
 		<table class="forma">
-                <h1 th:text="#{terminTreninga}"></h1></caption>   
+                <h1 th:text="#{termini}"></h1></caption>   
 			<tr>
-				<th th:text="#{termin}"></th> 
+				<th th:text="#{termini}"></th> 
 				<td>
 					<select name="terminId">
-						<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${#temporals.format(itTermin.datum,'dd-MM-yyyy HH:mm')}  + ' Sala: '+${itTermin.salaId.id}"></option>
+						<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${#temporals.format(itTermin.datumTermina,'dd-MM-yyyy HH:mm')}  + ' Sala: '+${itTermin.salaId.id}"></option>
 					</select>	
 				</td>
 				
@@ -76,13 +76,11 @@
 
  			 <table>     
              <h1 th:text="#{komentari}"></h1></caption>  			<tr>      
- 			    <th  th:text="#{autor}"></th> 
  				<th  th:text="#{datumIVreme}"></th>     
  				<th  th:text="#{tekstKomentara}"></th>     
  				<th  th:text="#{ocena}"></th>   
  			</tr>
-	 		<tr  th:each="itKomentar, status: ${komentar}">  
-	 		<td th:text="${itKomentar.autor.korisnickoIme}" name="autor"></td>  
+	 		<tr  th:each="itKomentar, status: ${komentar}">   
 	 		<td th:text="${itKomentar.datum}" name="datum"></td> 
 	 		<td th:text="${itKomentar.tekstKomentara}" name="TekstKomentara"></td> 
 	 		<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
