@@ -12,7 +12,6 @@ public class Korisnik {
     private String adresa;
     private String brojTelefona;
     private String datumIVremeRegistracije;
-    private String uloga;
 	private ETipKorisnika tipKorisnika;
     private boolean aktivan;
     
@@ -34,7 +33,7 @@ public class Korisnik {
 
     public Korisnik(String korisnickoIme1, String lozinka1, String email1, String ime1,
                     String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
-                    String datumIVremeRegistracije1, ETipKorisnika tipKorisnika, String uloga) {
+                    String datumIVremeRegistracije1, ETipKorisnika tipKorisnika) {
         this.korisnickoIme = korisnickoIme1;
         this.lozinka = lozinka1;
         this.email = email1;
@@ -45,12 +44,11 @@ public class Korisnik {
         this.brojTelefona = brojTelefona1;
         this.datumIVremeRegistracije = datumIVremeRegistracije1;
         this.tipKorisnika = tipKorisnika;
-        this.uloga = uloga;
     }
 
     public Korisnik(Long id1, String korisnickoIme1, String lozinka1, String email1, String ime1,
                     String prezime1, String datumRodjenja1, String adresa1, String brojTelefona1,
-                    String datumIVremeRegistracije1 , ETipKorisnika tipKorisnika1, boolean aktivan, String uloga1) {
+                    String datumIVremeRegistracije1 , ETipKorisnika tipKorisnika1, boolean aktivan) {
         this.id = id1;
         this.korisnickoIme = korisnickoIme1;
         this.lozinka = lozinka1;
@@ -63,7 +61,7 @@ public class Korisnik {
         this.datumIVremeRegistracije = datumIVremeRegistracije1;
         this.tipKorisnika = tipKorisnika1;
         this.aktivan = aktivan;
-        this.uloga = uloga1;
+    
     }
     
     public Korisnik(Long idKorisnika, String korisnickoIme) {
@@ -183,15 +181,6 @@ public class Korisnik {
 		this.aktivan = aktivan;
 	}
 	
-	
-	  public String getUloga() {
-			return uloga;
-		}
-
-
-		public void setUloga(String uloga) {
-			this.uloga = uloga;
-		}
 
 	
 }

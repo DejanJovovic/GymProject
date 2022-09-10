@@ -24,7 +24,8 @@
 
            <form method="post" action="admin/profil">
          
- 			<table>   
+ 			<input type="hidden" name="id" th:value="${korisnik.id}"/>
+			<table class="forma"> 
 	 		<h1 th:text="#{profil}"></h1></caption>     
  			<tr th:each="itKorisnik, status: ${korisnik}">
  			<th th:text="#{ime}"></th>

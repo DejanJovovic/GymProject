@@ -43,14 +43,13 @@ public class KorisnikDAOImpl implements KorisnikDAO{
             String brojTelefona = resultSet.getString(index++);
             String datumIVremeRegistracije = resultSet.getString(index++);;
             String tip = resultSet.getString(index++);
-            String uloga = resultSet.getString(index++);
             ETipKorisnika tipKorisnika = ETipKorisnika.valueOf(tip);
             boolean aktivan = resultSet.getBoolean(index++);
             
             Korisnik korisnik = korisnici.get(id);
             if (korisnik == null) {
                 korisnik = new Korisnik(id, korisnickoIme, lozinka, email, ime, prezime, datumRodjenja,
-                        adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika, aktivan,uloga);
+                        adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika, aktivan);
                 korisnici.put(korisnik.getId(), korisnik); // dodavanje u kolekciju
                 
             }
@@ -115,8 +114,8 @@ public class KorisnikDAOImpl implements KorisnikDAO{
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 String sql = "INSERT INTO korisnici (korisnickoIme, lozinka, email, ime," +
-                        "prezime, datumRodjenja, adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika, uloga)" +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        "prezime, datumRodjenja, adresa, brojTelefona, datumIVremeRegistracije, tipKorisnika)" +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 int index = 1;
                 preparedStatement.setString(index++, korisnik.getKorisnickoIme());
@@ -128,7 +127,6 @@ public class KorisnikDAOImpl implements KorisnikDAO{
                 preparedStatement.setString(index++, korisnik.getAdresa());
                 preparedStatement.setString(index++, korisnik.getBrojTelefona());
                 preparedStatement.setString(index++, korisnik.getDatumIVremeRegistracije());
-                preparedStatement.setString(index++, korisnik.getUloga());
                 preparedStatement.setString(index++, korisnik.getTipKorisnika().toString());
                 return preparedStatement;
             }
@@ -148,8 +146,8 @@ public class KorisnikDAOImpl implements KorisnikDAO{
     @Transactional
 	@Override
 	public int update(Korisnik korisnik) {
-		String sql = "UPDATE korisnici set korisnickoIme = ?, lozinka = ?, email = ?, ime = ?, prezime = ?, tipKorisnika = ?, uloga = ?, aktivan = ?  where id = ?";
-		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getLozinka(), korisnik.getEmail(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getTipKorisnika().toString(),korisnik.getUloga(),korisnik.isAktivan(), korisnik.getId()) == 1;
+		String sql = "UPDATE korisnici set korisnickoIme = ?, lozinka = ?, email = ?, ime = ?, prezime = ?, tipKorisnika = ?, aktivan = ?  where id = ?";
+		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getLozinka(), korisnik.getEmail(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getTipKorisnika().toString(), korisnik.isAktivan(), korisnik.getId()) == 1;
 		
 		return uspeh?1:0;
 		

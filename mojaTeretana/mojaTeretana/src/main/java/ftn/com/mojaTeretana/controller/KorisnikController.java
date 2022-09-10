@@ -79,11 +79,10 @@ public class KorisnikController implements ServletContextAware{
 	@RequestParam(required = true) String brojTelefona,
 	HttpSession session, HttpServletResponse response) throws IOException {
 		ETipKorisnika tipKorisnika = ETipKorisnika.POLAZNIK;
-		String uloga = new String("POLAZNIK");
 		String datumIVremeRegistracije = new String("11.07.2022, 15:39");
 		
 		Korisnik korisnik = new Korisnik(korisnickoIme, lozinka,email, ime, prezime, datumRodjenja, adresa, 
-				brojTelefona,datumIVremeRegistracije, tipKorisnika, uloga);
+				brojTelefona,datumIVremeRegistracije, tipKorisnika);
 		korisnikService.save(korisnik);
 		response.sendRedirect(bURL + "index.html");
 		
@@ -109,16 +108,6 @@ public class KorisnikController implements ServletContextAware{
 		String greska = "";
 		if(korisnik == null) 
 			greska = "Kredencijali nisu ispravni! <br/>";
-		if(korisnik != null) {
-			if(korisnik.getUloga().equals("ADMINISTRATOR")) {
-				session.setAttribute(KORISNIK_KEY, korisnik);
-				response.sendRedirect(bURL + "admin");
-			}
-			else if(korisnik.getUloga().equals("POLAZNIK")) {
-				session.setAttribute(KORISNIK_KEY, korisnik);
-				response.sendRedirect(bURL + "korisnik");
-			}
-		}
 	
 		if(!greska.equals("")) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -159,13 +148,13 @@ public class KorisnikController implements ServletContextAware{
 			
 			StringBuilder rtVal = new StringBuilder();
 			rtVal.append("<!DOCTYPE html>\r\n" + "<html>\r\n" + "<head>\r\n" + "<meta charset =\"UTF-8\">\r\n"
-			+ "<base href = \"/ProjekatTeretana/\">\r\n" 
+			+ "<base href = \"/index.html/\">\r\n" 
 			+ "<title>Prijava korisnika</title>\r\n" 
 			+ "</head>\r\n" + "<body>\r\n" + "<ul>\r\n");
 			
 		if(!greska.equals(""))
 			rtVal.append("<div>" + greska + "</div>\r\n");
-			rtVal.append("<a href = \"index.html\">Povratak</a>\r\n" 
+			rtVal.append("<a href = >Povratak</a>\r\n" 
 			+ "<br/>\r\n" + "</body>\r\n" + "</html>");
 		out.write(rtVal.toString());
 		return;
@@ -176,7 +165,7 @@ public class KorisnikController implements ServletContextAware{
 			session.setAttribute(KORISNIK_KEY, korisnik);
 			response.sendRedirect(bURL + "admin");
 		}
-		else if(korisnik.getTipKorisnika().equals(ETipKorisnika.POLAZNIK)) {
+		else if(korisnik.getTipKorisnika().equals(ETipKorisnika.POLAZNIK) && korisnik.isAktivan() == true) {
 			session.setAttribute(KORISNIK_KEY, korisnik);
 			response.sendRedirect(bURL + "korisnik");
 		}
